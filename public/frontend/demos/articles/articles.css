@@ -137,10 +137,10 @@ body:not(.dark) .article-price { color: var(--themecolor, #0C1CCC) }
 .section-features .card.border-color-yellow::before { background: linear-gradient(to right, teal, cyan); }
 .section-features .card.border-color-info::before { background: linear-gradient(to right, #111, #DDD); }
 
-body:not(.dark) .section-scroller {
+/* body:not(.dark) .section-scroller {
 	background-image: linear-gradient(to top, rgba(241,244,248,.5), rgba(241,244,248,.5) 30%, #FFF 30%);
 	background-repeat: no-repeat;
-}
+} */
 
 body:not(.dark) .section-features {
 	background-color: transparent;
@@ -292,8 +292,8 @@ body:not(.dark) .swiper-scrollbar-drag { opacity: .2; }
 
 body:not(.dark) #footer { background-color: #FFF; }
 
-.dark .owl-carousel .owl-dots .owl-dot,
-body:not(.dark) #copyrights { background-color: var(--light, #EEE); }
+/* .dark .owl-carousel .owl-dots .owl-dot, */
+/* body:not(.dark) #copyrights { background-color: var(--light, #EEE); } */
 
 @media (min-width: 992px) {
 
