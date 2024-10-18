@@ -28,19 +28,19 @@
                     <div class="card-title">
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-news-table-toolbar="base">
+                        <div class="d-flex justify-content-end" data-kt-journal-table-toolbar="base">
                             <a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-icon btn-sm me-2 mb-2" title="Refresh Halaman"><i class="fa fa-undo"></i></a>
-                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_news" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah {{ $title }}</a>
+                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_journal" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah {{ $title }}</a>
                         </div>
                     </div>
                 </div>
 
-                @include('admin.news.create')
+                @include('admin.journal.create')
 											   
                 <div class="card-body pt-0">
 
                     <!--begin::Table-->
-                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="news-table">
+                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="journal-table">
                         <thead style="background-color: #3f51b5;">
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width: 2%;color: white;border-bottom: white;" >Number</th>
@@ -64,16 +64,16 @@
     var table;
 
     $(document).ready(function () {
-        table = $('#news-table').DataTable({
+        table = $('#journal-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('news.list') }}",
+            ajax: "{{ route('journal.list') }}",
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
 				{data: 'title', name: 'title'},
-				{data: 'created_at', name: 'created_at'},
-				{data: 'user', name: 'user'},
+				{data: 'publication_date', name: 'publication_date'},
+				{data: 'author', name: 'author'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
 			order: [
@@ -93,17 +93,14 @@
             e.preventDefault(); // Hindari pengiriman form secara default
 
             var action = document.getElementById('action').innerText;
-            var id_news = $('#id_news').val();
+            var id_journal = $('#id_journal').val();
             var title = $('#title').val();
-            var text = CKEDITOR.instances.text.getData();
-            var slug = $('#slug').val();
+            var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
             var formData = new FormData();
-            formData.append('id', id_news);
+            formData.append('id', id_journal);
             formData.append('title', title);
-            formData.append('text', text);
-            formData.append('slug', slug);
             formData.append('_token', "{{ csrf_token() }}");
 
             var fileInput = document.getElementById('cover');
@@ -111,9 +108,8 @@
                 formData.append('cover', fileInput.files[0]);
             }
 
-
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/news/validate') }}";
+            var url = "{{ url('/journal/validate') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
@@ -127,7 +123,7 @@
                     if (action === "Simpan") {
                         send();
                     } else {
-                        update(id_news);
+                        update(id_journal);
                     }
                 },
                 error: function (xhr) {
@@ -152,10 +148,11 @@
     function clearForm(){
         document.getElementById("head_title").textContent = "Tambah {{ $title }}";
         $('#myForm')[0].reset();
-        var editor = CKEDITOR.instances['text'];
+        var editor = CKEDITOR.instances['desc'];
         editor.setData('');
 
         document.getElementById("show_cover").textContent = "";
+        document.getElementById("show_file").textContent = "";
         document.getElementById("action").textContent = "Simpan";
     }
 
@@ -172,7 +169,7 @@
 
         // Kirim data formulir ke server menggunakan AJAX
         $.ajax({
-            url: "{{ url('news/store') }}",
+            url: "{{ url('journal/store') }}",
             type: "POST",
             data: formData,
             contentType: false, // Biarkan jQuery menentukan contentType secara otomatis
@@ -180,7 +177,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast
                 $('#myForm')[0].reset(); // Reset form setelah berhasil menambahkan data
-                $('#kt_modal_add_news').modal('hide');
+                $('#kt_modal_add_journal').modal('hide');
                 table.ajax.reload(null, false);
             },
             error: function (xhr) {
@@ -196,19 +193,28 @@
         document.getElementById("action").textContent = "Update";
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/news/edit') }}";
+        var url = "{{ url('/journal/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "GET",
             success: function (response) {
-                document.getElementById("id_news").value = response.data.id;
+                document.getElementById("id_journal").value = response.data.id;
                 document.getElementById("title").value = response.data.title;
-                document.getElementById("slug").value = response.data.slug;
+                document.getElementById("author").value = response.data.author;
+                document.getElementById("publication_date").value = response.data.publication_date;
+                document.getElementById("issn").value = response.data.issn;
+                document.getElementById("doi").value = response.data.doi;
                 
-                CKEDITOR.instances['text'].setData(response.data.text);
-                // Ubah nilai cover menjadi tag <a> dengan href yang diinginkan
-                var coverLink = '<br><a href="{{ asset("upload/news/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
-                document.getElementById("show_cover").innerHTML = coverLink;
+                CKEDITOR.instances['desc'].setData(response.data.desc);
+                if(response.data.cover){
+                    var coverLink = '<br><a href="{{ asset("upload/journal/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    document.getElementById("show_cover").innerHTML = coverLink;
+                }
+
+                if(response.data.file){
+                    var fileLink = '<br><a href="{{ asset("upload/journal/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    document.getElementById("show_file").innerHTML = fileLink;
+                }
             },
             error: function (xhr) {
                 // Tangani kesalahan jika pengiriman formulir gagal
@@ -225,7 +231,7 @@
         
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/news/edit') }}";
+        var url = "{{ url('/journal/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "POST",
@@ -235,7 +241,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast untuk keberhasilan
                 $('#myForm')[0].reset(); // Reset form setelah berhasil memperbarui data
-                $('#kt_modal_add_news').modal('hide'); // Tutup modal setelah berhasil memperbarui data
+                $('#kt_modal_add_journal').modal('hide'); // Tutup modal setelah berhasil memperbarui data
                 table.ajax.reload(null, false); // Muat ulang DataTables setelah update
             },
             error: function (xhr) {
@@ -261,7 +267,7 @@
                     'Data Berhasil Dihapus.',
                     'success'
                 ).then(function () {
-                    var url = "{{ url('/news/delete') }}";
+                    var url = "{{ url('/journal/delete') }}";
                     $.ajax({
                         url: url + "/" + id,
                         success: function (response) {

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
@@ -39,6 +41,26 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/news/edit/{news}', [NewsController::class, 'edit']);
     Route::put('/news/edit/{news}', [NewsController::class, 'update']);
     Route::get('/news/delete/{news}',[NewsController::class, 'delete']);
+
+    ## Journal
+    Route::get('/journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('/journal/list', [JournalController::class, 'get_journal_index'])->name('journal.list');
+    Route::post('journal/upload_image',[JournalController::class, 'upload_image'])->name('upload_journal');
+    Route::post('/journal/store', [JournalController::class, 'store']);
+    Route::post('/journal/validate/{action}', [JournalController::class, 'validate']);
+    Route::get('/journal/edit/{journal}', [JournalController::class, 'edit']);
+    Route::put('/journal/edit/{journal}', [JournalController::class, 'update']);
+    Route::get('/journal/delete/{journal}',[JournalController::class, 'delete']);
+
+    ## Proceeding
+    Route::get('/proceeding', [ProceedingController::class, 'index'])->name('proceeding.index');
+    Route::get('/proceeding/list', [ProceedingController::class, 'get_proceeding_index'])->name('proceeding.list');
+    Route::post('proceeding/upload_image',[ProceedingController::class, 'upload_image'])->name('upload_proceeding');
+    Route::post('/proceeding/store', [ProceedingController::class, 'store']);
+    Route::post('/proceeding/validate/{action}', [ProceedingController::class, 'validate']);
+    Route::get('/proceeding/edit/{proceeding}', [ProceedingController::class, 'edit']);
+    Route::put('/proceeding/edit/{proceeding}', [ProceedingController::class, 'update']);
+    Route::get('/proceeding/delete/{proceeding}',[ProceedingController::class, 'delete']);
 
     ## Edit Profile
     Route::get('/edit_profil/{user}',[UserController::class, 'edit_profil']);

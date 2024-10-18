@@ -169,6 +169,34 @@ $setting = \App\Helpers\Helpers::setting();
 									</a>
 								</div>
 
+								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1),['journal','proceeding'])) here show @endif menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon" style="margin-right: 15px">
+											<img src="{{ asset('menu/icons8-home-100.png') }}" width="30" height="30" >
+										</span>
+										<span class="menu-title">Jurnal dan Prosiding</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion menu-active-bg">
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='journal') active @endif " href="{{ url('journal') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Jurnal</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='proceeding') active @endif " href="{{ url('proceeding') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Prosiding</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								
 								<div class="menu-item">
 									<a class="menu-link @if(Request::segment(1)=="album") active @endif" href="{{ url('/album') }}">
 										<span class="menu-icon" style="margin-right: 15px">
@@ -403,6 +431,7 @@ $setting = \App\Helpers\Helpers::setting();
 		<script src="{{ asset('backend/assets/js/custom/apps/chat/chat.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/modals/create-app.js') }}"></script>
 		<script src="{{ asset('backend/assets/js/custom/modals/upgrade-plan.js') }}"></script>
+		<script src="{{ asset('backend/assets/js/custom/documentation/forms/flatpickr.js') }}"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
