@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LogController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebController::class, 'index']);
@@ -111,6 +113,24 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/novel/edit/{novel}', [NovelController::class, 'edit']);
     Route::put('/novel/edit/{novel}', [NovelController::class, 'update']);
     Route::get('/novel/delete/{novel}',[NovelController::class, 'delete']);
+
+    ## Conference
+    Route::get('/conference', [ConferenceController::class, 'index'])->name('conference.index');
+    Route::get('/conference/list', [ConferenceController::class, 'get_conference_index'])->name('conference.list');
+    Route::post('/conference/store', [ConferenceController::class, 'store']);
+    Route::post('/conference/validate/{action}', [ConferenceController::class, 'validate']);
+    Route::get('/conference/edit/{conference}', [ConferenceController::class, 'edit']);
+    Route::put('/conference/edit/{conference}', [ConferenceController::class, 'update']);
+    Route::get('/conference/delete/{conference}',[ConferenceController::class, 'delete']);
+
+    ## Workshop
+    Route::get('/workshop', [WorkshopController::class, 'index'])->name('workshop.index');
+    Route::get('/workshop/list', [WorkshopController::class, 'get_workshop_index'])->name('workshop.list');
+    Route::post('/workshop/store', [WorkshopController::class, 'store']);
+    Route::post('/workshop/validate/{action}', [WorkshopController::class, 'validate']);
+    Route::get('/workshop/edit/{workshop}', [WorkshopController::class, 'edit']);
+    Route::put('/workshop/edit/{workshop}', [WorkshopController::class, 'update']);
+    Route::get('/workshop/delete/{workshop}',[WorkshopController::class, 'delete']);
 
     ## Edit Profile
     Route::get('/edit_profil/{user}',[UserController::class, 'edit_profil']);

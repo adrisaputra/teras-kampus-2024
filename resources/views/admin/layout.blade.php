@@ -209,6 +209,34 @@ $setting = \App\Helpers\Helpers::setting();
 									</div>
 								</div>
 								
+								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1),['conference','workshop'])) here show @endif menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon" style="margin-right: 15px">
+											<img src="{{ asset('menu/icons8-agenda-100.png') }}" width="30" height="30" >
+										</span>
+										<span class="menu-title">Konferensi dan Lokakarya</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion menu-active-bg">
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='conference') active @endif " href="{{ url('conference') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Konferensi</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='workshop') active @endif " href="{{ url('workshop') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Lokakarya</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								
 								@if(Auth::user()->group_id == 1)
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">
