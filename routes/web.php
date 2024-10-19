@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MonographController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NovelController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SettingController;
@@ -27,6 +28,11 @@ Route::middleware(['operator'])->group(function () {
     
     Route::get('/dashboard', [HomeController::class, 'index']);
     
+    ## Profiles
+    Route::get('/about_us', [PageController::class, 'index']);
+    Route::get('/publishing_process', [PageController::class, 'index']);
+    Route::get('/term_and_condition', [PageController::class, 'index']);
+
     ## Slider
     Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
     Route::get('/slider/list', [SliderController::class, 'get_slider_index'])->name('slider.list');

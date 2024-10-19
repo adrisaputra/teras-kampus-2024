@@ -92,12 +92,12 @@ $setting = \App\Helpers\Helpers::setting();
 									</div>
 								</div>
 								
-								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1), array('about_us','vision_and_mission','opening_speech','main_tasks','structure','service_information','motto'))) here show @endif menu-accordion">
+								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1), array('about_us','publishing_process','term_and_condition'))) here show @endif menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon" style="margin-right: 15px">
 											<img src="{{ asset('menu/icons8-menu-100.png') }}" width="30" height="30" >
 										</span>
-										<span class="menu-title">Profil</span>
+										<span class="menu-title">Halaman</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -110,51 +110,19 @@ $setting = \App\Helpers\Helpers::setting();
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='vision_and_mission') active @endif " href="{{ url('vision_and_mission') }}">
+											<a class="menu-link @if(Request::segment(1)=='publishing_process') active @endif " href="{{ url('publishing_process') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Visi dan Misi</span>
+												<span class="menu-title">Proses Publish</span>
 											</a>
 										</div>
 										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='opening_speech') active @endif " href="{{ url('opening_speech') }}">
+											<a class="menu-link @if(Request::segment(1)=='term_and_condition') active @endif " href="{{ url('term_and_condition') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Kata Sambutan</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='main_tasks') active @endif " href="{{ url('main_tasks') }}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Tugas Pokok & Fungsi</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='structure') active @endif " href="{{ url('structure') }}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Struktur Organisasi</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='service_information') active @endif " href="{{ url('service_information') }}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Maklumat Pelayanan</span>
-											</a>
-										</div>
-										<div class="menu-item">
-											<a class="menu-link @if(Request::segment(1)=='motto') active @endif " href="{{ url('motto') }}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Moto Pelayanan Publik</span>
+												<span class="menu-title">Syarat dan Ketentuan</span>
 											</a>
 										</div>
 									</div>
@@ -172,7 +140,7 @@ $setting = \App\Helpers\Helpers::setting();
 								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1),['journal','proceeding'])) here show @endif menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-home-100.png') }}" width="30" height="30" >
+											<img src="{{ asset('menu/icons8-journal-100.png') }}" width="30" height="30" >
 										</span>
 										<span class="menu-title">Jurnal dan Prosiding</span>
 										<span class="menu-arrow"></span>
@@ -200,7 +168,7 @@ $setting = \App\Helpers\Helpers::setting();
 								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1),['textbook','monograph','reference','novel'])) here show @endif menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-home-100.png') }}" width="30" height="30" >
+											<img src="{{ asset('menu/icons8-book-100.png') }}" width="30" height="30" >
 										</span>
 										<span class="menu-title">Katalog</span>
 										<span class="menu-arrow"></span>
@@ -241,42 +209,6 @@ $setting = \App\Helpers\Helpers::setting();
 									</div>
 								</div>
 								
-								<div class="menu-item">
-									<a class="menu-link @if(Request::segment(1)=="album") active @endif" href="{{ url('/album') }}">
-										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-photo-gallery-100.png') }}" width="30" height="30" >
-										</span>
-										<span class="menu-title">Album</span>
-									</a>
-								</div>
-
-								<div class="menu-item">
-									<a class="menu-link @if(Request::segment(1)=="information") active @endif" href="{{ url('/information') }}">
-										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-loudspeaker-100.png') }}" width="30" height="30" >
-										</span>
-										<span class="menu-title">Informasi</span>
-									</a>
-								</div>
-
-								<div class="menu-item">
-									<a class="menu-link @if(Request::segment(1)=="link") active @endif" href="{{ url('/link') }}">
-										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-website-100.png') }}" width="30" height="30" >
-										</span>
-										<span class="menu-title">Link Terkait</span>
-									</a>
-								</div>
-
-								<div class="menu-item">
-									<a class="menu-link @if(Request::segment(1)=="service_standard") active @endif" href="{{ url('/service_standard') }}">
-										<span class="menu-icon" style="margin-right: 15px">
-											<img src="{{ asset('menu/icons8-service-100.png') }}" width="30" height="30" >
-										</span>
-										<span class="menu-title">Pelayanan Publik</span>
-									</a>
-								</div>
-
 								@if(Auth::user()->group_id == 1)
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">
@@ -436,7 +368,7 @@ $setting = \App\Helpers\Helpers::setting();
 							<!--begin::Copyright-->
 							<div class="text-dark order-2 order-md-1">
 								<span class="text-muted fw-bold me-1">2024©</span>
-								<a href="" target="_blank" class="text-gray-800 text-hover-primary">Dinas Komunikasi dan Informatika Kabupaten Bombana</a>
+								<a href="" target="_blank" class="text-gray-800 text-hover-primary">Teras Kampus</a>
 							</div>
 							<!--end::Copyright-->
 						</div>
