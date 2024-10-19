@@ -28,25 +28,27 @@
                     <div class="card-title">
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-album-table-toolbar="base">
+                        <div class="d-flex justify-content-end" data-kt-monograph-table-toolbar="base">
                             <a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-icon btn-sm me-2 mb-2" title="Refresh Halaman"><i class="fa fa-undo"></i></a>
-                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_album" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah Album</a>
+                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_monograph" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah {{ $title }}</a>
                         </div>
                     </div>
                 </div>
 
-                @include('admin.album.create')
+                @include('admin.monograph.create')
 											   
                 <div class="card-body pt-0">
 
                     <!--begin::Table-->
-                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="album-table">
+                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="monograph-table">
                         <thead style="background-color: #3f51b5;">
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width: 2%;color: white;border-bottom: white;" >Number</th>
                                 <th style="width: 2%;color: white;border-bottom: white;" >No</th>
-                                <th style="color: white;border-bottom: white;">Nama Kegiatan</th>
-                                <th style="color: white;border-bottom: white;">Cover</th>
+                                <th style="color: white;border-bottom: white;">Judul</th>
+                                <th style="color: white;border-bottom: white;">Tanggal</th>
+                                <th style="color: white;border-bottom: white;">Penulis</th>
+                                <th style="color: white;border-bottom: white;">Kategori</th>
                                 <th style="width: 10%;color: white;border-bottom: white;">Aksi</th>
                             </tr>
                         </thead>
@@ -63,15 +65,17 @@
     var table;
 
     $(document).ready(function () {
-        table = $('#album-table').DataTable({
+        table = $('#monograph-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('album.list') }}",
+            ajax: "{{ route('monograph.list') }}",
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
 				{data: 'title', name: 'title'},
-				{data: 'cover', name: 'cover'},
+				{data: 'publication_date', name: 'publication_date'},
+				{data: 'author', name: 'author'},
+				{data: 'category', name: 'category'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
 			order: [
@@ -91,15 +95,16 @@
             e.preventDefault(); // Hindari pengiriman form secara default
 
             var action = document.getElementById('action').innerText;
-            var id_album = $('#id_album').val();
+            var id_monograph = $('#id_monograph').val();
+            var category = $('#category').val();
             var title = $('#title').val();
-            var text = $('#text').val();
+            var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
             var formData = new FormData();
-            formData.append('id', id_album);
+            formData.append('id', id_monograph);
             formData.append('title', title);
-            formData.append('text', text);
+            formData.append('category', category);
             formData.append('_token', "{{ csrf_token() }}");
 
             var fileInput = document.getElementById('cover');
@@ -107,8 +112,13 @@
                 formData.append('cover', fileInput.files[0]);
             }
 
+            var fileInput2 = document.getElementById('file');
+            if (fileInput2.files.length > 0) {
+                formData.append('file', fileInput2.files[0]);
+            }
+
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/album/validate') }}";
+            var url = "{{ url('/monograph/validate') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
@@ -122,7 +132,7 @@
                     if (action === "Simpan") {
                         send();
                     } else {
-                        update(id_album);
+                        update(id_monograph);
                     }
                 },
                 error: function (xhr) {
@@ -145,9 +155,13 @@
     });
 
     function clearForm(){
-        document.getElementById("head_title").textContent = "Tambah Album";
+        document.getElementById("head_title").textContent = "Tambah {{ $title }}";
         $('#myForm')[0].reset();
+        var editor = CKEDITOR.instances['desc'];
+        editor.setData('');
+
         document.getElementById("show_cover").textContent = "";
+        document.getElementById("show_file").textContent = "";
         document.getElementById("action").textContent = "Simpan";
     }
 
@@ -164,7 +178,7 @@
 
         // Kirim data formulir ke server menggunakan AJAX
         $.ajax({
-            url: "{{ url('album/store') }}",
+            url: "{{ url('monograph/store') }}",
             type: "POST",
             data: formData,
             contentType: false, // Biarkan jQuery menentukan contentType secara otomatis
@@ -172,7 +186,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast
                 $('#myForm')[0].reset(); // Reset form setelah berhasil menambahkan data
-                $('#kt_modal_add_album').modal('hide');
+                $('#kt_modal_add_monograph').modal('hide');
                 table.ajax.reload(null, false);
             },
             error: function (xhr) {
@@ -184,21 +198,31 @@
         
     // Get Data
     function getData(id){
-        document.getElementById("head_title").textContent = "Ubah Album";
+        document.getElementById("head_title").textContent = "Ubah {{ $title }}";
         document.getElementById("action").textContent = "Update";
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/album/edit') }}";
+        var url = "{{ url('/monograph/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "GET",
             success: function (response) {
-                document.getElementById("id_album").value = response.data.id;
+                document.getElementById("id_monograph").value = response.data.id;
+                document.getElementById("category").value = response.data.category;
                 document.getElementById("title").value = response.data.title;
-                document.getElementById("text").value = response.data.text;
+                document.getElementById("author").value = response.data.author;
+                document.getElementById("publication_date").value = response.data.publication_date;
                 
-                var coverLink = '<br><a href="{{ asset("upload/album/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
-                document.getElementById("show_cover").innerHTML = coverLink;
+                CKEDITOR.instances['desc'].setData(response.data.desc);
+                if(response.data.cover){
+                    var coverLink = '<br><a href="{{ asset("upload/monograph/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    document.getElementById("show_cover").innerHTML = coverLink;
+                }
+
+                if(response.data.file){
+                    var fileLink = '<br><a href="{{ asset("upload/monograph/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    document.getElementById("show_file").innerHTML = fileLink;
+                }
             },
             error: function (xhr) {
                 // Tangani kesalahan jika pengiriman formulir gagal
@@ -215,7 +239,7 @@
         
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/album/edit') }}";
+        var url = "{{ url('/monograph/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "POST",
@@ -225,7 +249,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast untuk keberhasilan
                 $('#myForm')[0].reset(); // Reset form setelah berhasil memperbarui data
-                $('#kt_modal_add_album').modal('hide'); // Tutup modal setelah berhasil memperbarui data
+                $('#kt_modal_add_monograph').modal('hide'); // Tutup modal setelah berhasil memperbarui data
                 table.ajax.reload(null, false); // Muat ulang DataTables setelah update
             },
             error: function (xhr) {
@@ -251,7 +275,7 @@
                     'Data Berhasil Dihapus.',
                     'success'
                 ).then(function () {
-                    var url = "{{ url('/album/delete') }}";
+                    var url = "{{ url('/monograph/delete') }}";
                     $.ajax({
                         url: url + "/" + id,
                         success: function (response) {

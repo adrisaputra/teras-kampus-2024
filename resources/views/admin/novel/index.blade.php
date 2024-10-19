@@ -6,8 +6,8 @@
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="toolbar" id="kt_toolbar">
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-name d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Data {{ __($name)}}</h1>
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Data {{ __($title)}}</h1>
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <li class="breadcrumb-item text-muted">
@@ -16,7 +16,7 @@
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-200 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-dark">Data {{ __($name) }}</li>
+                    <li class="breadcrumb-item text-dark">Data {{ __($title) }}</li>
                 </ul>
             </div>
         </div>
@@ -25,27 +25,29 @@
         <div id="kt_content_container" class="container-xxl">
             <div class="card">
                 <div class="card-header border-0 pt-6">
-                    <div class="card-name">
+                    <div class="card-title">
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-service_standard-table-toolbar="base">
-                            <a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-icon btn-sm me-2 mb-2" name="Refresh Halaman"><i class="fa fa-undo"></i></a>
-                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_service_standard" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah Standar Pelayanan Publik</a>
+                        <div class="d-flex justify-content-end" data-kt-novel-table-toolbar="base">
+                            <a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-icon btn-sm me-2 mb-2" title="Refresh Halaman"><i class="fa fa-undo"></i></a>
+                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_novel" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah {{ $title }}</a>
                         </div>
                     </div>
                 </div>
 
-                @include('admin.service_standard.create')
+                @include('admin.novel.create')
 											   
                 <div class="card-body pt-0">
 
                     <!--begin::Table-->
-                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="service_standard-table">
+                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="novel-table">
                         <thead style="background-color: #3f51b5;">
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width: 2%;color: white;border-bottom: white;" >Number</th>
                                 <th style="width: 2%;color: white;border-bottom: white;" >No</th>
-                                <th style="color: white;border-bottom: white;">Nama Standar Pelayanan Publik</th>
+                                <th style="color: white;border-bottom: white;">Judul</th>
+                                <th style="color: white;border-bottom: white;">Tanggal</th>
+                                <th style="color: white;border-bottom: white;">Penulis</th>
                                 <th style="width: 10%;color: white;border-bottom: white;">Aksi</th>
                             </tr>
                         </thead>
@@ -62,14 +64,16 @@
     var table;
 
     $(document).ready(function () {
-        table = $('#service_standard-table').DataTable({
+        table = $('#novel-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('service_standard.list') }}",
+            ajax: "{{ route('novel.list') }}",
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
-				{data: 'name', name: 'name'},
+				{data: 'title', name: 'title'},
+				{data: 'publication_date', name: 'publication_date'},
+				{data: 'author', name: 'author'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
 			order: [
@@ -89,19 +93,28 @@
             e.preventDefault(); // Hindari pengiriman form secara default
 
             var action = document.getElementById('action').innerText;
-            var id_service_standard = $('#id_service_standard').val();
-            var name = $('#name').val();
-            var service_standard = $('#service_standard').val();
+            var id_novel = $('#id_novel').val();
+            var title = $('#title').val();
+            var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
             var formData = new FormData();
-            formData.append('id', id_service_standard);
-            formData.append('name', name);
-            formData.append('service_standard', service_standard);
+            formData.append('id', id_novel);
+            formData.append('title', title);
             formData.append('_token', "{{ csrf_token() }}");
 
+            var fileInput = document.getElementById('cover');
+            if (fileInput.files.length > 0) {
+                formData.append('cover', fileInput.files[0]);
+            }
+
+            var fileInput2 = document.getElementById('file');
+            if (fileInput2.files.length > 0) {
+                formData.append('file', fileInput2.files[0]);
+            }
+
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/service_standard/validate') }}";
+            var url = "{{ url('/novel/validate') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
@@ -115,7 +128,7 @@
                     if (action === "Simpan") {
                         send();
                     } else {
-                        update(id_service_standard);
+                        update(id_novel);
                     }
                 },
                 error: function (xhr) {
@@ -138,9 +151,13 @@
     });
 
     function clearForm(){
-        document.getElementById("head_name").textContent = "Tambah Standar Pelayanan Publik";
+        document.getElementById("head_title").textContent = "Tambah {{ $title }}";
         $('#myForm')[0].reset();
-        document.getElementById("show_image").textContent = "";
+        var editor = CKEDITOR.instances['desc'];
+        editor.setData('');
+
+        document.getElementById("show_cover").textContent = "";
+        document.getElementById("show_file").textContent = "";
         document.getElementById("action").textContent = "Simpan";
     }
 
@@ -157,7 +174,7 @@
 
         // Kirim data formulir ke server menggunakan AJAX
         $.ajax({
-            url: "{{ url('service_standard/store') }}",
+            url: "{{ url('novel/store') }}",
             type: "POST",
             data: formData,
             contentType: false, // Biarkan jQuery menentukan contentType secara otomatis
@@ -165,7 +182,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast
                 $('#myForm')[0].reset(); // Reset form setelah berhasil menambahkan data
-                $('#kt_modal_add_service_standard').modal('hide');
+                $('#kt_modal_add_novel').modal('hide');
                 table.ajax.reload(null, false);
             },
             error: function (xhr) {
@@ -177,18 +194,30 @@
         
     // Get Data
     function getData(id){
-        document.getElementById("head_name").textContent = "Ubah Standar Pelayanan Publik";
+        document.getElementById("head_title").textContent = "Ubah {{ $title }}";
         document.getElementById("action").textContent = "Update";
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/service_standard/edit') }}";
+        var url = "{{ url('/novel/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "GET",
             success: function (response) {
-                document.getElementById("id_service_standard").value = response.data.id;
-                document.getElementById("name").value = response.data.name;
-                document.getElementById("service_standard").value = response.data.service_standard;
+                document.getElementById("id_novel").value = response.data.id;
+                document.getElementById("title").value = response.data.title;
+                document.getElementById("author").value = response.data.author;
+                document.getElementById("publication_date").value = response.data.publication_date;
+                
+                CKEDITOR.instances['desc'].setData(response.data.desc);
+                if(response.data.cover){
+                    var coverLink = '<br><a href="{{ asset("upload/novel/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    document.getElementById("show_cover").innerHTML = coverLink;
+                }
+
+                if(response.data.file){
+                    var fileLink = '<br><a href="{{ asset("upload/novel/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    document.getElementById("show_file").innerHTML = fileLink;
+                }
             },
             error: function (xhr) {
                 // Tangani kesalahan jika pengiriman formulir gagal
@@ -205,7 +234,7 @@
         
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/service_standard/edit') }}";
+        var url = "{{ url('/novel/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "POST",
@@ -215,7 +244,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast untuk keberhasilan
                 $('#myForm')[0].reset(); // Reset form setelah berhasil memperbarui data
-                $('#kt_modal_add_service_standard').modal('hide'); // Tutup modal setelah berhasil memperbarui data
+                $('#kt_modal_add_novel').modal('hide'); // Tutup modal setelah berhasil memperbarui data
                 table.ajax.reload(null, false); // Muat ulang DataTables setelah update
             },
             error: function (xhr) {
@@ -228,7 +257,7 @@
     // Delete Data
     function deleteData(id) {
         new Swal({
-            name: 'Apakah Kamu Yakin?',
+            title: 'Apakah Kamu Yakin?',
             text: "Anda tidak akan dapat mengembalikan ini!",
             icon: 'warning',
             showCancelButton: true,
@@ -241,7 +270,7 @@
                     'Data Berhasil Dihapus.',
                     'success'
                 ).then(function () {
-                    var url = "{{ url('/service_standard/delete') }}";
+                    var url = "{{ url('/novel/delete') }}";
                     $.ajax({
                         url: url + "/" + id,
                         success: function (response) {

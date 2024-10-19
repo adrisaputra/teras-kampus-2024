@@ -4,10 +4,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MonographController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NovelController;
 use App\Http\Controllers\ProceedingController;
+use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +65,46 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/proceeding/edit/{proceeding}', [ProceedingController::class, 'edit']);
     Route::put('/proceeding/edit/{proceeding}', [ProceedingController::class, 'update']);
     Route::get('/proceeding/delete/{proceeding}',[ProceedingController::class, 'delete']);
+
+    ## Textbook
+    Route::get('/textbook', [TextbookController::class, 'index'])->name('textbook.index');
+    Route::get('/textbook/list', [TextbookController::class, 'get_textbook_index'])->name('textbook.list');
+    Route::post('textbook/upload_image',[TextbookController::class, 'upload_image'])->name('upload_textbook');
+    Route::post('/textbook/store', [TextbookController::class, 'store']);
+    Route::post('/textbook/validate/{action}', [TextbookController::class, 'validate']);
+    Route::get('/textbook/edit/{textbook}', [TextbookController::class, 'edit']);
+    Route::put('/textbook/edit/{textbook}', [TextbookController::class, 'update']);
+    Route::get('/textbook/delete/{textbook}',[TextbookController::class, 'delete']);
+
+    ## Monograph
+    Route::get('/monograph', [MonographController::class, 'index'])->name('monograph.index');
+    Route::get('/monograph/list', [MonographController::class, 'get_monograph_index'])->name('monograph.list');
+    Route::post('monograph/upload_image',[MonographController::class, 'upload_image'])->name('upload_monograph');
+    Route::post('/monograph/store', [MonographController::class, 'store']);
+    Route::post('/monograph/validate/{action}', [MonographController::class, 'validate']);
+    Route::get('/monograph/edit/{monograph}', [MonographController::class, 'edit']);
+    Route::put('/monograph/edit/{monograph}', [MonographController::class, 'update']);
+    Route::get('/monograph/delete/{monograph}',[MonographController::class, 'delete']);
+
+    ## Reference
+    Route::get('/reference', [ReferenceController::class, 'index'])->name('reference.index');
+    Route::get('/reference/list', [ReferenceController::class, 'get_reference_index'])->name('reference.list');
+    Route::post('reference/upload_image',[ReferenceController::class, 'upload_image'])->name('upload_reference');
+    Route::post('/reference/store', [ReferenceController::class, 'store']);
+    Route::post('/reference/validate/{action}', [ReferenceController::class, 'validate']);
+    Route::get('/reference/edit/{reference}', [ReferenceController::class, 'edit']);
+    Route::put('/reference/edit/{reference}', [ReferenceController::class, 'update']);
+    Route::get('/reference/delete/{reference}',[ReferenceController::class, 'delete']);
+
+    ## Novel
+    Route::get('/novel', [NovelController::class, 'index'])->name('novel.index');
+    Route::get('/novel/list', [NovelController::class, 'get_novel_index'])->name('novel.list');
+    Route::post('novel/upload_image',[NovelController::class, 'upload_image'])->name('upload_novel');
+    Route::post('/novel/store', [NovelController::class, 'store']);
+    Route::post('/novel/validate/{action}', [NovelController::class, 'validate']);
+    Route::get('/novel/edit/{novel}', [NovelController::class, 'edit']);
+    Route::put('/novel/edit/{novel}', [NovelController::class, 'update']);
+    Route::get('/novel/delete/{novel}',[NovelController::class, 'delete']);
 
     ## Edit Profile
     Route::get('/edit_profil/{user}',[UserController::class, 'edit_profil']);

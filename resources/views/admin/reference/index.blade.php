@@ -28,24 +28,27 @@
                     <div class="card-title">
                     </div>
                     <div class="card-toolbar">
-                        <div class="d-flex justify-content-end" data-kt-information-table-toolbar="base">
+                        <div class="d-flex justify-content-end" data-kt-reference-table-toolbar="base">
                             <a href="{{ url('/'.Request::segment(1)) }}" class="btn btn-warning btn-icon btn-sm me-2 mb-2" title="Refresh Halaman"><i class="fa fa-undo"></i></a>
-                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_information" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah Informasi</a>
+                            <a class="btn btn-primary btn-sm me-2 mb-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_reference" onClick="clearForm()"><i class="fa fa-plus"></i>Tambah {{ $title }}</a>
                         </div>
                     </div>
                 </div>
 
-                @include('admin.information.create')
+                @include('admin.reference.create')
 											   
                 <div class="card-body pt-0">
 
                     <!--begin::Table-->
-                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="information-table">
+                    <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="reference-table">
                         <thead style="background-color: #3f51b5;">
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width: 2%;color: white;border-bottom: white;" >Number</th>
                                 <th style="width: 2%;color: white;border-bottom: white;" >No</th>
-                                <th style="color: white;border-bottom: white;">Gambar Banner</th>
+                                <th style="color: white;border-bottom: white;">Judul</th>
+                                <th style="color: white;border-bottom: white;">Tanggal</th>
+                                <th style="color: white;border-bottom: white;">Penulis</th>
+                                <th style="color: white;border-bottom: white;">Kategori</th>
                                 <th style="width: 10%;color: white;border-bottom: white;">Aksi</th>
                             </tr>
                         </thead>
@@ -62,14 +65,17 @@
     var table;
 
     $(document).ready(function () {
-        table = $('#information-table').DataTable({
+        table = $('#reference-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('information.list') }}",
+            ajax: "{{ route('reference.list') }}",
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
-				{data: 'image', name: 'image'},
+				{data: 'title', name: 'title'},
+				{data: 'publication_date', name: 'publication_date'},
+				{data: 'author', name: 'author'},
+				{data: 'category', name: 'category'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
 			order: [
@@ -89,20 +95,30 @@
             e.preventDefault(); // Hindari pengiriman form secara default
 
             var action = document.getElementById('action').innerText;
-            var id_information = $('#id_information').val();
+            var id_reference = $('#id_reference').val();
+            var category = $('#category').val();
+            var title = $('#title').val();
+            var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
             var formData = new FormData();
-            formData.append('id', id_information);
+            formData.append('id', id_reference);
+            formData.append('title', title);
+            formData.append('category', category);
             formData.append('_token', "{{ csrf_token() }}");
 
-            var fileInput = document.getElementById('image');
+            var fileInput = document.getElementById('cover');
             if (fileInput.files.length > 0) {
-                formData.append('image', fileInput.files[0]);
+                formData.append('cover', fileInput.files[0]);
+            }
+
+            var fileInput2 = document.getElementById('file');
+            if (fileInput2.files.length > 0) {
+                formData.append('file', fileInput2.files[0]);
             }
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/information/validate') }}";
+            var url = "{{ url('/reference/validate') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
@@ -116,7 +132,7 @@
                     if (action === "Simpan") {
                         send();
                     } else {
-                        update(id_information);
+                        update(id_reference);
                     }
                 },
                 error: function (xhr) {
@@ -139,9 +155,13 @@
     });
 
     function clearForm(){
-        document.getElementById("head_title").textContent = "Tambah Informasi";
+        document.getElementById("head_title").textContent = "Tambah {{ $title }}";
         $('#myForm')[0].reset();
-        document.getElementById("show_image").textContent = "";
+        var editor = CKEDITOR.instances['desc'];
+        editor.setData('');
+
+        document.getElementById("show_cover").textContent = "";
+        document.getElementById("show_file").textContent = "";
         document.getElementById("action").textContent = "Simpan";
     }
 
@@ -158,7 +178,7 @@
 
         // Kirim data formulir ke server menggunakan AJAX
         $.ajax({
-            url: "{{ url('information/store') }}",
+            url: "{{ url('reference/store') }}",
             type: "POST",
             data: formData,
             contentType: false, // Biarkan jQuery menentukan contentType secara otomatis
@@ -166,7 +186,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast
                 $('#myForm')[0].reset(); // Reset form setelah berhasil menambahkan data
-                $('#kt_modal_add_information').modal('hide');
+                $('#kt_modal_add_reference').modal('hide');
                 table.ajax.reload(null, false);
             },
             error: function (xhr) {
@@ -178,21 +198,31 @@
         
     // Get Data
     function getData(id){
-        document.getElementById("head_title").textContent = "Ubah Informasi";
+        document.getElementById("head_title").textContent = "Ubah {{ $title }}";
         document.getElementById("action").textContent = "Update";
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/information/edit') }}";
+        var url = "{{ url('/reference/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "GET",
             success: function (response) {
-                document.getElementById("id_information").value = response.data.id;
+                document.getElementById("id_reference").value = response.data.id;
+                document.getElementById("category").value = response.data.category;
                 document.getElementById("title").value = response.data.title;
-                document.getElementById("text").value = response.data.text;
+                document.getElementById("author").value = response.data.author;
+                document.getElementById("publication_date").value = response.data.publication_date;
                 
-                var imageLink = '<br><a href="{{ asset("upload/information/") }}/' + response.data.image + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
-                document.getElementById("show_image").innerHTML = imageLink;
+                CKEDITOR.instances['desc'].setData(response.data.desc);
+                if(response.data.cover){
+                    var coverLink = '<br><a href="{{ asset("upload/reference/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    document.getElementById("show_cover").innerHTML = coverLink;
+                }
+
+                if(response.data.file){
+                    var fileLink = '<br><a href="{{ asset("upload/reference/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    document.getElementById("show_file").innerHTML = fileLink;
+                }
             },
             error: function (xhr) {
                 // Tangani kesalahan jika pengiriman formulir gagal
@@ -209,7 +239,7 @@
         
         // Kirim data formulir ke server menggunakan AJAX
 
-        var url = "{{ url('/information/edit') }}";
+        var url = "{{ url('/reference/edit') }}";
         $.ajax({
             url: url + "/" + id,
             type: "POST",
@@ -219,7 +249,7 @@
             success: function (response) {
                 showSuccessToast(response.message); // Tampilkan notifikasi toast untuk keberhasilan
                 $('#myForm')[0].reset(); // Reset form setelah berhasil memperbarui data
-                $('#kt_modal_add_information').modal('hide'); // Tutup modal setelah berhasil memperbarui data
+                $('#kt_modal_add_reference').modal('hide'); // Tutup modal setelah berhasil memperbarui data
                 table.ajax.reload(null, false); // Muat ulang DataTables setelah update
             },
             error: function (xhr) {
@@ -245,7 +275,7 @@
                     'Data Berhasil Dihapus.',
                     'success'
                 ).then(function () {
-                    var url = "{{ url('/information/delete') }}";
+                    var url = "{{ url('/reference/delete') }}";
                     $.ajax({
                         url: url + "/" + id,
                         success: function (response) {

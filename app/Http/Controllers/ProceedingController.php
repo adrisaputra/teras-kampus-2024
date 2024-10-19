@@ -30,8 +30,8 @@ class ProceedingController extends Controller
             ->addColumn('number', function () use (&$counter) {
                 return $counter++;
             })
-            ->addColumn('created_at', function ($v){
-                return date('d M Y', strtotime($v->created_at));
+            ->addColumn('publication_date', function ($v){
+                return date('d-m-Y', strtotime($v->publication_date));
             })
             ->addColumn('user', function ($v) {
                 return $v->user ? $v->user->name : '';
@@ -69,7 +69,7 @@ class ProceedingController extends Controller
             } else {
                 $rules = [
                     'title' => 'required',
-                    'cover' => 'cover|mimes:jpeg,png,jpg|max:5000',
+                    'cover' => 'image|mimes:jpeg,png,jpg|max:5000',
                     'file' => 'mimes:pdf|max:5000'
                 ];
             }

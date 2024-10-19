@@ -197,6 +197,50 @@ $setting = \App\Helpers\Helpers::setting();
 									</div>
 								</div>
 								
+								<div data-kt-menu-trigger="click" class="menu-item @if(in_array(Request::segment(1),['textbook','monograph','reference','novel'])) here show @endif menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon" style="margin-right: 15px">
+											<img src="{{ asset('menu/icons8-home-100.png') }}" width="30" height="30" >
+										</span>
+										<span class="menu-title">Katalog</span>
+										<span class="menu-arrow"></span>
+									</span>
+									<div class="menu-sub menu-sub-accordion menu-active-bg">
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='textbook') active @endif " href="{{ url('textbook') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Buku Ajar</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='monograph') active @endif " href="{{ url('monograph') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Monograf</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='reference') active @endif " href="{{ url('reference') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Referensi</span>
+											</a>
+										</div>
+										<div class="menu-item">
+											<a class="menu-link @if(Request::segment(1)=='novel') active @endif " href="{{ url('novel') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Novel</span>
+											</a>
+										</div>
+									</div>
+								</div>
+								
 								<div class="menu-item">
 									<a class="menu-link @if(Request::segment(1)=="album") active @endif" href="{{ url('/album') }}">
 										<span class="menu-icon" style="margin-right: 15px">
