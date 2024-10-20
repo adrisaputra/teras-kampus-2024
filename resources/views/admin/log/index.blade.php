@@ -38,7 +38,7 @@
 
                     <!--begin::Table-->
                     <table class="table table-striped table-rounded border border-gray-300 table-row-bordered table-row-gray-300 gy-2 gs-6" id="log-table">
-                        <thead style="background-color: #3f51b5;">
+                        <thead style="background-color: #257180;">
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width: 2%;color: white;border-bottom: white;" >Number</th>
                                 <th style="width: 2%;color: white;border-bottom: white;" >No</th>

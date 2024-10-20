@@ -48082,7 +48082,7 @@ body {
     right: 0;
     left: 0;
     z-index: 100;
-    background-color: #02b1c7;
+    background-color: #257180;
     box-shadow: 0 10px 30px 0 rgba(82, 63, 105, 0.05);
     height: 65px;
     padding: 0;
@@ -48540,7 +48540,7 @@ body {
   background-color: #ffffff;
 }
 .aside .aside-logo {
-  background-color: #00bcd4;
+  background-color: #257180e6;
 }
 .aside .aside-toggle svg [fill]:not(.permanent):not(g) {
   transition: fill 0.3s ease;
@@ -48950,7 +48950,7 @@ body {
 .aside-menu .menu-item .menu-link:hover:not(.disabled):not(.active),
 .aside-menu .menu-item.hover > .menu-link:not(.disabled):not(.active) {
   transition: color 0.2s ease, background-color 0.2s ease;
-  background-color: #bf0720;
+  background-color: #CB6040;
   color: #fff;
 }
 .aside-menu .menu-item .menu-link:hover:not(.disabled):not(.active) .menu-title,
@@ -49037,7 +49037,7 @@ body {
 .aside-menu .menu-item.here > .menu-link,
 .aside-menu .menu-item.show > .menu-link {
   transition: color 0.2s ease, background-color 0.2s ease;
-  background-color: #bf051f;
+  background-color: #FD8B51;
   color: #fff;
 }
 .aside-menu .menu-item.here > .menu-link .menu-title,
@@ -49098,7 +49098,7 @@ body {
 }
 .aside-menu .menu-item .menu-link.active {
   transition: color 0.2s ease, background-color 0.2s ease;
-  background-color: #db1430;
+  background-color: #CB6040;
   color: #fff;
 }
 .aside-menu .menu-item .menu-link.active .menu-title {

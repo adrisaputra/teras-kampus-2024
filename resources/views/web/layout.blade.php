@@ -1,3 +1,6 @@
+@php
+	$setting = \App\Helpers\Helpers::setting();
+@endphp
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
@@ -7,32 +10,48 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600..700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/style.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/swiper.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/dark.css') }}" type="text/css" />
+
 	<link rel="stylesheet" href="{{ asset('frontend/css/font-icons.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ asset('frontend/one-page/css/et-line.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}" type="text/css" />
 
 	<!-- Bootstrap Switch CSS -->
 	<link rel="stylesheet" href="{{ asset('frontend/css/components/bs-switches.css') }}" type="text/css" />
-
 	<link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="{{ asset('frontend/css/colors.php?color=0C1CCC') }}" type="text/css" />
 
-	<!-- Articles Demo Specific Stylesheet -->
+	<!-- Theme Color Stylesheet -->
+	<link rel="stylesheet" href="{{ asset('frontend/css/colors.php?color=FF8600') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ asset('frontend/demos/news/css/fonts.css') }}" type="text/css" />
+
+	<!-- News Demo Specific Stylesheet -->
+	<link rel="stylesheet" href="{{ asset('frontend/demos/news/news.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/demos/articles/articles.css') }}" type="text/css" />
-	<!-- <link rel="stylesheet" href="{{ asset('frontend/demos/articles/css/fonts.css') }}" type="text/css" /> -->
+	<link rel="stylesheet" href="{{ asset('frontend/demos/articles/css/fonts.css') }}" type="text/css" />
+	<!-- / -->
 
+	<!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontend/include/rs-plugin/css/settings.css') }}" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontend/include/rs-plugin/css/layers.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontend/include/rs-plugin/css/navigation.css') }}">
 
 	<!-- Document Title
 	============================================= -->
-	<title>Articles | Canvas</title>
+	<title>News Demo | Canvas</title>
+
+	<style>
+		/* Revolution Slider Styles */
+		.hesperiden .tp-tab { border-bottom: 0; }
+		.hesperiden .tp-tab:hover,
+		.hesperiden .tp-tab.selected { background-color: #E5E5E5; }
+
+	</style>
 
 </head>
 
@@ -44,26 +63,51 @@
 
 		<!-- Header
 		============================================= -->
-		<header id="header" class="border-bottom-0">
-			<div id="header-wrap">
+		<header id="header" class="header-size-sm" data-sticky-shrink="false">
+			<div class="container">
+				<div class="header-row justify-content-between">
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo" class="col-auto ms-auto ms-mb-0 me-mb-0 order-md-2">
+						<a href="demo-news.html" class="standard-logo"><img class="mx-auto" src="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png" alt="Canvas Logo"></a>
+						<a href="demo-news.html" class="retina-logo"><img class="mx-auto" src="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png" alt="Canvas Logo"></a>
+					</div><!-- #logo end -->
+
+					<div class="w-100 d-block d-md-none"></div>
+
+					<div class="col-12 col-sm-6 col-md-4 justify-content-center justify-content-sm-start d-flex order-md-1 mb-4 mb-sm-0">
+						<a href="https://facebook.com/semiColonWeb" class="social-icon si-small si-rounded si-dark si-mini si-facebook mb-0">
+							<i class="icon-facebook"></i>
+							<i class="icon-facebook"></i>
+						</a>
+						<a href="https://twitter.com/__semicolon" class="social-icon si-small si-rounded si-dark si-mini si-twitter mb-0">
+							<i class="icon-twitter"></i>
+							<i class="icon-twitter"></i>
+						</a>
+						<a href="https://instagram.com/semicolonweb" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+							<i class="icon-instagram"></i>
+							<i class="icon-instagram"></i>
+						</a>
+					</div>
+
+					<div class="col-12 col-sm-6 col-md-4 order-md-3 mb-4 mb-md-0">
+						<ul class="nav align-items-center justify-content-center justify-content-sm-end">
+							<li class="nav-item">
+							</li>
+							<li class="nav-item">
+								<div class="date-today text-uppercase badge bg-dark rounded-pill py-2 px-3 fw-medium"></div>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="header-wrap" class="border-top border-f5">
 				<div class="container">
-					<div class="header-row">
+					<div class="header-row justify-content-between flex-row-reverse flex-lg-row">
 
-						<!-- Logo
-						============================================= -->
-						<div id="">
-							<a href="demo-articles.html" class="standard-logo" data-dark-logo="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png"><img src="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png" style="height:80px"></a>
-						</div><!-- #logo end -->
-
-						<div class="header-misc">
-
-							<!-- Top Search
-							============================================= -->
-							<div id="top-search" class="header-misc-icon">
-								<a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
-							</div><!-- #top-search end -->
-
-						</div>
 
 						<div id="primary-menu-trigger">
 							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
@@ -71,34 +115,193 @@
 
 						<!-- Primary Navigation
 						============================================= -->
-						<nav class="primary-menu">
+						<nav class="primary-menu with-arrows">
 
 							<ul class="menu-container">
-								<li class="menu-item"><a href="demo-articles-about.html" class="menu-link ls0"><div>Home</div></a></li>
-								<li class="menu-item"><a href="demo-articles-about.html" class="menu-link ls0"><div>About us</div></a></li>
-								<li class="menu-item"><a href="demo-articles-books.html" class="menu-link ls0"><div>Catalog</div></a>
+								<li class="menu-item current menu-color-home"><a class="menu-link" href="demo-news.html"><div>Home</div></a></li>
+								<li class="menu-item menu-color-travel"><a class="menu-link" href="demo-news-category.html"><div>About us</div></a></li>
+								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Catalog</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Buku Ajar</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Monograf</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Referensi</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Novel</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Journal & Proceeding</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Journal</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Proceeding</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Conference & Workshop</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Conference</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="header-light.html"><div>Workshop</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="menu-item menu-color-fashion"><a class="menu-link" href="demo-news-category.html"><div>Author & Affiliation</div></a></li>
+								<li class="menu-item menu-color-sports"><a class="menu-link" href="demo-news-category.html"><div>Term & Condition</div></a></li>
+								<li class="menu-item menu-color-food"><a class="menu-link" href="demo-news-category.html"><div>Contact Us</div></a></li>
+							</ul>
+
+							<!-- Mobile Menu
+							============================================= -->
+							<ul class="menu-container mobile-primary-menu">
+								<li class="menu-item current menu-color-home"><a class="menu-link" href="demo-news.html"><div>Home</div></a></li>
+								<li class="menu-item menu-color-travel"><a class="menu-link" href="demo-news-category.html"><div>Travel</div></a></li>
+								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="demo-news-category.html"><div>Lifestyle</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="demo-news-category.html"><div>Tech</div></a></li>
+								<li class="menu-item menu-color-fashion"><a class="menu-link" href="demo-news-category.html"><div>Fashion</div></a></li>
+								<li class="menu-item menu-color-sports"><a class="menu-link" href="demo-news-category.html"><div>Sports</div></a></li>
+								<li class="menu-item menu-color-food"><a class="menu-link" href="demo-news-category.html"><div>Food</div></a></li>
+								<li class="menu-item menu-color-market"><a class="menu-link" href="demo-news-category.html"><div>More</div></a>
 									<ul class="sub-menu-container">
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Buku Ajar</div></a></li>
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Monograf</div></a></li>
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Referensi</div></a></li>
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Novel</div></a></li>
+										<li class="menu-item"><a class="menu-link" href="#"><div>Header</div></a>
+											<ul class="sub-menu-container">
+												<li class="menu-item">
+													<a class="menu-link" href="header-light.html"><div>Light Version</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-dark.html"><div>Dark Version</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-transparent.html"><div>Transparent</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-semi-transparent.html"><div>Semi Transparent</div></a>
+													<ul class="sub-menu-container">
+														<li class="menu-item">
+															<a class="menu-link" href="header-semi-transparent.html"><div>Light Version</div></a>
+														</li>
+														<li class="menu-item">
+															<a class="menu-link" href="header-semi-transparent-dark.html"><div>Dark Version</div></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-side-left.html"><div>Left Side Header</div></a>
+													<ul class="sub-menu-container">
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-left.html"><div>Fixed Position</div></a>
+														</li>
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-left-open.html"><div>OnClick Open</div></a>
+														</li>
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-left-open-push.html"><div>Push Content</div></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-side-right.html"><div>Right Side Header</div></a>
+													<ul class="sub-menu-container">
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-right.html"><div>Fixed Position</div></a>
+														</li>
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-right-open.html"><div>OnClick Open</div></a>
+														</li>
+														<li class="menu-item">
+															<a class="menu-link" href="header-side-right-open-push.html"><div>Push Content</div></a>
+														</li>
+													</ul>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="header-floating.html"><div>Floating Version</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="static-sticky.html"><div>Static Sticky</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="responsive-sticky.html"><div>Responsive Sticky</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="logo-changer.html"><div>Alternate Logos</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="alternate-mobile-menu.html"><div>Alternate Mobile Menu</div></a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<ul class="sub-menu-container">
+										<li class="menu-item mega-menu-title"><a class="menu-link" href="#"><div>Layouts</div></a>
+											<ul class="sub-menu-container">
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single.html"><div>Default Layout</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single-left-sidebar.html"><div>Left Sidebar</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single-both-sidebar.html"><div>Both Sidebar</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="both-left-sidebar.html"><div>Both Left Sidebar</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="both-right-sidebar.html"><div>Both Right Sidebar</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single-full.html"><div>Full Width</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single-small.html"><div>Small Image</div></a>
+												</li>
+												<li class="menu-item">
+													<a class="menu-link" href="blog-single-split-right-sidebar.html"><div>Split Layout</div></a>
+												</li>
+											</ul>
+										</li>
 									</ul>
 								</li>
-								<li class="menu-item"><a href="demo-articles-books.html" class="menu-link ls0"><div>Journal & Proceeding</div></a>
-									<ul class="sub-menu-container">
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Journal</div></a></li>
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Proceeding</div></a></li>
-									</ul>
-								</li>
-								<li class="menu-item"><a href="demo-articles-books.html" class="menu-link ls0"><div>Conference & Workshop</div></a>
-									<ul class="sub-menu-container">
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Conference</div></a></li>
-										<li class="menu-item"><a href="demo-articles-single.html" class="menu-link ls0"><div>Workshop</div></a></li>
-									</ul>
-								</li>
-								<li class="menu-item"><a href="#" class="menu-link ls0" data-scrollto="#footer" data-highlight="yellow" data-speed="1200"><div>Author & Affiliation</div></a></li>
-								<li class="menu-item"><a href="#" class="menu-link ls0" data-scrollto="#footer" data-highlight="yellow" data-speed="1200"><div>Term & Condition</div></a></li>
-								<li class="menu-item"><a href="#" class="menu-link ls0" data-scrollto="#footer" data-highlight="yellow" data-speed="1200"><div>Contact Us</div></a></li>
 							</ul>
 
 						</nav><!-- #primary-menu end -->
@@ -110,6 +313,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="header-wrap-clone"></div>
 		</header><!-- #header end -->
 
 		<!-- Content
@@ -119,99 +323,36 @@
 
 		<!-- Footer
 		============================================= -->
-		<footer id="footer" class="border-0">
+		<footer id="footer" class="dark" style="background-color: #1f2024;">
 
-			<div class="container clearfix">
+			<div class="container">
 
 				<!-- Footer Widgets
 				============================================= -->
 				<div class="footer-widgets-wrap row clearfix">
 
-					<div class="col-md-4 col-sm-6">
+					<div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+						<!-- Footer Widget 1
+						============================================= -->
 						<div class="widget clearfix">
-
-							<div class="d-flex align-items-center mb-4">
-								<img src="demos/articles/images/logo-footer.jpg" height="40" alt="Image">
-								<h4 class="nott ls0 mb-0 font-body ms-2">canvas</h4>
-							</div>
-
-							<div class="d-flex clearfix">
-								<div class="pe-4 ps-1">
-									<i class="icon-building2 h3"></i>
-								</div>
-								<div class="flex-grow-1">
-									<address>
-										<abbr title="address"><strong>Headquarters:</strong><br></abbr>
-										795 Folsom Ave, Suite 600<br>
-										San Francisco, CA 94107<br>
-									</address>
-								</div>
-							</div>
-							<div class="d-flex clearfix">
-								<div class="pe-4 ps-1">
-									<i class="icon-call h3"></i>
-								</div>
-								<div class="flex-grow-1">
-									<div class="bottommargin-sm">
-										<abbr title="Phone Number"><strong>Phone:</strong></abbr> (1) 8547 632521<br>
-										<abbr title="Fax"><strong>Fax:</strong></abbr> (1) 11 4752 1433<br>
-									</div>
-								</div>
-							</div>
-							<div class="d-flex align-items-center clearfix">
-								<div class="pe-4 ps-1">
-									<i class="icon-envelope21 h3 mb-0"></i>
-								</div>
-								<div class="flex-grow-1">
-									<abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com
-								</div>
-							</div>
-
-							<div class="mt-4 clearfix">
-								<a href="https://facebook.com/semicolonweb" class="social-icon si-small si-rounded si-colored si-facebook" title="Facebook" target="_blank">
-									<i class="icon-facebook"></i>
-									<i class="icon-facebook"></i>
-								</a>
-								<a href="https://twitter.com/__semicolon" class="social-icon ms-1 si-small si-rounded si-colored si-twitter" title="Twitter" target="_blank">
-									<i class="icon-twitter"></i>
-									<i class="icon-twitter"></i>
-								</a>
-								<a href="#" class="social-icon ms-1 si-small si-rounded si-colored si-github" title="Github">
-									<i class="icon-github"></i>
-									<i class="icon-github"></i>
-								</a>
-								<a href="#" class="social-icon ms-1 si-small si-rounded si-colored si-pinterest" title="Pinterest">
-									<i class="icon-pinterest"></i>
-									<i class="icon-pinterest"></i>
-								</a>
-								<a href="#" class="social-icon ms-1 si-small si-rounded si-colored si-forrst" title="Forrst">
-									<i class="icon-forrst"></i>
-									<i class="icon-forrst"></i>
-								</a>
-							</div>
-
-						</div>
-					</div>
-
-					<div class="col-md-4 col-sm-6  mt-5 mt-sm-0">
-						<div class="widget widget_links clearfix">
-
-							<div class="line mb-5 mt-2 d-block d-sm-none"></div>
-
-							<h4 class="font-body fw-bold ls0">Popular Authors</h4>
-
+							<h4 class="mb-3 mb-sm-4">Recent Posts</h4>
 							<div class="posts-sm row col-mb-30" id="post-list-footer">
 								<div class="entry col-12">
 									<div class="grid-inner row align-items-center g-0">
 										<div class="col-auto">
 											<div class="entry-image">
-												<a href="#"><img src="demos/articles/images/authors/1.jpg" alt="Author"></a>
+												<a href="demo-news-single.html"><img src="demos/news/images/posts/travel/small/1.jpg" alt="Image"></a>
 											</div>
 										</div>
 										<div class="col ps-3">
 											<div class="entry-title">
-												<h4 class="font-body"><a href="#">Nathaneal Down</a></h4>
-												<small>Published 2,615 Books</small>
+												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">UK government weighs Tesla's Model.</a></h4>
+											</div>
+											<div class="entry-meta">
+												<ul>
+													<li><span>by</span> <a href="#">John Doe</a></li>
+													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -221,13 +362,18 @@
 									<div class="grid-inner row align-items-center g-0">
 										<div class="col-auto">
 											<div class="entry-image">
-												<a href="#"><img src="demos/articles/images/authors/2.jpg" alt="Author"></a>
+												<a href="demo-news-single.html"><img src="demos/news/images/posts/sports/small/2.jpg" alt="Image"></a>
 											</div>
 										</div>
 										<div class="col ps-3">
 											<div class="entry-title">
-												<h4 class="font-body"><a href="#">Bailey Wonger</a></h4>
-												<small>Published 2,174 Books</small>
+												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">UK government weighs Tesla's Model.</a></h4>
+											</div>
+											<div class="entry-meta">
+												<ul>
+													<li><span>by</span> <a href="#">John Doe</a></li>
+													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -237,53 +383,81 @@
 									<div class="grid-inner row align-items-center g-0">
 										<div class="col-auto">
 											<div class="entry-image">
-												<a href="#"><img src="demos/articles/images/authors/3.jpg" alt="Author"></a>
+												<a href="demo-news-single.html"><img src="demos/news/images/posts/market/small/3.jpg" alt="Image"></a>
 											</div>
 										</div>
 										<div class="col ps-3">
 											<div class="entry-title">
-												<h4 class="font-body"><a href="#">Hanson Deck</a></h4>
-												<small>Published 1,187 Books</small>
+												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">Why market Is No Friend To Small Business</a></h4>
+											</div>
+											<div class="entry-meta">
+												<ul>
+													<li><span>by</span> <a href="#">John Doe</a></li>
+													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
+												</ul>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 
-					<div class="col-md-4 col-sm-6 mt-5 mt-md-0">
-
-						<div id="q-contact" class="widget quick-contact-widget form-widget clearfix">
-
-							<div class="line mb-5 mt-2 d-block d-md-none"></div>
-
-							<h4 class="highlight-me font-body fw-bold ls0">Contact Us</h4>
-							<div class="form-result"></div>
-							<form id="quick-contact-form" name="quick-contact-form" action="include/form.php" method="post" class="quick-contact-form mb-0">
-								<div class="form-process">
-									<div class="css3-spinner">
-										<div class="css3-spinner-scaler"></div>
-									</div>
-								</div>
-
-								<input type="text" class="required sm-form-control border-form-control input-block-level" id="quick-contact-form-name" name="quick-contact-form-name" value="" placeholder="Full Name" />
-								<input type="text" class="required sm-form-control border-form-control email input-block-level" id="quick-contact-form-email" name="quick-contact-form-email" value="" placeholder="Email Address" />
-								<textarea class="required sm-form-control border-form-control input-block-level short-textarea" id="quick-contact-form-message" name="quick-contact-form-message" rows="4" cols="30" placeholder="Message"></textarea>
-								<input type="text" class="d-none" id="quick-contact-form-botcheck" name="quick-contact-form-botcheck" value="" />
-								<input type="hidden" name="prefix" value="quick-contact-form-">
-								<button type="submit" id="quick-contact-form-submit" name="quick-contact-form-submit" class="button button-small button-black nott ls0 mt-3 ms-0" value="submit">Send Email</button>
-							</form>
-
+					<!-- Footer Widget 2
+						============================================= -->
+					<div class="col-lg-2 col-sm-6 mb-5 mb-lg-0">
+						<h4 class="mb-3 mb-sm-4">Tag Cloud</h4>
+						<div class="tagcloud">
+							<a href="#">general</a>
+							<a href="#">videos</a>
+							<a href="#">music</a>
+							<a href="#">media</a>
+							<a href="#">photography</a>
+							<a href="#">parallax</a>
+							<a href="#">ecommerce</a>
+							<a href="#">terms</a>
+							<a href="#">coupons</a>
+							<a href="#">modern</a>
+							<a href="#">magazine</a>
+							<a href="#">bootstrap</a>
+							<a href="#">news</a>
+							<a href="#">blog</a>
+							<a href="#">wordpress</a>
 						</div>
 					</div>
 
-				</div><!-- .footer-widgets-wrap end -->
+					<!-- Footer Widget 3
+					============================================= -->
+					<div class="col-lg-3 col-sm-6 mb-5 mb-sm-0">
+						<div class="widget widget_links clearfix">
+							<h4 class="mb-3 mb-sm-4">Blogroll</h4>
+							<ul>
+								<li><a href="https://codex.wordpress.org/">Documentation</a></li>
+								<li><a href="https://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
+								<li><a href="https://wordpress.org/extend/plugins/">Plugins</a></li>
+								<li><a href="https://wordpress.org/support/">Support Forums</a></li>
+								<li><a href="https://wordpress.org/extend/themes/">Themes</a></li>
+								<li><a href="https://wordpress.org/news/">Canvas Blog</a></li>
+								<li><a href="https://planet.wordpress.org/">Customer Reviews</a></li>
+								<li><a href="https://planet.wordpress.org/">Get Licence</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Footer Widget 4
+					============================================= -->
+					<div class="col-lg-3 col-sm-6 mb-0">
+						<div class="widget widget_links clearfix">
+							<h4 class="mb-3 mb-sm-4">Download in Mobile</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae esse iure est, quam libero!</p>
+							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-apple"></i>App Store</a>
+							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-googleplay"></i>Google Play</a>
+						</div>
+					</div>
+
+				</div>
 
 			</div>
-
-			<div class="line m-0"></div>
 
 			<!-- Copyrights
 			============================================= -->
@@ -291,52 +465,15 @@
 
 				<div class="container clearfix">
 
-					<div class="row align-items-center">
-						<div class="col-sm-6">
-							Copyrights &copy; 2020 All Rights Reserved by Canvas Inc.
+					<div class="row justify-content-center">
+						<div class="col-md-6 align-self-center">
+							Copyrights &copy; 2020 All Rights Reserved by Canvas Inc.<br>
+							<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
 						</div>
 
-						<div class="col-sm-6 mt-4 mt-sm-0">
-							<div class="float-none float-sm-right clearfix">
-								<a href="#" class="social-icon si-small si-borderless si-facebook">
-									<i class="icon-facebook"></i>
-									<i class="icon-facebook"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-twitter">
-									<i class="icon-twitter"></i>
-									<i class="icon-twitter"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-gplus">
-									<i class="icon-gplus"></i>
-									<i class="icon-gplus"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-pinterest">
-									<i class="icon-pinterest"></i>
-									<i class="icon-pinterest"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-vimeo">
-									<i class="icon-vimeo"></i>
-									<i class="icon-vimeo"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-github">
-									<i class="icon-github"></i>
-									<i class="icon-github"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-yahoo">
-									<i class="icon-yahoo"></i>
-									<i class="icon-yahoo"></i>
-								</a>
-
-								<a href="#" class="social-icon si-small si-borderless si-linkedin">
-									<i class="icon-linkedin"></i>
-									<i class="icon-linkedin"></i>
-								</a>
+						<div class="col-md-6 align-self-center">
+							<div class="copyrights-menu float-end copyright-links m-0 clearfix">
+								<a href="#">Home</a>/<a href="#">About</a>/<a href="#">Features</a>/<a href="#">Portfolio</a>/<a href="#">FAQs</a>/<a href="#">Contact</a>
 							</div>
 						</div>
 					</div>
@@ -349,18 +486,6 @@
 
 	</div><!-- #wrapper end -->
 
-	<!-- Switcher
-	============================================= -->
-	<div class="mode-switcher">
-		<div class="pts-text center"><span class="tdark">Dark</span><span class="tlight">Light</span></div>
-		<div class="pts-switcher">
-			<div class="switch">
-				<input id="switch-toggle-mode" class="switch-toggle switch-toggle-round" type="checkbox">
-				<label for="switch-toggle-mode"></label>
-			</div>
-		</div>
-	</div>
-
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
@@ -369,11 +494,56 @@
 	============================================= -->
 	<script src="{{ asset('frontend/js/jquery.js') }}"></script>
 	<script src="{{ asset('frontend/js/plugins.min.js') }}"></script>
+	<script src="{{ asset('frontend/js/plugins.infinitescroll.js') }}"></script>
 
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="{{ asset('frontend/js/functions.js') }}"></script>
 
+	<!-- SLIDER REVOLUTION 5.x SCRIPTS  -->
+	<script src="{{ asset('frontend/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.actions.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.carousel.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.migration.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
+	<script src="{{ asset('frontend/include/rs-plugin/js/extensions/revolution.extension.video.min.js') }}"></script>
+
+	<script>
+		var tpj=jQuery;
+		tpj.noConflict();
+		var $ = jQuery.noConflict();
+
+
+		tpj(document).ready(function() {
+			var apiRevoSlider = tpj('#rev_slider_k_fullwidth').show().revolution(
+			{
+				sliderType:"standard",
+				sliderLayout:"fullwidth",
+				delay:9000,
+				navigation: {
+					arrows:{enable:true}
+				},
+				responsiveLevels:[1240,1024,778,480],
+				visibilityLevels:[1240,1024,778,480],
+				gridwidth:[1240,1024,778,480],
+				gridheight:[600,768,960,720],
+			});
+
+			apiRevoSlider.on("revolution.slide.onloaded",function (e) {
+				setTimeout( function(){ SEMICOLON.slider.sliderDimensions(); }, 400 );
+			});
+
+			apiRevoSlider.on("revolution.slide.onchange",function (e,data) {
+				SEMICOLON.slider.revolutionSliderMenu();
+			});
+		});
+	</script>
 	<script>
 		jQuery(window).on( 'load', function(){
 		    var swiper = new Swiper('.swiper-scroller', {
@@ -424,6 +594,5 @@
 			});
 		});
 	</script>
-
 </body>
 </html>
