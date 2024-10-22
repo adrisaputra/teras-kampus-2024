@@ -43,7 +43,8 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>News Demo | Canvas</title>
+	<title>{{ __($setting->application_name) }}</title>
+	<link rel="icon" type="image/x-icon" href="{{ asset('upload/setting/'.$setting->small_icon) }}"/>
 
 	<style>
 		/* Revolution Slider Styles */
@@ -70,24 +71,28 @@
 					<!-- Logo
 					============================================= -->
 					<div id="logo" class="col-auto ms-auto ms-mb-0 me-mb-0 order-md-2">
-						<a href="demo-news.html" class="standard-logo"><img class="mx-auto" src="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png" alt="Canvas Logo"></a>
-						<a href="demo-news.html" class="retina-logo"><img class="mx-auto" src="https://teraskampus.id/wp-content/uploads/2024/04/logo-perusahaan.png" alt="Canvas Logo"></a>
+						<a href="demo-news.html" class="standard-logo"><img class="mx-auto" src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
+						<a href="demo-news.html" class="retina-logo"><img class="mx-auto" src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
 					</div><!-- #logo end -->
 
 					<div class="w-100 d-block d-md-none"></div>
 
 					<div class="col-12 col-sm-6 col-md-4 justify-content-center justify-content-sm-start d-flex order-md-1 mb-4 mb-sm-0">
-						<a href="https://facebook.com/semiColonWeb" class="social-icon si-small si-rounded si-dark si-mini si-facebook mb-0">
+						<a href="{{ $setting->fb }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-facebook mb-0">
 							<i class="icon-facebook"></i>
 							<i class="icon-facebook"></i>
 						</a>
-						<a href="https://twitter.com/__semicolon" class="social-icon si-small si-rounded si-dark si-mini si-twitter mb-0">
-							<i class="icon-twitter"></i>
-							<i class="icon-twitter"></i>
+						<a href="{{ $setting->ig }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+							<i class="icon-instagram"></i>
+							<i class="icon-instagram"></i>
 						</a>
-						<a href="https://instagram.com/semicolonweb" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
-							<i class="icon-instagram"></i>
-							<i class="icon-instagram"></i>
+						<a href="{{ $setting->tiktok }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+							<i class="icon-tiktok"></i>
+							<i class="icon-tiktok"></i>
+						</a>
+						<a href="{{ $setting->youtube }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+							<i class="icon-youtube"></i>
+							<i class="icon-youtube"></i>
 						</a>
 					</div>
 
@@ -117,10 +122,11 @@
 						============================================= -->
 						<nav class="primary-menu with-arrows">
 
-							<ul class="menu-container">
-								<li class="menu-item current menu-color-home"><a class="menu-link" href="demo-news.html"><div>Home</div></a></li>
-								<li class="menu-item menu-color-travel"><a class="menu-link" href="demo-news-category.html"><div>About us</div></a></li>
-								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Catalog</div></a>
+							<ul class="menu-container" >
+								<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
+								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
+								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Catalog</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -128,16 +134,16 @@
 													<li class="menu-item mega-menu-title">
 														<ul class="sub-menu-container">
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Buku Ajar</div></a>
+																<a class="menu-link" href="{{ url('page-catalog-1') }}"><div>Buku Ajar</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Monograf</div></a>
+																<a class="menu-link" href="{{ url('page-catalog-2') }}"><div>Monograf</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Referensi</div></a>
+																<a class="menu-link" href="{{ url('page-catalog-3') }}"><div>Referensi</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Novel</div></a>
+																<a class="menu-link" href="{{ url('page-catalog-4') }}"><div>Novel</div></a>
 															</li>
 														</ul>
 													</li>
@@ -146,7 +152,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Journal & Proceeding</div></a>
+								<li class="menu-item menu-color-fashion  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -154,10 +160,10 @@
 													<li class="menu-item mega-menu-title">
 														<ul class="sub-menu-container">
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Journal</div></a>
+																<a class="menu-link" href="{{ url('page-journal') }}"><div style="font-size: 12px;">Journal</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Proceeding</div></a>
+																<a class="menu-link" href="{{ url('page-proceeding') }}"><div style="font-size: 12px;">Proceeding</div></a>
 															</li>
 														</ul>
 													</li>
@@ -166,7 +172,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="demo-news-category.html"><div>Conference & Workshop</div></a>
+								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -174,10 +180,10 @@
 													<li class="menu-item mega-menu-title">
 														<ul class="sub-menu-container">
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Conference</div></a>
+																<a class="menu-link" href="{{ url('page-conference') }}"><div style="font-size: 12px;">Conference</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="header-light.html"><div>Workshop</div></a>
+																<a class="menu-link" href="{{ url('page-workshop') }}"><div style="font-size: 12px;">Workshop</div></a>
 															</li>
 														</ul>
 													</li>
@@ -186,9 +192,9 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-fashion"><a class="menu-link" href="demo-news-category.html"><div>Author & Affiliation</div></a></li>
-								<li class="menu-item menu-color-sports"><a class="menu-link" href="demo-news-category.html"><div>Term & Condition</div></a></li>
-								<li class="menu-item menu-color-food"><a class="menu-link" href="demo-news-category.html"><div>Contact Us</div></a></li>
+								<li class="menu-item menu-color-fashion"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
+								<li class="menu-item menu-color-sports"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
+								<li class="menu-item menu-color-food"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
 							</ul>
 
 							<!-- Mobile Menu
@@ -335,102 +341,20 @@
 						<!-- Footer Widget 1
 						============================================= -->
 						<div class="widget clearfix">
-							<h4 class="mb-3 mb-sm-4">Recent Posts</h4>
-							<div class="posts-sm row col-mb-30" id="post-list-footer">
-								<div class="entry col-12">
-									<div class="grid-inner row align-items-center g-0">
-										<div class="col-auto">
-											<div class="entry-image">
-												<a href="demo-news-single.html"><img src="demos/news/images/posts/travel/small/1.jpg" alt="Image"></a>
-											</div>
-										</div>
-										<div class="col ps-3">
-											<div class="entry-title">
-												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">UK government weighs Tesla's Model.</a></h4>
-											</div>
-											<div class="entry-meta">
-												<ul>
-													<li><span>by</span> <a href="#">John Doe</a></li>
-													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="entry col-12">
-									<div class="grid-inner row align-items-center g-0">
-										<div class="col-auto">
-											<div class="entry-image">
-												<a href="demo-news-single.html"><img src="demos/news/images/posts/sports/small/2.jpg" alt="Image"></a>
-											</div>
-										</div>
-										<div class="col ps-3">
-											<div class="entry-title">
-												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">UK government weighs Tesla's Model.</a></h4>
-											</div>
-											<div class="entry-meta">
-												<ul>
-													<li><span>by</span> <a href="#">John Doe</a></li>
-													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="entry col-12">
-									<div class="grid-inner row align-items-center g-0">
-										<div class="col-auto">
-											<div class="entry-image">
-												<a href="demo-news-single.html"><img src="demos/news/images/posts/market/small/3.jpg" alt="Image"></a>
-											</div>
-										</div>
-										<div class="col ps-3">
-											<div class="entry-title">
-												<h4 class="fw-semibold"><a href="demo-news-single.html" class="text-white">Why market Is No Friend To Small Business</a></h4>
-											</div>
-											<div class="entry-meta">
-												<ul>
-													<li><span>by</span> <a href="#">John Doe</a></li>
-													<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Footer Widget 2
-						============================================= -->
-					<div class="col-lg-2 col-sm-6 mb-5 mb-lg-0">
-						<h4 class="mb-3 mb-sm-4">Tag Cloud</h4>
-						<div class="tagcloud">
-							<a href="#">general</a>
-							<a href="#">videos</a>
-							<a href="#">music</a>
-							<a href="#">media</a>
-							<a href="#">photography</a>
-							<a href="#">parallax</a>
-							<a href="#">ecommerce</a>
-							<a href="#">terms</a>
-							<a href="#">coupons</a>
-							<a href="#">modern</a>
-							<a href="#">magazine</a>
-							<a href="#">bootstrap</a>
-							<a href="#">news</a>
-							<a href="#">blog</a>
-							<a href="#">wordpress</a>
+							
+						<address>
+							<strong>Alamat:</strong><br>{{ $setting->address }}{{ $setting->address }}<br><br>
+							<strong>Telepon / Whatsapp: </strong><br>{{ $setting->phone }}<br><br>
+							<strong>Email: </strong><br>{{ $setting->email }}
+						</address>
 						</div>
 					</div>
 
 					<!-- Footer Widget 3
 					============================================= -->
-					<div class="col-lg-3 col-sm-6 mb-5 mb-sm-0">
+					<div class="col-lg-4 col-sm-6 mb-5 mb-sm-0">
 						<div class="widget widget_links clearfix">
-							<h4 class="mb-3 mb-sm-4">Blogroll</h4>
+							<h4 class="mb-3 mb-sm-4">Link Terkait</h4>
 							<ul>
 								<li><a href="https://codex.wordpress.org/">Documentation</a></li>
 								<li><a href="https://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>

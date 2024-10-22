@@ -164,69 +164,6 @@ $setting = \App\Helpers\Helpers::setting();
 										</div>
 										@endforeach
 
-										<!-- Post Article -->
-										<div class="entry col-12">
-											<div class="grid-inner row align-items-center g-0">
-												<div class="col-auto">
-													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="demos/news/images/posts/travel/small/3.jpg" alt="Image"></a>
-													</div>
-												</div>
-												<div class="col ps-3">
-													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">MIT's new robot glove can give you extra fingers.</a></h4>
-													</div>
-													<div class="entry-meta">
-														<ul>
-															<li><span>by</span> <a href="#">John Doe</a></li>
-															<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Post Article -->
-										<div class="entry col-12">
-											<div class="grid-inner row align-items-center g-0">
-												<div class="col-auto">
-													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="demos/news/images/posts/sports/small/1.jpg" alt="Image"></a>
-													</div>
-												</div>
-												<div class="col ps-3">
-													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">You can now listen to headphones through your hoodie.</a></h4>
-													</div>
-													<div class="entry-meta">
-														<ul>
-															<li><span>by</span> <a href="#">John Doe</a></li>
-															<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Post Article -->
-										<div class="entry col-12">
-											<div class="grid-inner row align-items-center g-0">
-												<div class="col-auto">
-													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="demos/news/images/posts/fashion/small/4.jpg" alt="Image"></a>
-													</div>
-												</div>
-												<div class="col ps-3">
-													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">How would you change Kobo's Aura HD e-reader?</a></h4>
-													</div>
-													<div class="entry-meta">
-														<ul>
-															<li><span>by</span> <a href="#">John Doe</a></li>
-															<li><i class="icon-time"></i><a href="#">11 Mar 2021</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 
 								</div>
@@ -252,116 +189,85 @@ $setting = \App\Helpers\Helpers::setting();
 						<div class="swiper-container swiper-parent swiper-scroller">
 							<div class="swiper-wrapper h-auto">
 
+								@foreach($catalog1 as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/1/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
+											<img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Yanagi Canvas</a></h4>
-													<p class="mb-3 d-none d-sm-block">Proactively empower flexible partnerships rather than ethical products. Assertively cultivate 2.0 ROI before standardized processes.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$50.00</del> $42.00</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								@endforeach
 
+								@foreach($catalog2 as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/2/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
+											<img src="{{ asset('upload/monograph/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Learn English</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$39.99</del> $29.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								@endforeach
 
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center justify-content-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/3/1.png') }}" alt="Image">
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Learn English</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$29.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
+								@foreach($catalog3 as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/4/1.png') }}" alt="Image">
+											<img src="{{ asset('upload/reference/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Woodfire Pizza</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$21.49</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								@endforeach
 
+								@foreach($catalog4 as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/2/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
+											<img src="{{ asset('upload/novel/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">My Father is a Hero</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$60.00</del> $49.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/6/1.png') }}" alt="Image">
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3">Harry Potter Series</h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$11.49</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								@endforeach
 
 							</div>
 							<!-- Add Scroll Bar -->
@@ -390,116 +296,46 @@ $setting = \App\Helpers\Helpers::setting();
 						<div class="swiper-container swiper-parent swiper-scroller">
 							<div class="swiper-wrapper h-auto">
 
+							
+								@foreach($journal as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/1/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
+											<img src="{{ asset('upload/journal/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Yanagi Canvas</a></h4>
-													<p class="mb-3 d-none d-sm-block">Proactively empower flexible partnerships rather than ethical products. Assertively cultivate 2.0 ROI before standardized processes.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$50.00</del> $42.00</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								@endforeach
 
+								@foreach($proceeding as $v)
 								<div class="swiper-slide">
 									<div class="row m-auto align-items-center">
 										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/2/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
+											<img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image">
+											
 										</div>
 										<div class="col-md-6 p-0">
 											<div class="card">
 												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Learn English</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$39.99</del> $29.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
+													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
+													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
+													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center justify-content-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/3/1.png') }}" alt="Image">
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Learn English</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$29.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/4/1.png') }}" alt="Image">
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">Woodfire Pizza</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$21.49</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/2/1.png') }}" alt="Image">
-											<div class="sale-flash badge bg-color text-light p-2">Sale!</div>
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3"><a href="#">My Father is a Hero</a></h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix"><del>$60.00</del> $49.99</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="swiper-slide">
-									<div class="row m-auto align-items-center">
-										<div class="col-md-6 p-0">
-											<img src="{{ asset('frontend/demos/articles/images/articles/6/1.png') }}" alt="Image">
-										</div>
-										<div class="col-md-6 p-0">
-											<div class="card">
-												<div class="card-body py-4">
-													<h4 class="mb-3">Harry Potter Series</h4>
-													<p class="mb-3 d-none d-sm-block">Continually impact viral web-readiness before client-focused value. Phosfluor brand global action items via principle-centered ideas.</p>
-													<span class="article-price fw-bold ms-1 clearfix">$11.49</span>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix"><i class="icon-shopping-cart1"></i>Add to Cart</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								@endforeach
 
 							</div>
 							<!-- Add Scroll Bar -->

@@ -20,6 +20,19 @@ use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebController::class, 'index']);
+Route::get('/page-about', [WebController::class, 'about']);
+Route::get('/page-publishing-process', [WebController::class, 'publishing_process']);
+Route::get('/page-catalog-1', [WebController::class, 'catalog_1']);
+Route::get('/page-catalog-2', [WebController::class, 'catalog_2']);
+Route::get('/page-catalog-3', [WebController::class, 'catalog_3']);
+Route::get('/page-catalog-4', [WebController::class, 'catalog_4']);
+Route::get('/page-journal', [WebController::class, 'journal']);
+Route::get('/page-proceeding', [WebController::class, 'proceeding']);
+Route::get('/page-conference', [WebController::class, 'conference']);
+Route::get('/page-workshop', [WebController::class, 'workshop']);
+Route::get('/page-author-and-affiliation', [WebController::class, 'author_and_affiliation']);
+Route::get('/page-term-and-condition', [WebController::class, 'term_and_condition']);
+Route::get('/page-contact', [WebController::class, 'contact']);
 
 
 Route::get('/login', [LoginController::class, 'index']);

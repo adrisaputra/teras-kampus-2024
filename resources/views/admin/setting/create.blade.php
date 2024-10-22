@@ -26,6 +26,34 @@
                 <div id="email-error" class="fv-plugins-message-container invalid-feedback"></div>
             </div>
         </div>
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Facebook</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="fb" id="fb" class="form-control" placeholder="Facebook" value="{{ $setting->fb }}"/>
+                <div id="fb-error" class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Instagram</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="ig" id="ig" class="form-control" placeholder="Instagram" value="{{ $setting->ig }}"/>
+                <div id="ig-error" class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Tiktok</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="tiktok" id="youtube" class="form-control" placeholder="Tiktok" value="{{ $setting->tiktok }}"/>
+                <div id="tiktok-error" class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Youtube</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="youtube" id="youtube" class="form-control" placeholder="Youtube" value="{{ $setting->youtube }}"/>
+                <div id="youtube-error" class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
         <hr>
         <div class="row mb-6">
             <label class="col-lg-4 col-form-label required fw-bold fs-6">Nama Aplikasi</label>

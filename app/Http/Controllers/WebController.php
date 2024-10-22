@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conference;
+use App\Models\Journal;
+use App\Models\Monograph;
 use App\Models\News;
+use App\Models\Novel;
+use App\Models\Page;
+use App\Models\Proceeding;
+use App\Models\Reference;
 use App\Models\Slider;
 use App\Models\Textbook;
-use Illuminate\Http\Request;
+use App\Models\Workshop;
 
 class WebController extends Controller
 {
@@ -14,6 +21,103 @@ class WebController extends Controller
         $slider = Slider::get();
         $news = News::orderBy('id', 'DESC')->limit(6)->get();
         $textbook = Textbook::orderBy('id', 'DESC')->limit(5)->get();
-        return view('web.home', compact('slider','news','textbook'));
+        $catalog1 = Textbook::orderBy('id', 'DESC')->limit(3)->get();
+        $catalog2 = Monograph::orderBy('id', 'DESC')->limit(3)->get();
+        $catalog3 = Reference::orderBy('id', 'DESC')->limit(3)->get();
+        $catalog4 = Novel::orderBy('id', 'DESC')->limit(3)->get();
+        $journal = Journal::orderBy('id', 'DESC')->limit(4)->get();
+        $proceeding = Proceeding::orderBy('id', 'DESC')->limit(5)->get();
+        return view('web.home', compact('slider','news','textbook','catalog1','catalog2','catalog3','catalog4','journal','proceeding'));
     }
+    
+    public function about()
+    {
+        $title = "Tentang Kami";
+        $about_us = Page::where('menu', 'about_us')->first();
+        return view('web.about',compact('title','about_us'));
+    }
+
+    public function publishing_process()
+    {
+        $title = "Proses Publish";
+        $publishing_process = Page::where('menu', 'publishing_process')->first();
+        return view('web.publishing_process',compact('title','publishing_process'));
+    }
+
+    public function catalog_1()
+    {
+        $title = "Buku Ajar";
+        $catalog = Textbook::paginate(12);
+        return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function catalog_2()
+    {
+        $title = "Monograf";
+        $catalog = Monograph::paginate(12);
+        return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function catalog_3()
+    {
+        $title = "Referensi";
+        $catalog = Reference::paginate(12);
+        return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function catalog_4()
+    {
+        $title = "Novel";
+        $catalog = Novel::paginate(12);
+        return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function journal()
+    {
+        $title = "Jurnal";
+        $journal = Journal::paginate(12);
+        return view('web.journal',compact('title','journal'));
+    }
+
+    public function proceeding()
+    {
+        $title = "Proseding";
+        $proceeding = Proceeding::paginate(12);
+        return view('web.proceeding',compact('title','proceeding'));
+    }
+
+    public function conference()
+    {
+        $title = "Konferensi";
+        $conference = Conference::paginate(12);
+        return view('web.conference',compact('title','conference'));
+    }
+
+    public function workshop()
+    {
+        $title = "Workshop";
+        $workshop = Workshop::paginate(12);
+        return view('web.workshop',compact('title','workshop'));
+    }
+
+    public function author_and_affiliation()
+    {
+        $title = "Penulis dan Afiliasi";
+        $author_and_affiliation = Page::where('menu', 'author_and_affiliation')->first();
+        return view('web.author_and_affiliation',compact('title','author_and_affiliation'));
+    }
+
+    public function term_and_condition()
+    {
+        $title = "Syarat dan Ketentuan";
+        $term_and_condition = Page::where('menu', 'term_and_condition')->first();
+        return view('web.term_and_condition',compact('title','term_and_condition'));
+    }
+
+    public function contact()
+    {
+        $title = "Kontak Kami";
+        return view('web.contact',compact('title'));
+    }
+
 }

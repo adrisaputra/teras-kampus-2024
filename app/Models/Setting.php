@@ -20,6 +20,10 @@ class Setting extends Model
         'office_name',
         'email',
         'phone',
-        'address'
+        'address',
+        'fb',
+        'ig',
+        'tiktok',
+        'youtube'
     ];
 }
