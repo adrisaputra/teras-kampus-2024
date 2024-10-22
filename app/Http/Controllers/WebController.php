@@ -51,11 +51,25 @@ class WebController extends Controller
         return view('web.catalog',compact('title','catalog'));
     }
 
+    public function catalog_1_detail(Textbook $textbook)
+    {
+        $title = "Buku Ajar";
+        $catalog = $textbook;
+        return view('web.catalog_detail',compact('title','catalog'));
+    }
+
     public function catalog_2()
     {
         $title = "Monograf";
         $catalog = Monograph::paginate(12);
         return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function catalog_2_detail(Monograph $monograph)
+    {
+        $title = "Monograf";
+        $catalog = $monograph;
+        return view('web.catalog_detail',compact('title','catalog'));
     }
 
     public function catalog_3()
@@ -65,11 +79,25 @@ class WebController extends Controller
         return view('web.catalog',compact('title','catalog'));
     }
 
+    public function catalog_3_detail(Reference $reference)
+    {
+        $title = "Referensi";
+        $catalog = $reference;
+        return view('web.catalog_detail',compact('title','catalog'));
+    }
+
     public function catalog_4()
     {
         $title = "Novel";
         $catalog = Novel::paginate(12);
         return view('web.catalog',compact('title','catalog'));
+    }
+
+    public function catalog_4_detail(Novel $novel)
+    {
+        $title = "Novel";
+        $catalog = $novel;
+        return view('web.catalog_detail',compact('title','catalog'));
     }
 
     public function journal()
@@ -79,11 +107,23 @@ class WebController extends Controller
         return view('web.journal',compact('title','journal'));
     }
 
+    public function journal_detail(Journal $journal)
+    {
+        $title = "Jurnal";
+        return view('web.journal_detail',compact('title','journal'));
+    }
+
     public function proceeding()
     {
         $title = "Proseding";
         $proceeding = Proceeding::paginate(12);
         return view('web.proceeding',compact('title','proceeding'));
+    }
+
+    public function proceeding_detail(Proceeding $proceeding)
+    {
+        $title = "Proseding";
+        return view('web.proceeding_detail',compact('title','proceeding'));
     }
 
     public function conference()

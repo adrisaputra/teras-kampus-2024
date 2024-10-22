@@ -201,7 +201,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-catalog-1/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
@@ -221,7 +221,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-catalog-2/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
@@ -241,7 +241,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-catalog-3/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
@@ -261,7 +261,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-catalog-4/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
@@ -309,7 +309,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-journal-detail/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>
@@ -329,7 +329,7 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="card-body py-4">
 													<h4 class="mb-3"><a href="#">{{ $v->title }}</a></h4>
 													<p class="mb-3 d-none d-sm-block">{!! Str::limit(strip_tags($v->desc), 300, ' ...') !!}</p>
-													<a href="#" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
+													<a href="{{ url('page-proceeding-detail/'.$v->id) }}" class="button button-small button-dark ls0 shadow-none nott ms-0 mt-4 clearfix">Detail</a>
 												</div>
 											</div>
 										</div>

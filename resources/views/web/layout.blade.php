@@ -200,114 +200,78 @@
 							<!-- Mobile Menu
 							============================================= -->
 							<ul class="menu-container mobile-primary-menu">
-								<li class="menu-item current menu-color-home"><a class="menu-link" href="demo-news.html"><div>Home</div></a></li>
-								<li class="menu-item menu-color-travel"><a class="menu-link" href="demo-news-category.html"><div>Travel</div></a></li>
-								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="demo-news-category.html"><div>Lifestyle</div></a></li>
-								<li class="menu-item menu-color-tech"><a class="menu-link" href="demo-news-category.html"><div>Tech</div></a></li>
-								<li class="menu-item menu-color-fashion"><a class="menu-link" href="demo-news-category.html"><div>Fashion</div></a></li>
-								<li class="menu-item menu-color-sports"><a class="menu-link" href="demo-news-category.html"><div>Sports</div></a></li>
-								<li class="menu-item menu-color-food"><a class="menu-link" href="demo-news-category.html"><div>Food</div></a></li>
-								<li class="menu-item menu-color-market"><a class="menu-link" href="demo-news-category.html"><div>More</div></a>
-									<ul class="sub-menu-container">
-										<li class="menu-item"><a class="menu-link" href="#"><div>Header</div></a>
-											<ul class="sub-menu-container">
-												<li class="menu-item">
-													<a class="menu-link" href="header-light.html"><div>Light Version</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-dark.html"><div>Dark Version</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-transparent.html"><div>Transparent</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-semi-transparent.html"><div>Semi Transparent</div></a>
-													<ul class="sub-menu-container">
-														<li class="menu-item">
-															<a class="menu-link" href="header-semi-transparent.html"><div>Light Version</div></a>
-														</li>
-														<li class="menu-item">
-															<a class="menu-link" href="header-semi-transparent-dark.html"><div>Dark Version</div></a>
-														</li>
-													</ul>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-side-left.html"><div>Left Side Header</div></a>
-													<ul class="sub-menu-container">
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-left.html"><div>Fixed Position</div></a>
-														</li>
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-left-open.html"><div>OnClick Open</div></a>
-														</li>
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-left-open-push.html"><div>Push Content</div></a>
-														</li>
-													</ul>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-side-right.html"><div>Right Side Header</div></a>
-													<ul class="sub-menu-container">
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-right.html"><div>Fixed Position</div></a>
-														</li>
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-right-open.html"><div>OnClick Open</div></a>
-														</li>
-														<li class="menu-item">
-															<a class="menu-link" href="header-side-right-open-push.html"><div>Push Content</div></a>
-														</li>
-													</ul>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="header-floating.html"><div>Floating Version</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="static-sticky.html"><div>Static Sticky</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="responsive-sticky.html"><div>Responsive Sticky</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="logo-changer.html"><div>Alternate Logos</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="alternate-mobile-menu.html"><div>Alternate Mobile Menu</div></a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-									<ul class="sub-menu-container">
-										<li class="menu-item mega-menu-title"><a class="menu-link" href="#"><div>Layouts</div></a>
-											<ul class="sub-menu-container">
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single.html"><div>Default Layout</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single-left-sidebar.html"><div>Left Sidebar</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single-both-sidebar.html"><div>Both Sidebar</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="both-left-sidebar.html"><div>Both Left Sidebar</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="both-right-sidebar.html"><div>Both Right Sidebar</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single-full.html"><div>Full Width</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single-small.html"><div>Small Image</div></a>
-												</li>
-												<li class="menu-item">
-													<a class="menu-link" href="blog-single-split-right-sidebar.html"><div>Split Layout</div></a>
-												</li>
-											</ul>
-										</li>
-									</ul>
+							<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
+								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
+								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Catalog</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-catalog-1') }}"><div>Buku Ajar</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-catalog-2') }}"><div>Monograf</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-catalog-3') }}"><div>Referensi</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-catalog-4') }}"><div>Novel</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 								</li>
+								<li class="menu-item menu-color-fashion  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-journal') }}"><div style="font-size: 12px;">Journal</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-proceeding') }}"><div style="font-size: 12px;">Proceeding</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+										<div class="container">
+											<div class="row">
+												<ul class="sub-menu-container">
+													<li class="menu-item mega-menu-title">
+														<ul class="sub-menu-container">
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-conference') }}"><div style="font-size: 12px;">Conference</div></a>
+															</li>
+															<li class="menu-item">
+																<a class="menu-link" href="{{ url('page-workshop') }}"><div style="font-size: 12px;">Workshop</div></a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="menu-item menu-color-fashion"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
+								<li class="menu-item menu-color-sports"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
+								<li class="menu-item menu-color-food"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
 							</ul>
 
 						</nav><!-- #primary-menu end -->
@@ -329,7 +293,7 @@
 
 		<!-- Footer
 		============================================= -->
-		<footer id="footer" class="dark" style="background-color: #1f2024;">
+		<footer id="footer" class="dark" style="background-color: #00BCD4;">
 
 			<div class="container">
 
@@ -337,7 +301,7 @@
 				============================================= -->
 				<div class="footer-widgets-wrap row clearfix">
 
-					<div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+					<div class="col-lg-8 col-sm-6 mb-5 mb-lg-0">
 						<!-- Footer Widget 1
 						============================================= -->
 						<div class="widget clearfix">
@@ -370,14 +334,14 @@
 
 					<!-- Footer Widget 4
 					============================================= -->
-					<div class="col-lg-3 col-sm-6 mb-0">
+					{{--<div class="col-lg-3 col-sm-6 mb-0">
 						<div class="widget widget_links clearfix">
 							<h4 class="mb-3 mb-sm-4">Download in Mobile</h4>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae esse iure est, quam libero!</p>
 							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-apple"></i>App Store</a>
 							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-googleplay"></i>Google Play</a>
 						</div>
-					</div>
+					</div>--}}
 
 				</div>
 
@@ -390,15 +354,9 @@
 				<div class="container clearfix">
 
 					<div class="row justify-content-center">
-						<div class="col-md-6 align-self-center">
-							Copyrights &copy; 2020 All Rights Reserved by Canvas Inc.<br>
-							<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
-						</div>
-
-						<div class="col-md-6 align-self-center">
-							<div class="copyrights-menu float-end copyright-links m-0 clearfix">
-								<a href="#">Home</a>/<a href="#">About</a>/<a href="#">Features</a>/<a href="#">Portfolio</a>/<a href="#">FAQs</a>/<a href="#">Contact</a>
-							</div>
+						<div class="col-md-12 align-self-center">
+							Copyrights &copy; 2024 All Rights Reserved by Teras Kampus. <br>
+							{{--<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>--}}
 						</div>
 					</div>
 

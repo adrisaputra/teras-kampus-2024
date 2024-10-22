@@ -46,18 +46,37 @@
 
 										<div id="shop" class="shop row grid-container gutter-50" data-layout="fitRows">
 
-											@foreach($proceeding as $v)
 											<div class="product col-md-4 col-sm-6 col-12">
 												<div class="grid-inner">
 													<div class="product-image h-translate-y all-ts">
-															<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
-													</div>
-													<div class="product-desc py-0">
-														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
+														<a href="demo-articles-single.html"><img src="{{ asset('upload/journal/'.$journal->cover) }}" alt="Image 1"></a>
 													</div>
 												</div>
 											</div>
-											@endforeach
+											
+											<div class="product col-md-4 col-sm-6 col-12">
+
+												<b>Judul : </b><br>
+												{{ $journal->title }} <br><br>
+
+												<b>Penulis : </b><br>
+												{{ $journal->author }} <br><br>
+												
+												<b>ISSN : </b><br>
+												{{ $journal->issn }} <br><br>
+												
+												<b>DOI : </b><br>
+												{{ $journal->doi }} <br><br>
+												
+												<b>Tanggal Publikasi : </b><br>
+												{{ date('d M Y', strtotime($journal->publication_date)) }} <br><br>
+												
+											</div>
+
+											<div class="product col-md-12 col-sm-6 col-12">
+											<b>Deskripsi : </b><br>
+											{!! $journal->desc !!}
+											</div>
 										</div>
 
 										</div>
@@ -140,6 +159,7 @@
 								
 							</div>
 						</div>
+
 					</div>
 
 				</div>

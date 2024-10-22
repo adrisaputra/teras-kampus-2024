@@ -46,18 +46,74 @@
 
 										<div id="shop" class="shop row grid-container gutter-50" data-layout="fitRows">
 
-											@foreach($proceeding as $v)
 											<div class="product col-md-4 col-sm-6 col-12">
 												<div class="grid-inner">
 													<div class="product-image h-translate-y all-ts">
-															<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
-													</div>
-													<div class="product-desc py-0">
-														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
+														@if($title=="Buku Ajar")
+															<a href="demo-articles-single.html"><img src="{{ asset('upload/textbook/'.$catalog->cover) }}" alt="Image 1"></a>
+														@elseif($title=="Monograf")
+															<a href="demo-articles-single.html"><img src="{{ asset('upload/monograph/'.$catalog->cover) }}" alt="Image 1"></a>
+														@elseif($title=="Referensi")
+															<a href="demo-articles-single.html"><img src="{{ asset('upload/reference/'.$catalog->cover) }}" alt="Image 1"></a>
+														@else
+															<a href="demo-articles-single.html"><img src="{{ asset('upload/novel/'.$catalog->cover) }}" alt="Image 1"></a>
+														@endif
 													</div>
 												</div>
 											</div>
-											@endforeach
+											
+											<div class="product col-md-4 col-sm-6 col-12">
+												{{--<div class="row">
+
+													<div class="col-md-4">
+														<b>Judul</b>
+													</div>
+													<div class="col-md-8">
+														: {{ $catalog->title }} 
+													</div>
+													
+													<div class="col-md-4">
+														<b>Kategori</b>
+													</div>
+													<div class="col-md-8">
+														: {{ $catalog->category }} 
+													</div>
+													
+													<div class="col-md-4">
+														<b>Penulis</b>
+													</div>
+													<div class="col-md-8">
+														: {{ $catalog->author }} 
+													</div>
+													
+													<div class="col-md-4">
+														<b>Tanggal Publikasi</b>
+													</div>
+													<div class="col-md-8">
+														: {{ $catalog->publication_date }} 
+													</div>
+													
+												</div>--}}
+
+												<b>Judul : </b><br>
+												{{ $catalog->title }} <br><br>
+
+
+												<b>Kategori : </b><br>
+												{{ $catalog->category }} <br><br>
+												
+												<b>Penulis : </b><br>
+												{{ $catalog->author }} <br><br>
+												
+												<b>Tanggal Publikasi : </b><br>
+												{{ date('d M Y', strtotime($catalog->publication_date)) }} <br><br>
+												
+											</div>
+
+											<div class="product col-md-12 col-sm-6 col-12">
+											<b>Deskripsi : </b><br>
+											{!! $catalog->desc !!}
+											</div>
 										</div>
 
 										</div>
@@ -140,6 +196,7 @@
 								
 							</div>
 						</div>
+
 					</div>
 
 				</div>
