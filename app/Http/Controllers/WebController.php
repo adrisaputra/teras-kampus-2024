@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Proceeding;
 use App\Models\Reference;
 use App\Models\Slider;
+use App\Models\Supported;
 use App\Models\Textbook;
 use App\Models\Workshop;
 
@@ -27,7 +28,8 @@ class WebController extends Controller
         $catalog4 = Novel::orderBy('id', 'DESC')->limit(3)->get();
         $journal = Journal::orderBy('id', 'DESC')->limit(4)->get();
         $proceeding = Proceeding::orderBy('id', 'DESC')->limit(5)->get();
-        return view('web.home', compact('slider','news','textbook','catalog1','catalog2','catalog3','catalog4','journal','proceeding'));
+        $supported = Supported::get();
+        return view('web.home', compact('slider','news','textbook','catalog1','catalog2','catalog3','catalog4','journal','proceeding','supported'));
     }
     
     public function about()

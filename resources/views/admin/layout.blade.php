@@ -238,6 +238,22 @@ $setting = \App\Helpers\Helpers::setting();
 									</div>
 								</div>
 								
+								<div class="menu-item">
+									<a class="menu-link @if(Request::segment(1)=="supported") active @endif" href="{{ url('/supported') }}">
+										<span class="menu-icon" style="margin-right: 15px">
+											<img src="{{ asset('menu/icons8-institution-100.png') }}" width="30" height="30" >
+										</span>
+										<span class="menu-title">Support</span>
+									</a>
+								</div>
+								<div class="menu-item">
+									<a class="menu-link @if(Request::segment(1)=="related_link") active @endif" href="{{ url('/related_link') }}">
+										<span class="menu-icon" style="margin-right: 15px">
+											<img src="{{ asset('menu/icons8-www-100.png') }}" width="30" height="30" >
+										</span>
+										<span class="menu-title">Link Terkait</span>
+									</a>
+								</div>
 								@if(Auth::user()->group_id == 1)
 								<div class="menu-item">
 									<div class="menu-content pt-8 pb-2">

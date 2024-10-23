@@ -11,8 +11,10 @@ use App\Http\Controllers\NovelController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\RelatedLinksController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SupportedController;
 use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
@@ -150,6 +152,24 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/workshop/edit/{workshop}', [WorkshopController::class, 'edit']);
     Route::put('/workshop/edit/{workshop}', [WorkshopController::class, 'update']);
     Route::get('/workshop/delete/{workshop}',[WorkshopController::class, 'delete']);
+
+    ## Supported
+    Route::get('/supported', [SupportedController::class, 'index'])->name('supported.index');
+    Route::get('/supported/list', [SupportedController::class, 'get_supported_index'])->name('supported.list');
+    Route::post('/supported/store', [SupportedController::class, 'store']);
+    Route::post('/supported/validate/{action}', [SupportedController::class, 'validate']);
+    Route::get('/supported/edit/{supported}', [SupportedController::class, 'edit']);
+    Route::put('/supported/edit/{supported}', [SupportedController::class, 'update']);
+    Route::get('/supported/delete/{supported}',[SupportedController::class, 'delete']);
+
+    ## Related Link
+    Route::get('/related_link', [RelatedLinksController::class, 'index'])->name('related_link.index');
+    Route::get('/related_link/list', [RelatedLinksController::class, 'get_related_link_index'])->name('related_link.list');
+    Route::post('/related_link/store', [RelatedLinksController::class, 'store']);
+    Route::post('/related_link/validate/{action}', [RelatedLinksController::class, 'validate']);
+    Route::get('/related_link/edit/{related_link}', [RelatedLinksController::class, 'edit']);
+    Route::put('/related_link/edit/{related_link}', [RelatedLinksController::class, 'update']);
+    Route::get('/related_link/delete/{related_link}',[RelatedLinksController::class, 'delete']);
 
     ## Edit Profile
     Route::get('/edit_profil/{user}',[UserController::class, 'edit_profil']);

@@ -360,16 +360,9 @@ $setting = \App\Helpers\Helpers::setting();
 					</div>
 					<div class="pb-0 clearfix">
 						<div id="oc-clients" class="section bg-transparent mt-0 owl-carousel owl-carousel-full image-carousel footer-stick carousel-widget" data-margin="80" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6">
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/1.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/2.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/3.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/4.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/5.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/6.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/7.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/8.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/9.png') }}" alt="Clients"></a></div>
-							<div class="oc-item"><a href="#"><img src="{{ asset('frontend/images/clients/10.png') }}" alt="Clients"></a></div>	
+							@foreach($supported as $v)
+								<div class="oc-item"><a href="#"><img src="{{ asset('upload/supported/' . $v->image) }}" alt="Clients"></a></div>
+							@endforeach
 						</div>
 					</div>
 				</div>

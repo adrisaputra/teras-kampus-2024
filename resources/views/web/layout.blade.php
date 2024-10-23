@@ -1,5 +1,6 @@
 @php
 	$setting = \App\Helpers\Helpers::setting();
+	$related_links = \App\Helpers\Helpers::related_links();
 @endphp
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -320,14 +321,9 @@
 						<div class="widget widget_links clearfix">
 							<h4 class="mb-3 mb-sm-4">Link Terkait</h4>
 							<ul>
-								<li><a href="https://codex.wordpress.org/">Documentation</a></li>
-								<li><a href="https://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
-								<li><a href="https://wordpress.org/extend/plugins/">Plugins</a></li>
-								<li><a href="https://wordpress.org/support/">Support Forums</a></li>
-								<li><a href="https://wordpress.org/extend/themes/">Themes</a></li>
-								<li><a href="https://wordpress.org/news/">Canvas Blog</a></li>
-								<li><a href="https://planet.wordpress.org/">Customer Reviews</a></li>
-								<li><a href="https://planet.wordpress.org/">Get Licence</a></li>
+								@foreach($related_links as $v)
+									<li><a href="{{ $v->url }}" target="_blank">{{ $v->name }}</a></li>
+								@endforeach
 							</ul>
 						</div>
 					</div>

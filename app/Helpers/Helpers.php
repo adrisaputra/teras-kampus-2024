@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\News;
+use App\Models\RelatedLinks;
 use App\Models\Setting;   //nama model
 use App\Models\Textbook;
 
@@ -31,6 +32,12 @@ class Helpers
     {
         $textbook = Textbook::orderBy('id', 'DESC')->limit(5)->get();
         return $textbook;
+    }
+    
+    public static function related_links()
+    {
+        $related_links = RelatedLinks::orderBy('id', 'DESC')->limit(10)->get();
+        return $related_links;
     }
     
 }
