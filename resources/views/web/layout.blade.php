@@ -127,7 +127,7 @@
 								<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
 								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
 								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
-								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Catalog</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Book</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -204,7 +204,7 @@
 							<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
 								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
 								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
-								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Catalog</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Book</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">

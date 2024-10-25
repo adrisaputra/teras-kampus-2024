@@ -171,7 +171,7 @@ $setting = \App\Helpers\Helpers::setting();
 										<span class="menu-icon" style="margin-right: 15px">
 											<img src="{{ asset('menu/icons8-book-100.png') }}" width="30" height="30" >
 										</span>
-										<span class="menu-title">Katalog</span>
+										<span class="menu-title">Katalog Buku</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<div class="menu-sub menu-sub-accordion menu-active-bg">
