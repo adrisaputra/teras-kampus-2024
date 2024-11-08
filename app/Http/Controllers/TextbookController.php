@@ -50,7 +50,7 @@ class TextbookController extends Controller
         
     }
 
-    public function validate(Request $request, $action)
+    public function validation(Request $request, $action)
     {
         if ($request->ajax()) {
 

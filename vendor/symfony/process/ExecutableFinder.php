@@ -19,12 +19,12 @@ namespace Symfony\Component\Process;
  */
 class ExecutableFinder
 {
-    private array $suffixes = ['.exe', '.bat', '.cmd', '.com'];
+    private $suffixes = ['.exe', '.bat', '.cmd', '.com'];
 
     /**
      * Replaces default suffixes of executable.
      */
-    public function setSuffixes(array $suffixes): void
+    public function setSuffixes(array $suffixes)
     {
         $this->suffixes = $suffixes;
     }
@@ -32,7 +32,7 @@ class ExecutableFinder
     /**
      * Adds new possible suffix to check for executable.
      */
-    public function addSuffix(string $suffix): void
+    public function addSuffix(string $suffix)
     {
         $this->suffixes[] = $suffix;
     }
@@ -43,8 +43,10 @@ class ExecutableFinder
      * @param string      $name      The executable name (without the extension)
      * @param string|null $default   The default to return if no executable is found
      * @param array       $extraDirs Additional dirs to check into
+     *
+     * @return string|null
      */
-    public function find(string $name, ?string $default = null, array $extraDirs = []): ?string
+    public function find(string $name, ?string $default = null, array $extraDirs = [])
     {
         $dirs = array_merge(
             explode(\PATH_SEPARATOR, getenv('PATH') ?: getenv('Path')),

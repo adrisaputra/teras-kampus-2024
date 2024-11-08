@@ -3,18 +3,13 @@
 namespace Illuminate\Http\Client;
 
 use ArrayAccess;
-use GuzzleHttp\Psr7\StreamWrapper;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 use LogicException;
-use Stringable;
 
-/**
- * @mixin \Psr\Http\Message\ResponseInterface
- */
-class Response implements ArrayAccess, Stringable
+class Response implements ArrayAccess
 {
-    use Concerns\DeterminesStatusCode, Macroable {
+    use Macroable {
         __call as macroCall;
     }
 
@@ -31,20 +26,6 @@ class Response implements ArrayAccess, Stringable
      * @var array
      */
     protected $decoded;
-
-    /**
-     * The request cookies.
-     *
-     * @var \GuzzleHttp\Cookie\CookieJar
-     */
-    public $cookies;
-
-    /**
-     * The transfer stats for the request.
-     *
-     * @var \GuzzleHttp\TransferStats|null
-     */
-    public $transferStats;
 
     /**
      * Create a new response instance.
@@ -90,7 +71,7 @@ class Response implements ArrayAccess, Stringable
     /**
      * Get the JSON decoded body of the response as an object.
      *
-     * @return object|null
+     * @return object
      */
     public function object()
     {
@@ -106,18 +87,6 @@ class Response implements ArrayAccess, Stringable
     public function collect($key = null)
     {
         return Collection::make($this->json($key));
-    }
-
-    /**
-     * Get the body of the response as a PHP resource.
-     *
-     * @return resource
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function resource()
-    {
-        return StreamWrapper::getResource($this->response->getBody());
     }
 
     /**
@@ -168,7 +137,7 @@ class Response implements ArrayAccess, Stringable
      */
     public function effectiveUri()
     {
-        return $this->transferStats?->getEffectiveUri();
+        return optional($this->transferStats)->getEffectiveUri();
     }
 
     /**
@@ -182,6 +151,16 @@ class Response implements ArrayAccess, Stringable
     }
 
     /**
+     * Determine if the response code was "OK".
+     *
+     * @return bool
+     */
+    public function ok()
+    {
+        return $this->status() === 200;
+    }
+
+    /**
      * Determine if the response was a redirect.
      *
      * @return bool
@@ -189,6 +168,26 @@ class Response implements ArrayAccess, Stringable
     public function redirect()
     {
         return $this->status() >= 300 && $this->status() < 400;
+    }
+
+    /**
+     * Determine if the response was a 401 "Unauthorized" response.
+     *
+     * @return bool
+     */
+    public function unauthorized()
+    {
+        return $this->status() === 401;
+    }
+
+    /**
+     * Determine if the response was a 403 "Forbidden" response.
+     *
+     * @return bool
+     */
+    public function forbidden()
+    {
+        return $this->status() === 403;
     }
 
     /**
@@ -253,7 +252,7 @@ class Response implements ArrayAccess, Stringable
      */
     public function handlerStats()
     {
-        return $this->transferStats?->getHandlerStats() ?? [];
+        return optional($this->transferStats)->getHandlerStats() ?? [];
     }
 
     /**
@@ -293,6 +292,7 @@ class Response implements ArrayAccess, Stringable
     /**
      * Throw an exception if a server or client error occurred.
      *
+     * @param  \Closure|null  $callback
      * @return $this
      *
      * @throws \Illuminate\Http\Client\RequestException
@@ -315,73 +315,14 @@ class Response implements ArrayAccess, Stringable
     /**
      * Throw an exception if a server or client error occurred and the given condition evaluates to true.
      *
-     * @param  \Closure|bool  $condition
+     * @param  bool  $condition
      * @return $this
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public function throwIf($condition)
     {
-        return value($condition, $this) ? $this->throw(func_get_args()[1] ?? null) : $this;
-    }
-
-    /**
-     * Throw an exception if the response status code matches the given code.
-     *
-     * @param  callable|int  $statusCode
-     * @return $this
-     *
-     * @throws \Illuminate\Http\Client\RequestException
-     */
-    public function throwIfStatus($statusCode)
-    {
-        if (is_callable($statusCode) &&
-            $statusCode($this->status(), $this)) {
-            return $this->throw();
-        }
-
-        return $this->status() === $statusCode ? $this->throw() : $this;
-    }
-
-    /**
-     * Throw an exception unless the response status code matches the given code.
-     *
-     * @param  callable|int  $statusCode
-     * @return $this
-     *
-     * @throws \Illuminate\Http\Client\RequestException
-     */
-    public function throwUnlessStatus($statusCode)
-    {
-        if (is_callable($statusCode)) {
-            return $statusCode($this->status(), $this) ? $this : $this->throw();
-        }
-
-        return $this->status() === $statusCode ? $this : $this->throw();
-    }
-
-    /**
-     * Throw an exception if the response status code is a 4xx level code.
-     *
-     * @return $this
-     *
-     * @throws \Illuminate\Http\Client\RequestException
-     */
-    public function throwIfClientError()
-    {
-        return $this->clientError() ? $this->throw() : $this;
-    }
-
-    /**
-     * Throw an exception if the response status code is a 5xx level code.
-     *
-     * @return $this
-     *
-     * @throws \Illuminate\Http\Client\RequestException
-     */
-    public function throwIfServerError()
-    {
-        return $this->serverError() ? $this->throw() : $this;
+        return $condition ? $this->throw() : $this;
     }
 
     /**
@@ -390,7 +331,8 @@ class Response implements ArrayAccess, Stringable
      * @param  string  $offset
      * @return bool
      */
-    public function offsetExists($offset): bool
+    #[\ReturnTypeWillChange]
+    public function offsetExists($offset)
     {
         return isset($this->json()[$offset]);
     }
@@ -401,7 +343,8 @@ class Response implements ArrayAccess, Stringable
      * @param  string  $offset
      * @return mixed
      */
-    public function offsetGet($offset): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         return $this->json()[$offset];
     }
@@ -415,7 +358,8 @@ class Response implements ArrayAccess, Stringable
      *
      * @throws \LogicException
      */
-    public function offsetSet($offset, $value): void
+    #[\ReturnTypeWillChange]
+    public function offsetSet($offset, $value)
     {
         throw new LogicException('Response data may not be mutated using array access.');
     }
@@ -428,7 +372,8 @@ class Response implements ArrayAccess, Stringable
      *
      * @throws \LogicException
      */
-    public function offsetUnset($offset): void
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($offset)
     {
         throw new LogicException('Response data may not be mutated using array access.');
     }

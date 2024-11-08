@@ -20,6 +20,7 @@ class Journal extends Model
         'desc',
         'cover',
         'file',
+        'url',
         'count_view',
         'user_id',
     ];

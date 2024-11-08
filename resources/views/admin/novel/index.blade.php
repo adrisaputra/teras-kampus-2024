@@ -114,7 +114,7 @@
             }
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/novel/validate') }}";
+            var url = "{{ url('/novel/validation') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",

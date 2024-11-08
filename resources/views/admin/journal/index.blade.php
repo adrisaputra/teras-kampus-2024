@@ -109,7 +109,7 @@
             }
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/journal/validate') }}";
+            var url = "{{ url('/journal/validation') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
@@ -204,6 +204,7 @@
                 document.getElementById("publication_date").value = response.data.publication_date;
                 document.getElementById("issn").value = response.data.issn;
                 document.getElementById("doi").value = response.data.doi;
+                document.getElementById("url").value = response.data.url;
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){

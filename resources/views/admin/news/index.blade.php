@@ -113,7 +113,7 @@
 
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/news/validate') }}";
+            var url = "{{ url('/news/validation') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",

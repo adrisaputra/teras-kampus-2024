@@ -48,7 +48,7 @@ class UserController extends Controller
         
     }
 
-    public function validate(Request $request, $action)
+    public function validation(Request $request, $action)
     {
         if ($request->ajax()) {
 
@@ -146,7 +146,7 @@ class UserController extends Controller
     }
 
     
-    public function validate_profile(Request $request)
+    public function validation_profile(Request $request)
     {
         if ($request->ajax()) {
 

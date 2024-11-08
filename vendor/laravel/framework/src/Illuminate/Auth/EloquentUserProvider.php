@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
 
 class EloquentUserProvider implements UserProvider
 {
@@ -23,13 +24,6 @@ class EloquentUserProvider implements UserProvider
      * @var string
      */
     protected $model;
-
-    /**
-     * The callback that may modify the user retrieval queries.
-     *
-     * @var (\Closure(\Illuminate\Database\Eloquent\Builder<*>):mixed)|null
-     */
-    protected $queryCallback;
 
     /**
      * Create a new database user provider.
@@ -66,7 +60,7 @@ class EloquentUserProvider implements UserProvider
      * @param  string  $token
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function retrieveByToken($identifier, #[\SensitiveParameter] $token)
+    public function retrieveByToken($identifier, $token)
     {
         $model = $this->createModel();
 
@@ -80,17 +74,18 @@ class EloquentUserProvider implements UserProvider
 
         $rememberToken = $retrievedModel->getRememberToken();
 
-        return $rememberToken && hash_equals($rememberToken, $token) ? $retrievedModel : null;
+        return $rememberToken && hash_equals($rememberToken, $token)
+                        ? $retrievedModel : null;
     }
 
     /**
      * Update the "remember me" token for the given user in storage.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|\Illuminate\Database\Eloquent\Model  $user
      * @param  string  $token
      * @return void
      */
-    public function updateRememberToken(UserContract $user, #[\SensitiveParameter] $token)
+    public function updateRememberToken(UserContract $user, $token)
     {
         $user->setRememberToken($token);
 
@@ -109,15 +104,11 @@ class EloquentUserProvider implements UserProvider
      * @param  array  $credentials
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-    public function retrieveByCredentials(#[\SensitiveParameter] array $credentials)
+    public function retrieveByCredentials(array $credentials)
     {
-        $credentials = array_filter(
-            $credentials,
-            fn ($key) => ! str_contains($key, 'password'),
-            ARRAY_FILTER_USE_KEY
-        );
-
-        if (empty($credentials)) {
+        if (empty($credentials) ||
+           (count($credentials) === 1 &&
+            Str::contains($this->firstCredentialKey($credentials), 'password'))) {
             return;
         }
 
@@ -127,6 +118,10 @@ class EloquentUserProvider implements UserProvider
         $query = $this->newModelQuery();
 
         foreach ($credentials as $key => $value) {
+            if (Str::contains($key, 'password')) {
+                continue;
+            }
+
             if (is_array($value) || $value instanceof Arrayable) {
                 $query->whereIn($key, $value);
             } elseif ($value instanceof Closure) {
@@ -140,61 +135,43 @@ class EloquentUserProvider implements UserProvider
     }
 
     /**
+     * Get the first key from the credential array.
+     *
+     * @param  array  $credentials
+     * @return string|null
+     */
+    protected function firstCredentialKey(array $credentials)
+    {
+        foreach ($credentials as $key => $value) {
+            return $key;
+        }
+    }
+
+    /**
      * Validate a user against the given credentials.
      *
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @param  array  $credentials
      * @return bool
      */
-    public function validateCredentials(UserContract $user, #[\SensitiveParameter] array $credentials)
+    public function validateCredentials(UserContract $user, array $credentials)
     {
-        if (is_null($plain = $credentials['password'])) {
-            return false;
-        }
+        $plain = $credentials['password'];
 
-        if (is_null($hashed = $user->getAuthPassword())) {
-            return false;
-        }
-
-        return $this->hasher->check($plain, $hashed);
-    }
-
-    /**
-     * Rehash the user's password if required and supported.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
-     * @param  array  $credentials
-     * @param  bool  $force
-     * @return void
-     */
-    public function rehashPasswordIfRequired(UserContract $user, #[\SensitiveParameter] array $credentials, bool $force = false)
-    {
-        if (! $this->hasher->needsRehash($user->getAuthPassword()) && ! $force) {
-            return;
-        }
-
-        $user->forceFill([
-            $user->getAuthPasswordName() => $this->hasher->make($credentials['password']),
-        ])->save();
+        return $this->hasher->check($plain, $user->getAuthPassword());
     }
 
     /**
      * Get a new query builder for the model instance.
      *
-     * @template TModel of \Illuminate\Database\Eloquent\Model
-     *
-     * @param  TModel|null  $model
-     * @return \Illuminate\Database\Eloquent\Builder<TModel>
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     protected function newModelQuery($model = null)
     {
-        $query = is_null($model)
+        return is_null($model)
                 ? $this->createModel()->newQuery()
                 : $model->newQuery();
-
-        with($query, $this->queryCallback);
-
-        return $query;
     }
 
     /**
@@ -251,29 +228,6 @@ class EloquentUserProvider implements UserProvider
     public function setModel($model)
     {
         $this->model = $model;
-
-        return $this;
-    }
-
-    /**
-     * Get the callback that modifies the query before retrieving users.
-     *
-     * @return (\Closure(\Illuminate\Database\Eloquent\Builder<*>):mixed)|null
-     */
-    public function getQueryCallback()
-    {
-        return $this->queryCallback;
-    }
-
-    /**
-     * Sets the callback to modify the query before retrieving users.
-     *
-     * @param  (\Closure(\Illuminate\Database\Eloquent\Builder<*>):mixed)|null  $queryCallback
-     * @return $this
-     */
-    public function withQuery($queryCallback = null)
-    {
-        $this->queryCallback = $queryCallback;
 
         return $this;
     }

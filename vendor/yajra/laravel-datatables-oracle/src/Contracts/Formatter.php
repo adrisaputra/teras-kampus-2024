@@ -5,8 +5,9 @@ namespace Yajra\DataTables\Contracts;
 interface Formatter
 {
     /**
-     * @param  array|\Illuminate\Database\Eloquent\Model|object  $row
+     * @param  mixed  $value
+     * @param  mixed  $row
      * @return string
      */
-    public function format(mixed $value, $row);
+    public function format($value, $row);
 }

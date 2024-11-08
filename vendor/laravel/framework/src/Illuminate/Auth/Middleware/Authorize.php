@@ -6,8 +6,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Database\Eloquent\Model;
 
-use function Illuminate\Support\enum_value;
-
 class Authorize
 {
     /**
@@ -26,18 +24,6 @@ class Authorize
     public function __construct(Gate $gate)
     {
         $this->gate = $gate;
-    }
-
-    /**
-     * Specify the ability and models for the middleware.
-     *
-     * @param  \BackedEnum|string  $ability
-     * @param  string  ...$models
-     * @return string
-     */
-    public static function using($ability, ...$models)
-    {
-        return static::class.':'.implode(',', [enum_value($ability), ...$models]);
     }
 
     /**
@@ -64,7 +50,7 @@ class Authorize
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  array|null  $models
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Model|array|string
      */
     protected function getGateArguments($request, $models)
     {
@@ -88,10 +74,10 @@ class Authorize
     {
         if ($this->isClassName($model)) {
             return trim($model);
+        } else {
+            return $request->route($model, null) ?:
+                ((preg_match("/^['\"](.*)['\"]$/", trim($model), $matches)) ? $matches[1] : null);
         }
-
-        return $request->route($model, null) ??
-            ((preg_match("/^['\"](.*)['\"]$/", trim($model), $matches)) ? $matches[1] : null);
     }
 
     /**
@@ -102,6 +88,6 @@ class Authorize
      */
     protected function isClassName($value)
     {
-        return str_contains($value, '\\');
+        return strpos($value, '\\') !== false;
     }
 }

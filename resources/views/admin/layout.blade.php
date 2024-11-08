@@ -36,7 +36,7 @@ $setting = \App\Helpers\Helpers::setting();
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="{{ url('/dashboard') }}">
+						<a href="{{ url('/') }}" target="blank">
 							<img alt="Logo" src="{{ asset('upload/setting/'.$setting->large_icon) }}" class="h-60px" />
 						</a>
 						<!--end::Logo-->

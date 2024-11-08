@@ -109,7 +109,7 @@
             formData.append('_token', "{{ csrf_token() }}");
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/slider/validate') }}";
+            var url = "{{ url('/slider/validation') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",

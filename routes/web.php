@@ -60,7 +60,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');
     Route::get('/slider/list', [SliderController::class, 'get_slider_index'])->name('slider.list');
     Route::post('/slider/store', [SliderController::class, 'store']);
-    Route::post('/slider/validate/{action}', [SliderController::class, 'validate']);
+    Route::post('/slider/validation/{action}', [SliderController::class, 'validation']);
     Route::get('/slider/edit/{slider}', [SliderController::class, 'edit']);
     Route::put('/slider/edit/{slider}', [SliderController::class, 'update']);
     Route::get('/slider/delete/{slider}',[SliderController::class, 'delete']);
@@ -70,7 +70,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/news/list', [NewsController::class, 'get_news_index'])->name('news.list');
     Route::post('news/upload_image',[NewsController::class, 'upload_image'])->name('upload_news');
     Route::post('/news/store', [NewsController::class, 'store']);
-    Route::post('/news/validate/{action}', [NewsController::class, 'validate']);
+    Route::post('/news/validation/{action}', [NewsController::class, 'validation']);
     Route::get('/news/edit/{news}', [NewsController::class, 'edit']);
     Route::put('/news/edit/{news}', [NewsController::class, 'update']);
     Route::get('/news/delete/{news}',[NewsController::class, 'delete']);
@@ -80,7 +80,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/journal/list', [JournalController::class, 'get_journal_index'])->name('journal.list');
     Route::post('journal/upload_image',[JournalController::class, 'upload_image'])->name('upload_journal');
     Route::post('/journal/store', [JournalController::class, 'store']);
-    Route::post('/journal/validate/{action}', [JournalController::class, 'validate']);
+    Route::post('/journal/validation/{action}', [JournalController::class, 'validation']);
     Route::get('/journal/edit/{journal}', [JournalController::class, 'edit']);
     Route::put('/journal/edit/{journal}', [JournalController::class, 'update']);
     Route::get('/journal/delete/{journal}',[JournalController::class, 'delete']);
@@ -90,7 +90,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/proceeding/list', [ProceedingController::class, 'get_proceeding_index'])->name('proceeding.list');
     Route::post('proceeding/upload_image',[ProceedingController::class, 'upload_image'])->name('upload_proceeding');
     Route::post('/proceeding/store', [ProceedingController::class, 'store']);
-    Route::post('/proceeding/validate/{action}', [ProceedingController::class, 'validate']);
+    Route::post('/proceeding/validation/{action}', [ProceedingController::class, 'validation']);
     Route::get('/proceeding/edit/{proceeding}', [ProceedingController::class, 'edit']);
     Route::put('/proceeding/edit/{proceeding}', [ProceedingController::class, 'update']);
     Route::get('/proceeding/delete/{proceeding}',[ProceedingController::class, 'delete']);
@@ -100,7 +100,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/textbook/list', [TextbookController::class, 'get_textbook_index'])->name('textbook.list');
     Route::post('textbook/upload_image',[TextbookController::class, 'upload_image'])->name('upload_textbook');
     Route::post('/textbook/store', [TextbookController::class, 'store']);
-    Route::post('/textbook/validate/{action}', [TextbookController::class, 'validate']);
+    Route::post('/textbook/validation/{action}', [TextbookController::class, 'validation']);
     Route::get('/textbook/edit/{textbook}', [TextbookController::class, 'edit']);
     Route::put('/textbook/edit/{textbook}', [TextbookController::class, 'update']);
     Route::get('/textbook/delete/{textbook}',[TextbookController::class, 'delete']);
@@ -110,7 +110,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/monograph/list', [MonographController::class, 'get_monograph_index'])->name('monograph.list');
     Route::post('monograph/upload_image',[MonographController::class, 'upload_image'])->name('upload_monograph');
     Route::post('/monograph/store', [MonographController::class, 'store']);
-    Route::post('/monograph/validate/{action}', [MonographController::class, 'validate']);
+    Route::post('/monograph/validation/{action}', [MonographController::class, 'validation']);
     Route::get('/monograph/edit/{monograph}', [MonographController::class, 'edit']);
     Route::put('/monograph/edit/{monograph}', [MonographController::class, 'update']);
     Route::get('/monograph/delete/{monograph}',[MonographController::class, 'delete']);
@@ -120,7 +120,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/reference/list', [ReferenceController::class, 'get_reference_index'])->name('reference.list');
     Route::post('reference/upload_image',[ReferenceController::class, 'upload_image'])->name('upload_reference');
     Route::post('/reference/store', [ReferenceController::class, 'store']);
-    Route::post('/reference/validate/{action}', [ReferenceController::class, 'validate']);
+    Route::post('/reference/validation/{action}', [ReferenceController::class, 'validation']);
     Route::get('/reference/edit/{reference}', [ReferenceController::class, 'edit']);
     Route::put('/reference/edit/{reference}', [ReferenceController::class, 'update']);
     Route::get('/reference/delete/{reference}',[ReferenceController::class, 'delete']);
@@ -130,7 +130,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/novel/list', [NovelController::class, 'get_novel_index'])->name('novel.list');
     Route::post('novel/upload_image',[NovelController::class, 'upload_image'])->name('upload_novel');
     Route::post('/novel/store', [NovelController::class, 'store']);
-    Route::post('/novel/validate/{action}', [NovelController::class, 'validate']);
+    Route::post('/novel/validation/{action}', [NovelController::class, 'validation']);
     Route::get('/novel/edit/{novel}', [NovelController::class, 'edit']);
     Route::put('/novel/edit/{novel}', [NovelController::class, 'update']);
     Route::get('/novel/delete/{novel}',[NovelController::class, 'delete']);
@@ -139,7 +139,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/conference', [ConferenceController::class, 'index'])->name('conference.index');
     Route::get('/conference/list', [ConferenceController::class, 'get_conference_index'])->name('conference.list');
     Route::post('/conference/store', [ConferenceController::class, 'store']);
-    Route::post('/conference/validate/{action}', [ConferenceController::class, 'validate']);
+    Route::post('/conference/validation/{action}', [ConferenceController::class, 'validation']);
     Route::get('/conference/edit/{conference}', [ConferenceController::class, 'edit']);
     Route::put('/conference/edit/{conference}', [ConferenceController::class, 'update']);
     Route::get('/conference/delete/{conference}',[ConferenceController::class, 'delete']);
@@ -148,7 +148,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/workshop', [WorkshopController::class, 'index'])->name('workshop.index');
     Route::get('/workshop/list', [WorkshopController::class, 'get_workshop_index'])->name('workshop.list');
     Route::post('/workshop/store', [WorkshopController::class, 'store']);
-    Route::post('/workshop/validate/{action}', [WorkshopController::class, 'validate']);
+    Route::post('/workshop/validation/{action}', [WorkshopController::class, 'validation']);
     Route::get('/workshop/edit/{workshop}', [WorkshopController::class, 'edit']);
     Route::put('/workshop/edit/{workshop}', [WorkshopController::class, 'update']);
     Route::get('/workshop/delete/{workshop}',[WorkshopController::class, 'delete']);
@@ -157,7 +157,7 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/supported', [SupportedController::class, 'index'])->name('supported.index');
     Route::get('/supported/list', [SupportedController::class, 'get_supported_index'])->name('supported.list');
     Route::post('/supported/store', [SupportedController::class, 'store']);
-    Route::post('/supported/validate/{action}', [SupportedController::class, 'validate']);
+    Route::post('/supported/validation/{action}', [SupportedController::class, 'validation']);
     Route::get('/supported/edit/{supported}', [SupportedController::class, 'edit']);
     Route::put('/supported/edit/{supported}', [SupportedController::class, 'update']);
     Route::get('/supported/delete/{supported}',[SupportedController::class, 'delete']);
@@ -166,14 +166,14 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/related_link', [RelatedLinksController::class, 'index'])->name('related_link.index');
     Route::get('/related_link/list', [RelatedLinksController::class, 'get_related_link_index'])->name('related_link.list');
     Route::post('/related_link/store', [RelatedLinksController::class, 'store']);
-    Route::post('/related_link/validate/{action}', [RelatedLinksController::class, 'validate']);
+    Route::post('/related_link/validation/{action}', [RelatedLinksController::class, 'validation']);
     Route::get('/related_link/edit/{related_link}', [RelatedLinksController::class, 'edit']);
     Route::put('/related_link/edit/{related_link}', [RelatedLinksController::class, 'update']);
     Route::get('/related_link/delete/{related_link}',[RelatedLinksController::class, 'delete']);
 
     ## Edit Profile
     Route::get('/edit_profil/{user}',[UserController::class, 'edit_profil']);
-    Route::post('/edit_profil/validate/{action}', [UserController::class, 'validate_profile']);
+    Route::post('/edit_profil/validation/{action}', [UserController::class, 'validation_profile']);
     Route::put('/edit_profil/{user}',[UserController::class, 'update_profil']);
 
 });
@@ -186,7 +186,7 @@ Route::middleware(['administrator'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('users.index');
     Route::get('/user/list', [UserController::class, 'get_user_index'])->name('users.list');
     Route::post('/user/store', [UserController::class, 'store']);
-    Route::post('/user/validate/{action}', [UserController::class, 'validate']);
+    Route::post('/user/validation/{action}', [UserController::class, 'validation']);
     Route::get('/user/edit/{user}', [UserController::class, 'edit']);
     Route::put('/user/edit/{user}', [UserController::class, 'update']);
     Route::get('/user/delete/{user}',[UserController::class, 'delete']);
@@ -194,7 +194,7 @@ Route::middleware(['administrator'])->group(function () {
 
     ## Setting
     Route::get('/setting', [SettingController::class, 'index'])->name('settings.index');
-    Route::post('/setting/validate', [SettingController::class, 'validate']);
+    Route::post('/setting/validation', [SettingController::class, 'validation']);
     Route::put('/setting/edit/{setting}', [SettingController::class, 'update']);
 
     ## Log

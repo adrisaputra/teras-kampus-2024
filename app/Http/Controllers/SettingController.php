@@ -15,7 +15,7 @@ class SettingController extends Controller
 		return view('admin.setting.index',compact('title','setting'));
     }
 
-    public function validate(Request $request)
+    public function validation(Request $request)
     {
         if ($request->ajax()) {
 

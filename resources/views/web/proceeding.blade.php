@@ -50,7 +50,8 @@
 											<div class="product col-md-4 col-sm-6 col-12">
 												<div class="grid-inner">
 													<div class="product-image h-translate-y all-ts">
-															<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
+															{{--<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>--}}
+															<a href="{{ $v->url }}" target="_blank"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
 													</div>
 													<div class="product-desc py-0">
 														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>

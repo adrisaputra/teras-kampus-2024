@@ -11,7 +11,9 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/style.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/swiper.css') }}" type="text/css" />
@@ -28,7 +30,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Theme Color Stylesheet -->
-	<link rel="stylesheet" href="{{ asset('frontend/css/colors.php?color=FF8600') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ asset('frontend/css/colors.php?color=2196F8') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/demos/news/css/fonts.css') }}" type="text/css" />
 
 	<!-- News Demo Specific Stylesheet -->
@@ -65,55 +67,19 @@
 
 		<!-- Header
 		============================================= -->
-		<header id="header" class="header-size-sm" data-sticky-shrink="false">
-			<div class="container">
-				<div class="header-row justify-content-between">
-
-					<!-- Logo
-					============================================= -->
-					<div id="logo" class="col-auto ms-auto ms-mb-0 me-mb-0 order-md-2">
-						<a href="demo-news.html" class="standard-logo"><img class="mx-auto" src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
-						<a href="demo-news.html" class="retina-logo"><img class="mx-auto" src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
-					</div><!-- #logo end -->
-
-					<div class="w-100 d-block d-md-none"></div>
-
-					<div class="col-12 col-sm-6 col-md-4 justify-content-center justify-content-sm-start d-flex order-md-1 mb-4 mb-sm-0">
-						<a href="{{ $setting->fb }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-facebook mb-0">
-							<i class="icon-facebook"></i>
-							<i class="icon-facebook"></i>
-						</a>
-						<a href="{{ $setting->ig }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
-							<i class="icon-instagram"></i>
-							<i class="icon-instagram"></i>
-						</a>
-						<a href="{{ $setting->tiktok }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
-							<i class="icon-tiktok"></i>
-							<i class="icon-tiktok"></i>
-						</a>
-						<a href="{{ $setting->youtube }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
-							<i class="icon-youtube"></i>
-							<i class="icon-youtube"></i>
-						</a>
-					</div>
-
-					<div class="col-12 col-sm-6 col-md-4 order-md-3 mb-4 mb-md-0">
-						<ul class="nav align-items-center justify-content-center justify-content-sm-end">
-							<li class="nav-item">
-							</li>
-							<li class="nav-item">
-								<div class="date-today text-uppercase badge bg-dark rounded-pill py-2 px-3 fw-medium"></div>
-							</li>
-						</ul>
-					</div>
-
-				</div>
-			</div>
-
-			<div id="header-wrap" class="border-top border-f5">
+		<!-- Header
+		============================================= -->
+		<header id="header" class="full-header transparent-header" data-sticky-class="not-dark">
+			<div id="header-wrap">
 				<div class="container">
-					<div class="header-row justify-content-between flex-row-reverse flex-lg-row">
+					<div class="header-row">
 
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="index.html" class="standard-logo" data-dark-logo="{{ asset('upload/setting/'.$setting->large_icon) }}"><img src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
+							<a href="index.html" class="retina-logo" data-dark-logo="{{ asset('upload/setting/'.$setting->large_icon) }}"><img src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
+						</div><!-- #logo end -->
 
 						<div id="primary-menu-trigger">
 							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
@@ -121,12 +87,12 @@
 
 						<!-- Primary Navigation
 						============================================= -->
-						<nav class="primary-menu with-arrows">
+						<nav class="primary-menu">
 
-							<ul class="menu-container" >
-								<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
-								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
-								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
+						<ul class="menu-container" >
+								<li class="menu-item current menu-color-tech"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
 								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Book</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
@@ -153,7 +119,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-fashion  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -173,7 +139,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -193,86 +159,9 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-fashion"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
-								<li class="menu-item menu-color-sports"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
-								<li class="menu-item menu-color-food"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
-							</ul>
-
-							<!-- Mobile Menu
-							============================================= -->
-							<ul class="menu-container mobile-primary-menu">
-							<li class="menu-item current menu-color-home"><a class="menu-link" href="{{ url('/') }}"><div style="font-size: 12px;">Home</div></a></li>
-								<li class="menu-item menu-color-travel"><a class="menu-link" href="{{ url('page-about') }}"><div style="font-size: 12px;">About us</div></a></li>
-								<li class="menu-item menu-color-lifestyle"><a class="menu-link" href="{{ url('page-publishing-process') }}"><div style="font-size: 12px;">Publishing Process</div></a></li>
-								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Book</div></a>
-									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
-										<div class="container">
-											<div class="row">
-												<ul class="sub-menu-container">
-													<li class="menu-item mega-menu-title">
-														<ul class="sub-menu-container">
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-1') }}"><div>Buku Ajar</div></a>
-															</li>
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-2') }}"><div>Monograf</div></a>
-															</li>
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-3') }}"><div>Referensi</div></a>
-															</li>
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-4') }}"><div>Novel</div></a>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="menu-item menu-color-fashion  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
-									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
-										<div class="container">
-											<div class="row">
-												<ul class="sub-menu-container">
-													<li class="menu-item mega-menu-title">
-														<ul class="sub-menu-container">
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-journal') }}"><div style="font-size: 12px;">Journal</div></a>
-															</li>
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-proceeding') }}"><div style="font-size: 12px;">Proceeding</div></a>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="menu-item menu-color-market  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
-									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
-										<div class="container">
-											<div class="row">
-												<ul class="sub-menu-container">
-													<li class="menu-item mega-menu-title">
-														<ul class="sub-menu-container">
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-conference') }}"><div style="font-size: 12px;">Conference</div></a>
-															</li>
-															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-workshop') }}"><div style="font-size: 12px;">Workshop</div></a>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="menu-item menu-color-fashion"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
-								<li class="menu-item menu-color-sports"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
-								<li class="menu-item menu-color-food"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
 							</ul>
 
 						</nav><!-- #primary-menu end -->
@@ -294,7 +183,7 @@
 
 		<!-- Footer
 		============================================= -->
-		<footer id="footer" class="dark" style="background-color: #00BCD4;">
+		<footer id="footer" class="dark" style="background-color: #2bd2e7;">
 
 			<div class="container">
 
@@ -302,10 +191,10 @@
 				============================================= -->
 				<div class="footer-widgets-wrap row clearfix">
 
-					<div class="col-lg-8 col-sm-6 mb-5 mb-lg-0">
+					<div class="col-lg-6 col-sm-6 mb-5 mb-lg-0">
 						<!-- Footer Widget 1
 						============================================= -->
-						<div class="widget clearfix">
+						<div class="widget clearfix" data-animate="fadeInUp" data-delay="100">
 							
 						<address>
 							<strong>Alamat:</strong><br>{{ $setting->address }}{{ $setting->address }}<br><br>
@@ -317,7 +206,7 @@
 
 					<!-- Footer Widget 3
 					============================================= -->
-					<div class="col-lg-4 col-sm-6 mb-5 mb-sm-0">
+					<div class="col-lg-3 col-sm-6 mb-5 mb-sm-0" data-animate="fadeInUp" data-delay="300">
 						<div class="widget widget_links clearfix">
 							<h4 class="mb-3 mb-sm-4">Link Terkait</h4>
 							<ul>
@@ -330,14 +219,27 @@
 
 					<!-- Footer Widget 4
 					============================================= -->
-					{{--<div class="col-lg-3 col-sm-6 mb-0">
-						<div class="widget widget_links clearfix">
-							<h4 class="mb-3 mb-sm-4">Download in Mobile</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae esse iure est, quam libero!</p>
-							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-apple"></i>App Store</a>
-							<a href="#" class="button button-light text-dark w-100 text-center bg-white nott ls0 button-rounded button-xlarge ms-0"><i class="icon-googleplay"></i>Google Play</a>
+					<div class="col-lg-3 col-sm-6 mb-0">
+						<div class="widget widget_links clearfix "data-animate="fadeInUp" data-delay="600">
+							<h4 class="mb-3 mb-sm-4">Media Sosial</h4>
+							<a href="{{ $setting->fb }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-facebook mb-0">
+								<i class="icon-facebook"></i>
+								<i class="icon-facebook"></i>
+							</a>
+							<a href="{{ $setting->ig }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+								<i class="icon-instagram"></i>
+								<i class="icon-instagram"></i>
+							</a>
+							<a href="{{ $setting->tiktok }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+								<i class="icon-tiktok"></i>
+								<i class="icon-tiktok"></i>
+							</a>
+							<a href="{{ $setting->youtube }}" target="_blank" class="social-icon si-small si-rounded si-dark si-mini si-instagram mb-0">
+								<i class="icon-youtube"></i>
+								<i class="icon-youtube"></i>
+							</a>
 						</div>
-					</div>--}}
+					</div>
 
 				</div>
 
@@ -349,7 +251,7 @@
 
 				<div class="container clearfix">
 
-					<div class="row justify-content-center">
+					<div class="row justify-content-center" data-animate="fadeInUp" data-delay="300">
 						<div class="col-md-12 align-self-center">
 							Copyrights &copy; 2024 All Rights Reserved by Teras Kampus. <br>
 							{{--<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>--}}

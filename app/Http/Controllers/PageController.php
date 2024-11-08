@@ -15,7 +15,7 @@ class PageController extends Controller
         return view('admin.page.index', compact('title', 'page'));
     }
 
-    public function validate(Request $request)
+    public function validation(Request $request)
     {
         if ($request->ajax()) {
 

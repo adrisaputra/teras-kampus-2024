@@ -10,11 +10,11 @@
 .dark h4,
 .dark h5,
 .dark h6 {
-	color: #EEE;
+	color: #414141;
 }
 
 .dark a:not([class*="btn-"]):hover {
-	color: #EEE;
+	color: #414141;
 }
 
 body.dark,
@@ -111,8 +111,11 @@ body #side-panel.dark {
 	#header.transparent-header.dark,
 	.dark #header.transparent-header:not(.sticky-header) #header-wrap,
 	#header.transparent-header.dark:not(.sticky-header) #header-wrap {
-		background: transparent;
-		border-bottom-color: transparent;
+		/* background: transparent; */
+		background: white;
+		/* border-bottom-color: transparent; */
+		border-bottom-color: white;
+
 	}
 
 	.dark #header.transparent-header.semi-transparent #header-wrap,
@@ -212,11 +215,11 @@ body #side-panel.dark {
 }
 
 .dark .menu-item .sub-menu-trigger {
-	color: #F7F7F7;
+	color: #636363;
 }
 
 .dark .menu-link {
-	color: #F7F7F7;
+	color: #636363;
 }
 
 .dark .primary-menu:not(.not-dark) .sub-menu-container .menu-item > .menu-link {
@@ -264,8 +267,8 @@ body #side-panel.dark {
 
 	.dark .primary-menu:not(.not-dark) .sub-menu-container,
 	.dark .primary-menu:not(.not-dark) .mega-menu-content {
-		background-color: #333;
-		border-color: rgba(255,255,255,0.05);
+		background-color: #ffffff;
+		border-color: rgba(255, 254, 254, 0.05);
 		border-top-color: #1ABC9C;
 	}
 
@@ -274,7 +277,7 @@ body #side-panel.dark {
 	}
 
 	.dark .primary-menu:not(.not-dark) .sub-menu-container .menu-item:hover > .menu-link {
-		background-color: rgba(0,0,0,0.1);
+		background-color: rgb(255, 255, 255);
 		color: #1ABC9C;
 	}
 
@@ -1457,13 +1460,13 @@ body #side-panel.dark {
 
 .dark #footer,
 #footer.dark {
-	color: rgba(255,255,255,0.75);
+	color: rgba(41, 41, 41, 0.75);
 	background-color: #282828;
 	border-top-color: rgba(255,255,255,0.15);
 }
 
 .dark .footer-widgets-wrap a {
-	color: rgba(255,255,255,0.75);
+	color: #414141;
 }
 
 .dark .footer-widgets-wrap a:hover {
@@ -1477,7 +1480,7 @@ body #side-panel.dark {
 
 .dark #copyrights,
 #copyrights.dark {
-	color: rgba(255,255,255,0.4);
+	color: #000000;
 	background-color: rgba(0,0,0,0.2);
 }
 
@@ -1509,7 +1512,7 @@ body #side-panel.dark {
 .dark .widget_pages li a,
 .dark .widget_rss li a,
 .dark .widget_recent_comments li a {
-	color: rgba(255,255,255,0.8);
+	color: #414141;
 }
 
 .dark .widget_nav_menu li a:hover,

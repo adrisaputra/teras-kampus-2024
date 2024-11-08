@@ -50,7 +50,7 @@ class JournalController extends Controller
         
     }
 
-    public function validate(Request $request, $action)
+    public function validation(Request $request, $action)
     {
         if ($request->ajax()) {
 
@@ -124,6 +124,7 @@ class JournalController extends Controller
             $journal->issn = $request->issn;
             $journal->doi = $request->doi;
             $journal->desc = $request->desc;
+            $journal->url = $request->url;
 
             
             if ($journal->cover && $request->file('cover') != "") {

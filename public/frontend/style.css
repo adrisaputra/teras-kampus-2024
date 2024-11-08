@@ -175,7 +175,7 @@ dl, dt, dd, ol, ul, li {
 body {
 	line-height: 1.5;
 	color: #555;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -273,7 +273,7 @@ table,
 fieldset,
 form { margin-bottom: 30px; }
 
-small { font-family: 'Lato', sans-serif; }
+small { font-family: 'Poppins', sans-serif; }
 
 
 @media (max-width: 1200px) {
@@ -422,7 +422,7 @@ span.middot {
 
 .nolineheight { line-height: 0 !important; }
 
-.font-body { font-family: 'Lato', sans-serif; }
+.font-body { font-family: 'Poppins', sans-serif; }
 
 .font-primary { font-family: 'Quicksand', sans-serif; }
 
@@ -3153,7 +3153,7 @@ html[xmlns] .slider-wrap {
 
 #header-wrap {
 	position: relative;
-	background-color: #00bcd4;
+	background-color: #ffffff;
 	width: 100%;
 }
 
@@ -3217,7 +3217,7 @@ html[xmlns] .slider-wrap {
 
 	#header.transparent-header,
 	#header.transparent-header:not(.sticky-header) #header-wrap {
-		background: transparent;
+		background: white;
 		border-bottom: 1px solid transparent;
 		z-index: 299;
 	}
@@ -3301,7 +3301,7 @@ html[xmlns] .slider-wrap {
 		position: fixed;
 		top: 0;
 		left: 0;
-		background-color: #00BCD4;
+		background-color: #ffffff;
 		box-shadow: 0 0 10px rgba(0,0,0,0.1);
 	}
 
@@ -3622,7 +3622,7 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
 	display: block;
 	line-height: 22px;
 	padding: 14px 5px;
-	color: #ffffff;
+	color: #636363;
 	font-weight: 700;
 	font-size: 0.8125rem;
 	letter-spacing: 1px;
@@ -3671,7 +3671,7 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
 	font-weight: 400;
 	color: #666;
 	letter-spacing: 0;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .sub-menu-container .menu-item:hover > .menu-link {
@@ -8235,7 +8235,7 @@ div.alignright {
 .wp-caption {
 	text-align: center;
 	margin: 10px 20px 13px 20px;
-	font-family: 'Lato', Georgia, "Times New Roman", Times, serif;
+	font-family: 'Poppins', Georgia, "Times New Roman", Times, serif;
 	font-style: italic;
 }
 
@@ -9994,7 +9994,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .fbox-center.fbox-italic p {
 	font-style: italic;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 
@@ -12397,7 +12397,7 @@ body:not(.device-touch) .rounded-skill {
 
 .skills li .progress-percent .counter {
 	font-weight: 400;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .progress-percent::after, .progress-percent::before {
@@ -14807,7 +14807,7 @@ body:not(.device-touch) .tagcloud a {
 	font-size: 12px;
 	padding: 6px 0;
 	letter-spacing: 1px;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .nav-tree ul ul a i.icon-angle-down { font-size: 12px; }

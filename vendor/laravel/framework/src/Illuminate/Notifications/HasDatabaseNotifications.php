@@ -7,11 +7,11 @@ trait HasDatabaseNotifications
     /**
      * Get the entity's notifications.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<DatabaseNotification, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function notifications()
     {
-        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
 
     /**

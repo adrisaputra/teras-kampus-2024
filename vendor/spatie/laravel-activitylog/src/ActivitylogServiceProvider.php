@@ -3,37 +3,42 @@
 namespace Spatie\Activitylog;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 use Spatie\Activitylog\Exceptions\InvalidConfiguration;
 use Spatie\Activitylog\Models\Activity as ActivityModel;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class ActivitylogServiceProvider extends PackageServiceProvider
+class ActivitylogServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function boot()
     {
-        $package
-        ->name('laravel-activitylog')
-        ->hasConfigFile('activitylog')
-        ->hasMigrations([
-            'create_activity_log_table',
-            'add_event_column_to_activity_log_table',
-            'add_batch_uuid_column_to_activity_log_table',
-        ])
-        ->hasCommand(CleanActivitylogCommand::class);
+        $this->publishes([
+            __DIR__.'/../config/activitylog.php' => config_path('activitylog.php'),
+        ], 'config');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/activitylog.php', 'activitylog');
+
+        if (! class_exists('CreateActivityLogTable')) {
+            $timestamp = date('Y_m_d_His', time());
+
+            $this->publishes([
+                __DIR__.'/../migrations/create_activity_log_table.php.stub' => database_path("/migrations/{$timestamp}_create_activity_log_table.php"),
+            ], 'migrations');
+        }
     }
 
-    public function registeringPackage()
+    public function register()
     {
+        $this->app->bind('command.activitylog:clean', CleanActivitylogCommand::class);
+
+        $this->commands([
+            'command.activitylog:clean',
+        ]);
+
         $this->app->bind(ActivityLogger::class);
 
-        $this->app->scoped(LogBatch::class);
-
-        $this->app->scoped(CauserResolver::class);
-
-        $this->app->scoped(ActivityLogStatus::class);
+        $this->app->singleton(ActivityLogStatus::class);
     }
 
     public static function determineActivityModel(): string

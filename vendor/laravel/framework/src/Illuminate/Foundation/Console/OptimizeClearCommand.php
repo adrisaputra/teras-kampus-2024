@@ -3,10 +3,7 @@
 namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'optimize:clear')]
 class OptimizeClearCommand extends Command
 {
     /**
@@ -30,30 +27,13 @@ class OptimizeClearCommand extends Command
      */
     public function handle()
     {
-        $this->components->info('Clearing cached bootstrap files.');
+        $this->call('event:clear');
+        $this->call('view:clear');
+        $this->call('cache:clear');
+        $this->call('route:clear');
+        $this->call('config:clear');
+        $this->call('clear-compiled');
 
-        foreach ($this->getOptimizeClearTasks() as $description => $command) {
-            $this->components->task($description, fn () => $this->callSilently($command) == 0);
-        }
-
-        $this->newLine();
-    }
-
-    /**
-     * Get the commands that should be run to clear the "optimization" files.
-     *
-     * @return array
-     */
-    public function getOptimizeClearTasks()
-    {
-        return [
-            'cache' => 'cache:clear',
-            'compiled' => 'clear-compiled',
-            'config' => 'config:clear',
-            'events' => 'event:clear',
-            'routes' => 'route:clear',
-            'views' => 'view:clear',
-            ...ServiceProvider::$optimizeClearCommands,
-        ];
+        $this->info('Caches cleared successfully!');
     }
 }

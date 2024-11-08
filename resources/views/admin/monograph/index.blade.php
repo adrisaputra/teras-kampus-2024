@@ -118,7 +118,7 @@
             }
 
             // Kirim permintaan validasi ke controller via Ajax
-            var url = "{{ url('/monograph/validate') }}";
+            var url = "{{ url('/monograph/validation') }}";
             $.ajax({
                 url: url + "/" + action,
                 type: "POST",
