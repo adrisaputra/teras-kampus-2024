@@ -20,6 +20,7 @@ class Proceeding extends Model
         'desc',
         'cover',
         'file',
+        'url',
         'count_view',
         'user_id',
     ];

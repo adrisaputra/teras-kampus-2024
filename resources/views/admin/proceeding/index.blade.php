@@ -204,6 +204,7 @@
                 document.getElementById("publication_date").value = response.data.publication_date;
                 document.getElementById("issn").value = response.data.issn;
                 document.getElementById("doi").value = response.data.doi;
+                document.getElementById("url").value = response.data.url;
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){

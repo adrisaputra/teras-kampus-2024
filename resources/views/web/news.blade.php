@@ -32,41 +32,49 @@
 					<div class="row clearfix">
 						<div class="col-lg-8">
 
-							<div class="postcontent col-lg-12" data-aos="fade-left" data-aos-delay=400>
+							
+							<div class="row col-mb-50 mb-0 infinity-wrapper">
 
-								<div class="single-post mb-0">
-
-									<!-- Single Post
-									============================================= -->
-									<div class="entry clearfix">
-
-										<!-- Entry Content
-										============================================= -->
-										<div class="entry-content mt-0">
-
-										<div id="shop" class="shop row grid-container gutter-50" data-layout="fitRows">
-
-											@foreach($proceeding as $i => $v)
-											<div class="product col-md-4 col-sm-6 col-12"  data-animate="fadeInUp" data-delay="{{$i+1}}00">
-												<div class="grid-inner">
-													<div class="product-image h-translate-y all-ts">
-															{{--<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>--}}
-															<a href="{{ $v->url }}" target="_blank"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
-													</div>
-													<div class="product-desc py-0">
-														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
-													</div>
-												</div>
-											</div>
-											@endforeach
-										</div>
-
-										</div>
-									</div><!-- .entry end -->
-
+							<form action="{{ url('/page-news-search') }}" method="GET">
+								<div class="row" style="margin-bottom:20px">
+									<div class="col-md-11">
+									<input type="text" name="search" class="form-control" id="inputPassword2" placeholder="Masukkan Pencarian">
+									</div>
+									<div class="col-md-1">
+									<button type="submit" class="btn btn-primary col-12">Cari</button>
+									</div>
 								</div>
+							</form>
 
+								@foreach($news2 as $i => $v)
+								<div class="col-md-6"  data-animate="fadeInUp" data-delay="{{$i+1}}00">
+									<!-- Post Article -->
+									<div class="posts-md">
+										<div class="entry">
+											<div class="entry-image">
+												<a href="{{ url('page-news-detail?q='.$v->slug) }}"><img src="{{ asset('upload/news/'.$v->cover) }}" alt="Image 3"></a>
+												<div class="entry-categories"><a href="{{ url('page-news-detail?q='.$v->slug) }}" target="_blank" class="bg-fashion">Berita</a></div>
+											</div>
+											<div class="entry-title title-sm nott">
+												<h3 class="mb-2"><a href="{{ url('page-news-detail?q='.$v->slug) }}">{{ $v->title }}</a></h3>
+											</div>
+											<div class="entry-meta">
+												<ul>
+													<li><span>By</span> <a href="#">{{ $v->user->name }}</a></li>
+													<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->created_at)) }}</a></li>
+												</ul>
+											</div>
+											<div class="entry-content">
+											{!! Str::limit(strip_tags($v->text), 300, ' ...') !!}
+											<a href="{{ url('page-news-detail?q='.$v->slug) }}" target="_blank" data-aos="fade-right" data-aos-delay=300>Selengkapnya</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								@endforeach
+								<div class="paginating-container">{{ $news2->appends(Request::only('search'))->links() }}</div>
 							</div>
+
 
 						</div>
 						
@@ -141,6 +149,7 @@
 								
 							</div>
 						</div>
+
 					</div>
 
 				</div>

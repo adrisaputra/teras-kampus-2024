@@ -41,30 +41,30 @@
 									============================================= -->
 									<div class="entry-content mt-0">
 
-									<div class="row col-mb-50" data-aos="fade-up" data-aos-delay=100 style="background-color: white;border-radius: 10px;padding-top: 25px;padding-left: 25px;;padding-right: 25px;">
-						<div class="col-sm-6 col-lg-6" >
-							<div class="feature-box fbox-center fbox-bg fbox-plain">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-map-marker2"></i></a>
-								</div>
-								<div class="fbox-content">
-									<h3>Alamat Kami<span class="subtitle">{{ $setting->address }}</span></h3>
-								</div>
-							</div>
-						</div>
+									<div class="row col-mb-50"  data-animate="fadeInUp" data-delay="200" style="background-color: white;border-radius: 10px;padding-top: 25px;padding-left: 25px;;padding-right: 25px;">
+										<div class="col-sm-6 col-lg-6" >
+											<div class="feature-box fbox-center fbox-bg fbox-plain">
+												<div class="fbox-icon">
+													<a href="#"><i class="icon-map-marker2"></i></a>
+												</div>
+												<div class="fbox-content">
+													<h3>Alamat Kami<span class="subtitle">{{ $setting->address }}</span></h3>
+												</div>
+											</div>
+										</div>
 
-						<div class="col-sm-6 col-lg-6">
-							<div class="feature-box fbox-center fbox-bg fbox-plain">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-phone3"></i></a>
-								</div>
-								<div class="fbox-content">
-									<h3>Telepon / Whatsapp<span class="subtitle">{{ $setting->phone }}</span></h3>
-								</div>
-							</div>
-						</div>
+										<div class="col-sm-6 col-lg-6">
+											<div class="feature-box fbox-center fbox-bg fbox-plain">
+												<div class="fbox-icon">
+													<a href="#"><i class="icon-phone3"></i></a>
+												</div>
+												<div class="fbox-content">
+													<h3>Telepon / Whatsapp<span class="subtitle">{{ $setting->phone }}</span></h3>
+												</div>
+											</div>
+										</div>
 
-					</div><!-- Contact Info End -->
+									</div><!-- Contact Info End -->
 
 									</div>
 								</div><!-- .entry end -->

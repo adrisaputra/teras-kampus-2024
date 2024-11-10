@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WebController::class, 'index']);
 Route::get('/page-about', [WebController::class, 'about']);
 Route::get('/page-publishing-process', [WebController::class, 'publishing_process']);
+Route::get('/page-news', [WebController::class, 'news']);
+Route::get('/page-news-search', [WebController::class, 'news_search']);
+Route::get('/page-news-detail', [WebController::class, 'news_detail']);
 Route::get('/page-catalog-1', [WebController::class, 'catalog_1']);
 Route::get('/page-catalog-2', [WebController::class, 'catalog_2']);
 Route::get('/page-catalog-3', [WebController::class, 'catalog_3']);
@@ -55,6 +58,8 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/about_us', [PageController::class, 'index']);
     Route::get('/publishing_process', [PageController::class, 'index']);
     Route::get('/term_and_condition', [PageController::class, 'index']);
+    Route::post('/page/validation', [PageController::class, 'validation']);
+    Route::put('/page/edit/{page}', [PageController::class, 'update']);
 
     ## Slider
     Route::get('/slider', [SliderController::class, 'index'])->name('slider.index');

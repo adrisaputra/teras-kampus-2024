@@ -10,7 +10,7 @@
 .dark h4,
 .dark h5,
 .dark h6 {
-	color: #414141;
+	color: white;
 }
 
 .dark a:not([class*="btn-"]):hover {
@@ -1460,13 +1460,13 @@ body #side-panel.dark {
 
 .dark #footer,
 #footer.dark {
-	color: rgba(41, 41, 41, 0.75);
+	color: white;
 	background-color: #282828;
 	border-top-color: rgba(255,255,255,0.15);
 }
 
 .dark .footer-widgets-wrap a {
-	color: #414141;
+	color: white;
 }
 
 .dark .footer-widgets-wrap a:hover {
@@ -1480,7 +1480,7 @@ body #side-panel.dark {
 
 .dark #copyrights,
 #copyrights.dark {
-	color: #000000;
+	color: white;
 	background-color: rgba(0,0,0,0.2);
 }
 
@@ -1512,7 +1512,7 @@ body #side-panel.dark {
 .dark .widget_pages li a,
 .dark .widget_rss li a,
 .dark .widget_recent_comments li a {
-	color: #414141;
+	color: white;
 }
 
 .dark .widget_nav_menu li a:hover,

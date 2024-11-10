@@ -183,7 +183,7 @@
 
 		<!-- Footer
 		============================================= -->
-		<footer id="footer" class="dark" style="background-color: #2bd2e7;">
+		<footer id="footer" class="dark" style="background-color: #3d3d3d;">
 
 			<div class="container">
 
@@ -253,7 +253,7 @@
 
 					<div class="row justify-content-center" data-animate="fadeInUp" data-delay="300">
 						<div class="col-md-12 align-self-center">
-							Copyrights &copy; 2024 All Rights Reserved by Teras Kampus. <br>
+							Copyrights &copy; 2024 All Rights Reserved By Teras Kampus. <br>
 							{{--<div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>--}}
 						</div>
 					</div>

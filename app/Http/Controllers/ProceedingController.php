@@ -124,6 +124,7 @@ class ProceedingController extends Controller
             $proceeding->issn = $request->issn;
             $proceeding->doi = $request->doi;
             $proceeding->desc = $request->desc;
+            $proceeding->url = $request->url;
 
             
             if ($proceeding->cover && $request->file('cover') != "") {

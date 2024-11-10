@@ -32,7 +32,7 @@
 					<div class="row clearfix">
 						<div class="col-lg-8">
 
-							<div class="postcontent col-lg-12" data-aos="fade-left" data-aos-delay=400>
+							<div class="postcontent col-lg-12" data-animate="fadeInUp" data-delay="200">
 
 								<div class="single-post mb-0">
 
@@ -129,26 +129,26 @@
 							<div class="sticky-sidebar">
 								
 								<div class="widget clearfix">
-									<h4 class="mb-2 ls1 text-uppercase fw-bold">Berita Terbaru</h4>
-									<div class="line line-xs line-sports"></div>
+									<h4 class="mb-2 ls1 text-uppercase fw-bold" data-animate="fadeInUp" data-delay="100">Berita Terbaru</h4>
+									<div class="line line-xs line-sports" data-animate="fadeInUp" data-delay="300"></div>
 
-									<div class="posts-sm row col-mb-30">
+									<div class="posts-sm row col-mb-30" data-animate="fadeInUp" data-delay="200">
 										
 										@foreach($news as $i => $v)
 										<div class="entry col-12">
 											<div class="grid-inner row align-items-center g-0">
 												<div class="col-auto">
 													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="{{ asset('upload/news/'.$v->cover) }}" alt="Image"></a>
+														<a href="{{ url('page-news-detail?q='.$v->slug) }}"><img src="{{ asset('upload/news/'.$v->cover) }}" alt="Image"></a>
 													</div>
 												</div>
 												<div class="col ps-3">
 													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">{{ $v->title }}</a></h4>
+														<h4 class="fw-semibold"><a href="{{ url('page-news-detail?q='.$v->slug) }}">{{ $v->title }}</a></h4>
 													</div>
 													<div class="entry-meta">
 														<ul>
-															<li><span>by</span> <a href="#">{{ $v->user->name }}</a></li>
+															<li><span>By</span> <a href="#">{{ $v->user->name }}</a></li>
 															<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->created_at)) }}</a></li>
 														</ul>
 													</div>
@@ -162,26 +162,26 @@
 								</div>
 								
 								<div class="widget clearfix">
-									<h4 class="mb-2 ls1 text-uppercase fw-bold">Buku Terbaru</h4>
-									<div class="line line-xs line-food"></div>
+									<h4 class="mb-2 ls1 text-uppercase fw-bold" data-animate="fadeInUp" data-delay="100">Buku Terbaru</h4>
+									<div class="line line-xs line-food" data-animate="fadeInUp" data-delay="300"></div>
 
-									<div class="posts-sm row col-mb-30">
+									<div class="posts-sm row col-mb-30" data-animate="fadeInUp" data-delay="200">
 										
 										@foreach($textbook as $i => $v)
 										<div class="entry col-12">
 											<div class="grid-inner row align-items-center g-0">
 												<div class="col-auto">
 													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image"></a>
+														<a href="{{ url('page-catalog-1/'.$v->id) }}"><img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image"></a>
 													</div>
 												</div>
 												<div class="col ps-3">
 													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">{{ $v->title }}</a></h4>
+														<h4 class="fw-semibold"><a href="{{ url('page-catalog-1/'.$v->id) }}">{{ $v->title }}</a></h4>
 													</div>
 													<div class="entry-meta">
 														<ul>
-															<li><span>by</span> <a href="#">{{ $v->author }}</a></li>
+															<li><span>By</span> <a href="#">{{ $v->author }}</a></li>
 															<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->publication_date)) }}</a></li>
 														</ul>
 													</div>

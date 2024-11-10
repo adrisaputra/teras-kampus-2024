@@ -32,41 +32,35 @@
 					<div class="row clearfix">
 						<div class="col-lg-8">
 
-							<div class="postcontent col-lg-12" data-aos="fade-left" data-aos-delay=400>
+							
+							<div class="row col-mb-50 mb-0 infinity-wrapper" data-animate="fadeInUp" data-delay="200">
 
-								<div class="single-post mb-0">
-
-									<!-- Single Post
-									============================================= -->
-									<div class="entry clearfix">
-
-										<!-- Entry Content
-										============================================= -->
-										<div class="entry-content mt-0">
-
-										<div id="shop" class="shop row grid-container gutter-50" data-layout="fitRows">
-
-											@foreach($proceeding as $i => $v)
-											<div class="product col-md-4 col-sm-6 col-12"  data-animate="fadeInUp" data-delay="{{$i+1}}00">
-												<div class="grid-inner">
-													<div class="product-image h-translate-y all-ts">
-															{{--<a href="{{ url('page-proceeding-detail/'.$v->id) }}"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>--}}
-															<a href="{{ $v->url }}" target="_blank"><img src="{{ asset('upload/proceeding/'.$v->cover) }}" alt="Image 1"></a>
-													</div>
-													<div class="product-desc py-0">
-														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
-													</div>
-												</div>
+								<div class="col-md-12">
+									<!-- Post Article -->
+									<div class="posts-md">
+										<div class="entry">
+											<div class="entry-image">
+												<a href="#"><img src="{{ asset('upload/news/'.$news2->cover) }}" alt="Image 3"></a>
+												<div class="entry-categories"><a href="{{ url('page-news-detail?q='.$news2->slug) }}" target="_blank" class="bg-fashion">Berita</a></div>
 											</div>
-											@endforeach
+											<div class="entry-title title-sm nott">
+												<h3 class="mb-2"><a href="#">{{ $news2->title }}</a></h3>
+											</div>
+											<div class="entry-meta">
+												<ul>
+													<li><span>By</span> <a href="#">{{ $news2->user->name }}</a></li>
+													<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($news2->created_at)) }}</a></li>
+													<li><i class="icon-eye"></i><a href="#">{{ $news2->count_view }} Views</a></li>
+												</ul>
+											</div>
+											<div class="entry-content">
+											{!! $news2->text !!}
+											</div>
 										</div>
-
-										</div>
-									</div><!-- .entry end -->
-
+									</div>
 								</div>
-
 							</div>
+
 
 						</div>
 						
@@ -141,6 +135,7 @@
 								
 							</div>
 						</div>
+
 					</div>
 
 				</div>

@@ -6,6 +6,7 @@ use App\Models\Conference;
 use App\Models\Journal;
 use App\Models\Monograph;
 use App\Models\News;
+use App\Models\NewsViewer;
 use App\Models\Novel;
 use App\Models\Page;
 use App\Models\Proceeding;
@@ -14,6 +15,7 @@ use App\Models\Slider;
 use App\Models\Supported;
 use App\Models\Textbook;
 use App\Models\Workshop;
+use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
@@ -44,6 +46,47 @@ class WebController extends Controller
         $title = "Proses Publish";
         $publishing_process = Page::where('menu', 'publishing_process')->first();
         return view('web.publishing_process',compact('title','publishing_process'));
+    }
+
+    public function news()
+    {
+        $title = "Berita";
+        $news2 = News::latest()->paginate(6)->onEachSide(1);
+        return view('web.news',compact('title','news2'));
+    }
+
+    public function news_search(Request $request)
+    {
+        $title = "Berita";
+        $search = $request->get('search');
+        $news2 = News::where(function ($query) use ($search) {
+                            $query->where('title', 'LIKE', '%' . $search . '%');
+                        })->orderBy('id', 'DESC')->paginate(6)->onEachSide(1);
+        return view('web.news', compact('title','news2'));
+    }
+
+    public function news_detail(Request $request)
+    {
+        $title = "Berita";
+        $news2 = $request->get('q');
+        $news2 = News::where('slug',$news2)->first();
+
+        $ipAddress = $request->ip();
+
+        $viewer = NewsViewer::where('news_id', $news2->id)
+            ->where('ip_address', $ipAddress)
+            ->first();
+
+        if (!$viewer) {
+            $news2->news_viewer()->create([
+                'ip_address' => $ipAddress,
+            ]);
+
+            $news2->count_view = $news2->count_view+1;
+            $news2->save();
+        }
+        
+        return view('web.news_detail', compact('title','news2'));
     }
 
     public function catalog_1()

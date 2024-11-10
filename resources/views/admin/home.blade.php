@@ -76,6 +76,28 @@
                             <!--end::Stats-->
                         </div>
                         <!--end::Body-->
+                        <!--begin::Body-->
+                        <div class="card-body p-0">
+                            <!--begin::Chart-->
+                            <div style="height: 30px"></div>
+                            <!--end::Chart-->
+                            <!--begin::Stats-->
+                            <div class="card-p mt-n20 position-relative">
+                                <!--begin::Row-->
+                                <div class="row g-0">
+                                    <!--begin::Col-->
+                                    <div class="col bg-warning py-8 ">
+                                        <div class="row">
+                                            <center><div id="histats_counter"></div></center>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Stats-->
+                        </div>
+                        <!--end::Body-->
                     </div>
                     <!--end::Mixed Widget 2-->
                 </div>
@@ -88,5 +110,17 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
-                    
+   <!-- Histats.com  (div with counter) -->
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4908527,4,408,270,55,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4908527&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->  
 @endsection

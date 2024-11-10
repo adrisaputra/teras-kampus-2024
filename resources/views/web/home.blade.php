@@ -66,7 +66,7 @@ $setting = \App\Helpers\Helpers::setting();
 							<div class="tab-content" id="nav-tabContent">
 								<!-- Tab Content 1
 								============================================= -->
-								<div class="tab-pane fade show active" id="nav-outdoor" role="tabpanel" aria-labelledby="nav-outdoor-tab">
+								<div class="tab-pane fade show active" id="nav-outdoor" role="tabpanel" aria-labelledBy="nav-outdoor-tab">
 									<div class="row col-mb-30 mb-0">
 									@foreach($news as $i => $v)
 										@if($i==0)
@@ -75,21 +75,16 @@ $setting = \App\Helpers\Helpers::setting();
 												<div class="bg-overlay">
 													<div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
 														<div class="position-relative w-100">
-															<div class="entry-categories"><a href="demo-news-category.html" class="bg-fashion">BERITA</a></div>
+															<div class="entry-categories"><a href="{{ url('page-news-detail?q='.$v->slug) }}" class="bg-fashion">BERITA</a></div>
 															<div class="entry-title nott">
-																<h3 class="fw-semibold mb-2"><a href="#" class="text-light">{{ $v->title }}</a></h3>
+																<h3 class="fw-semibold mb-2"><a href="{{ url('page-news-detail?q='.$v->slug) }}" class="text-light">{{ $v->title }}</a></h3>
 															</div>
 															<div class="entry-meta no-separator">
 																<ul>
-																	<li><span>by</span> <a href="#">{{ $v->user->name }}</a></li>
+																	<li><span>By</span> <a href="#">{{ $v->user->name }}</a></li>
 																	<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->created_at)) }}</a></li>
 																</ul>
 															</div>
-															{{--<ul class="entry-icons d-none d-sm-block">
-																<li><a href="#" class="icon-bookmark-empty"></a></li>
-																<li><a href="#" class="icon-heart-empty"><span>18</span></a></li>
-																<li><a href="#" class="icon-comment-alt"><span>3</span></a></li>
-															</ul>--}}
 														</div>
 													</div>
 												</div>
@@ -106,16 +101,16 @@ $setting = \App\Helpers\Helpers::setting();
 													<div class="grid-inner row align-items-center g-0">
 														<div class="col-auto">
 															<div class="entry-image">
-																<a href="demo-news-single.html"><img src="{{ asset('upload/news/'.$v->cover) }}" alt="Image"></a>
+																<a href="{{ url('page-news-detail?q='.$v->slug) }}"><img src="{{ asset('upload/news/'.$v->cover) }}" alt="Image"></a>
 															</div>
 														</div>
 														<div class="col ps-3">
 															<div class="entry-title">
-																<h4><a href="demo-news-single.html">{{ $v->title }}</a></h4>
+																<h4><a href="{{ url('page-news-detail?q='.$v->slug) }}">{{ $v->title }}</a></h4>
 															</div>
 															<div class="entry-meta">
 																<ul>
-																	<li><span>by</span> <a href="#">{{ $v->user->name }}</a></li>
+																	<li><span>By</span> <a href="#">{{ $v->user->name }}</a></li>
 																	<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->created_at)) }}</a></li>
 																</ul>
 															</div>
@@ -127,6 +122,9 @@ $setting = \App\Helpers\Helpers::setting();
 
 											</div>
 
+										</div>
+										<div class="col-12 form-group mb-0" data-animate="heartBeat" data-delay="100" style="padding-top:20px">
+											<center><a href="{{ url('page-news') }}" class="button button-rounded w-1 nott ls0 m-0" style="padding: 3px 22px;">Lihat Berita Lainnya</a></center>
 										</div>
 									</div>
 								</div>
@@ -150,16 +148,16 @@ $setting = \App\Helpers\Helpers::setting();
 											<div class="grid-inner row align-items-center g-0">
 												<div class="col-auto">
 													<div class="entry-image">
-														<a href="demo-news-single.html"><img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image"></a>
+														<a href="{{ url('page-catalog-1/'.$v->id) }}"><img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image"></a>
 													</div>
 												</div>
 												<div class="col ps-3">
 													<div class="entry-title">
-														<h4 class="fw-semibold"><a href="demo-news-single.html">{{ $v->title }}</a></h4>
+														<h4 class="fw-semibold"><a href="{{ url('page-catalog-1/'.$v->id) }}">{{ $v->title }}</a></h4>
 													</div>
 													<div class="entry-meta">
 														<ul>
-															<li><span>by</span> <a href="#">{{ $v->author }}</a></li>
+															<li><span>By</span> <a href="#">{{ $v->author }}</a></li>
 															<li><i class="icon-time"></i><a href="#">{{ date('d M Y', strtotime($v->publication_date)) }}</a></li>
 														</ul>
 													</div>
@@ -360,7 +358,7 @@ $setting = \App\Helpers\Helpers::setting();
 			<div class="section mb-0">
 				<div class="container clearfix">
 					<div class="heading-block center" data-animate="fadeInUp" data-delay="100">
-						<h3>Supported <span>by</span></h3>
+						<h3>Supported <span>By</span></h3>
 					</div>
 					<div class="pb-0 clearfix" data-animate="fadeInUp" data-delay="200">
 						<div id="oc-clients" class="section bg-transparent mt-0 owl-carousel owl-carousel-full image-carousel footer-stick carousel-widget" data-margin="80" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6">
