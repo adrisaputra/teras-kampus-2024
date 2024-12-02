@@ -68,7 +68,11 @@
         table = $('#monograph-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('monograph.list') }}",
+			ajax: {
+				url: "{{ route('monograph.list', ['type' => 'monograph']) }}",
+				type: 'GET',
+				dataType: 'json',
+			},
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
@@ -212,15 +216,16 @@
                 document.getElementById("title").value = response.data.title;
                 document.getElementById("author").value = response.data.author;
                 document.getElementById("publication_date").value = response.data.publication_date;
+                document.getElementById("selling_price").value = rupiah(response.data.selling_price);
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){
-                    var coverLink = '<br><a href="{{ asset("upload/monograph/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    var coverLink = '<br><a href="{{ asset("upload/catalog/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
                     document.getElementById("show_cover").innerHTML = coverLink;
                 }
 
                 if(response.data.file){
-                    var fileLink = '<br><a href="{{ asset("upload/monograph/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    var fileLink = '<br><a href="{{ asset("upload/catalog/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
                     document.getElementById("show_file").innerHTML = fileLink;
                 }
             },
@@ -292,7 +297,22 @@
         });
     }
 
+    function rupiah(number) {
+        var number_string = number.toString().replace(/[^,\d]/g, ''),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
+        // tambahkan titik jika angka yang diambil dari ribuan ada
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return rupiah;
+    }
 
 </script>
 

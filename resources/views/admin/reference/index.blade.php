@@ -68,7 +68,11 @@
         table = $('#reference-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('reference.list') }}",
+			ajax: {
+				url: "{{ route('reference.list', ['type' => 'reference']) }}",
+				type: 'GET',
+				dataType: 'json',
+			},
             columns: [
 				{data: 'id', name: 'id', visible: false},
 				{data: 'number', name: 'number'}, // Kolom nomor urut
@@ -215,12 +219,12 @@
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){
-                    var coverLink = '<br><a href="{{ asset("upload/reference/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
+                    var coverLink = '<br><a href="{{ asset("upload/catalog/") }}/' + response.data.cover + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat Cover Sebelumnya</a>';
                     document.getElementById("show_cover").innerHTML = coverLink;
                 }
 
                 if(response.data.file){
-                    var fileLink = '<br><a href="{{ asset("upload/reference/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
+                    var fileLink = '<br><a href="{{ asset("upload/catalog/") }}/' + response.data.file + '" class="btn mb-2 mr-1 btn-sm btn-info snackbar-bg-info" target="_blank">Lihat File Sebelumnya</a>';
                     document.getElementById("show_file").innerHTML = fileLink;
                 }
             },

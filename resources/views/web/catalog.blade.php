@@ -59,12 +59,21 @@
 														@else
 															<a href="{{ url('page-catalog-4/'.$v->id) }}"><img src="{{ asset('upload/novel/'.$v->cover) }}" alt="Image 1"></a>
 														@endif
+														
+														<div class="bg-overlay">
+															<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
+																<a href="#" class="btn btn-warning me-2"><i class="icon-shopping-basket"></i></a>
+															</div>
+															<div class="bg-overlay-bg bg-transparent"></div>
+														</div>
 													</div>
 													<div class="product-desc py-0">
 														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
+														<div class="product-price">Rp. {{ number_format($v->selling_price, 0, ',', '.') }}</div>
 													</div>
 												</div>
 											</div>
+
 											@endforeach
 										</div>
 

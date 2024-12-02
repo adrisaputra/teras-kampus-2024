@@ -45,6 +45,7 @@ return array(
     'App\\Models\\Log' => $baseDir . '/app/Models/Log.php',
     'App\\Models\\Monograph' => $baseDir . '/app/Models/Monograph.php',
     'App\\Models\\News' => $baseDir . '/app/Models/News.php',
+    'App\\Models\\NewsViewer' => $baseDir . '/app/Models/NewsViewer.php',
     'App\\Models\\Novel' => $baseDir . '/app/Models/Novel.php',
     'App\\Models\\Page' => $baseDir . '/app/Models/Page.php',
     'App\\Models\\Proceeding' => $baseDir . '/app/Models/Proceeding.php',

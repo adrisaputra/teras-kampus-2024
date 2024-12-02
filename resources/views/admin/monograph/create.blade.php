@@ -21,7 +21,7 @@
                         <input type="hidden" class="form-control" id="id_monograph"/>
 
                         <div class="fv-row mb-7">
-                            <label class="required fw-bold fs-6 mb-2">{{ __('Kategori') }}</label>
+                            <label class="fw-bold fs-6 mb-2">{{ __('Kategori') }}</label>
                             <select class="form-control" name="category" id="category">
                                 <option value="">- Pilih Kategori -</option>
                                 <option value="Agama">Agama</option>
@@ -57,6 +57,12 @@
                         <div class="fv-row mb-7">
                             <label class="fw-bold fs-6 mb-2">{{ __('Deskripsi') }}</label>
                             <textarea name="desc" id="desc" class="form-control ckeditor"></textarea>
+                            <div id="desc-error" class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+
+                        <div class="fv-row mb-7">
+                            <label class="fw-bold fs-6 mb-2">{{ __('Harga Jual (Rp)') }}</label>
+                            <input type="text" class="form-control" placeholder="Harga Jual" name="selling_price" id="selling_price" onkeyup="formatRupiah(this, '.')"/>
                             <div id="desc-error" class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
 

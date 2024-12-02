@@ -3444,7 +3444,7 @@ html[xmlns] .slider-wrap {
 @media (min-width: 992px) {
 
 	.full-header #logo {
-		padding-right: 30px;
+		/* padding-right: 30px; */
 		border-right: 1px solid #EEE;
 	}
 
@@ -4951,7 +4951,7 @@ body:not(.top-search-open) .top-search-parent .header-misc > *:not(#top-search) 
 	position: absolute;
 	top: -7px;
 	left: auto;
-	right: -8px;
+	right: 15px;
 	font-size: 0.625rem;
 	color: #FFF;
 	width: 1.125rem;

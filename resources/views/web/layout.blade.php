@@ -81,6 +81,53 @@
 							<a href="index.html" class="retina-logo" data-dark-logo="{{ asset('upload/setting/'.$setting->large_icon) }}"><img src="{{ asset('upload/setting/'.$setting->large_icon) }}" alt="Canvas Logo"></a>
 						</div><!-- #logo end -->
 
+						
+						<div class="header-misc">
+
+							<!-- Top Cart
+							============================================= -->
+							<div id="top-cart" class="">
+								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
+								<div class="top-cart-content">
+									<div class="top-cart-title">
+										<h4>Shopping Cart</h4>
+									</div>
+									<div class="top-cart-items">
+										<div class="top-cart-item">
+											<div class="top-cart-item-image">
+												<a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+											</div>
+											<div class="top-cart-item-desc">
+												<div class="top-cart-item-desc-title">
+													<a href="#">Blue Round-Neck Tshirt with a Button</a>
+													<span class="top-cart-item-price d-block">$19.99</span>
+												</div>
+												<div class="top-cart-item-quantity">x 2</div>
+											</div>
+										</div>
+										<div class="top-cart-item">
+											<div class="top-cart-item-image">
+												<a href="#"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+											</div>
+											<div class="top-cart-item-desc">
+												<div class="top-cart-item-desc-title">
+													<a href="#">Light Blue Denim Dress</a>
+													<span class="top-cart-item-price d-block">$24.99</span>
+												</div>
+												<div class="top-cart-item-quantity">x 3</div>
+											</div>
+										</div>
+									</div>
+									<div class="top-cart-action">
+										<span class="top-checkout-price">$114.95</span>
+										<a href="#" class="button button-3d button-small m-0">View Cart</a>
+									</div>
+								</div>
+								&nbsp;&nbsp;<a href="#" ><i class="icon-user"></i></a>
+							</div><!-- #top-cart end -->
+
+						</div>
+
 						<div id="primary-menu-trigger">
 							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
 						</div>
@@ -101,16 +148,16 @@
 													<li class="menu-item mega-menu-title">
 														<ul class="sub-menu-container">
 															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-1') }}"><div>Buku Ajar</div></a>
+																<a class="menu-link" href="{{ url('page-textbook') }}"><div>Buku Ajar</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-2') }}"><div>Monograf</div></a>
+																<a class="menu-link" href="{{ url('page-monograph') }}"><div>Monograf</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-3') }}"><div>Referensi</div></a>
+																<a class="menu-link" href="{{ url('page-reference') }}"><div>Referensi</div></a>
 															</li>
 															<li class="menu-item">
-																<a class="menu-link" href="{{ url('page-catalog-4') }}"><div>Novel</div></a>
+																<a class="menu-link" href="{{ url('page-novel') }}"><div>Novel</div></a>
 															</li>
 														</ul>
 													</li>
@@ -272,7 +319,12 @@
 
 	<!-- JavaScripts
 	============================================= -->
+	@if(
+	Request::segment(1)!="page-conference"
+	&& Request::segment(1)!="page-workshop"
+	)
 	<script src="{{ asset('frontend/js/jquery.js') }}"></script>
+	@endif
 	<script src="{{ asset('frontend/js/plugins.min.js') }}"></script>
 	<script src="{{ asset('frontend/js/plugins.infinitescroll.js') }}"></script>
 

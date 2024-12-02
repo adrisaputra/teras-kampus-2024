@@ -560,6 +560,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Log' => __DIR__ . '/../..' . '/app/Models/Log.php',
         'App\\Models\\Monograph' => __DIR__ . '/../..' . '/app/Models/Monograph.php',
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
+        'App\\Models\\NewsViewer' => __DIR__ . '/../..' . '/app/Models/NewsViewer.php',
         'App\\Models\\Novel' => __DIR__ . '/../..' . '/app/Models/Novel.php',
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',
         'App\\Models\\Proceeding' => __DIR__ . '/../..' . '/app/Models/Proceeding.php',

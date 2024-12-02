@@ -1,21 +1,18 @@
 <?php
 
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MonographController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\NovelController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProceedingController;
-use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\RelatedLinksController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SupportedController;
-use App\Http\Controllers\TextbookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\WorkshopController;
@@ -27,20 +24,22 @@ Route::get('/page-publishing-process', [WebController::class, 'publishing_proces
 Route::get('/page-news', [WebController::class, 'news']);
 Route::get('/page-news-search', [WebController::class, 'news_search']);
 Route::get('/page-news-detail', [WebController::class, 'news_detail']);
-Route::get('/page-catalog-1', [WebController::class, 'catalog_1']);
-Route::get('/page-catalog-2', [WebController::class, 'catalog_2']);
-Route::get('/page-catalog-3', [WebController::class, 'catalog_3']);
-Route::get('/page-catalog-4', [WebController::class, 'catalog_4']);
-Route::get('/page-catalog-1/{textbook}', [WebController::class, 'catalog_1_detail']);
-Route::get('/page-catalog-2/{monograph}', [WebController::class, 'catalog_2_detail']);
-Route::get('/page-catalog-3/{reference}', [WebController::class, 'catalog_3_detail']);
-Route::get('/page-catalog-4/{novel}', [WebController::class, 'catalog_4_detail']);
+Route::get('/page-textbook', [WebController::class, 'catalog']);
+Route::get('/page-monograph', [WebController::class, 'catalog']);
+Route::get('/page-reference', [WebController::class, 'catalog']);
+Route::get('/page-novel', [WebController::class, 'catalog']);
+Route::get('/page-textbook/{catalog}', [WebController::class, 'catalog_detail']);
+Route::get('/page-monograph/{catalog}', [WebController::class, 'catalog_detail']);
+Route::get('/page-reference/{catalog}', [WebController::class, 'catalog_detail']);
+Route::get('/page-novel/{catalog}', [WebController::class, 'catalog_detail']);
 Route::get('/page-journal', [WebController::class, 'journal']);
 Route::get('/page-journal-detail/{journal}', [WebController::class, 'journal_detail']);
 Route::get('/page-proceeding', [WebController::class, 'proceeding']);
 Route::get('/page-proceeding-detail/{proceeding}', [WebController::class, 'proceeding_detail']);
 Route::get('/page-conference', [WebController::class, 'conference']);
+Route::get('/page-conference/list', [WebController::class, 'get_conference_index'])->name('page_conferences.list');
 Route::get('/page-workshop', [WebController::class, 'workshop']);
+Route::get('/page-workshop/list', [WebController::class, 'get_workshop_index'])->name('page_workshops.list');
 Route::get('/page-author-and-affiliation', [WebController::class, 'author_and_affiliation']);
 Route::get('/page-term-and-condition', [WebController::class, 'term_and_condition']);
 Route::get('/page-contact', [WebController::class, 'contact']);
@@ -101,44 +100,44 @@ Route::middleware(['operator'])->group(function () {
     Route::get('/proceeding/delete/{proceeding}',[ProceedingController::class, 'delete']);
 
     ## Textbook
-    Route::get('/textbook', [TextbookController::class, 'index'])->name('textbook.index');
-    Route::get('/textbook/list', [TextbookController::class, 'get_textbook_index'])->name('textbook.list');
-    Route::post('textbook/upload_image',[TextbookController::class, 'upload_image'])->name('upload_textbook');
-    Route::post('/textbook/store', [TextbookController::class, 'store']);
-    Route::post('/textbook/validation/{action}', [TextbookController::class, 'validation']);
-    Route::get('/textbook/edit/{textbook}', [TextbookController::class, 'edit']);
-    Route::put('/textbook/edit/{textbook}', [TextbookController::class, 'update']);
-    Route::get('/textbook/delete/{textbook}',[TextbookController::class, 'delete']);
+    Route::get('/textbook', [CatalogController::class, 'index'])->name('textbook.index');
+    Route::get('/textbook/list/{type}', [CatalogController::class, 'get_catalog_index'])->name('textbook.list');
+    Route::post('textbook/upload_image',[CatalogController::class, 'upload_image'])->name('upload_textbook');
+    Route::post('/textbook/store', [CatalogController::class, 'store']);
+    Route::post('/textbook/validation/{action}', [CatalogController::class, 'validation']);
+    Route::get('/textbook/edit/{textbook}', [CatalogController::class, 'edit']);
+    Route::put('/textbook/edit/{catalog}', [CatalogController::class, 'update']);
+    Route::get('/textbook/delete/{catalog}',[CatalogController::class, 'delete']);
 
     ## Monograph
-    Route::get('/monograph', [MonographController::class, 'index'])->name('monograph.index');
-    Route::get('/monograph/list', [MonographController::class, 'get_monograph_index'])->name('monograph.list');
-    Route::post('monograph/upload_image',[MonographController::class, 'upload_image'])->name('upload_monograph');
-    Route::post('/monograph/store', [MonographController::class, 'store']);
-    Route::post('/monograph/validation/{action}', [MonographController::class, 'validation']);
-    Route::get('/monograph/edit/{monograph}', [MonographController::class, 'edit']);
-    Route::put('/monograph/edit/{monograph}', [MonographController::class, 'update']);
-    Route::get('/monograph/delete/{monograph}',[MonographController::class, 'delete']);
+    Route::get('/monograph', [CatalogController::class, 'index'])->name('monograph.index');
+    Route::get('/monograph/list/{type}', [CatalogController::class, 'get_catalog_index'])->name('monograph.list');
+    Route::post('monograph/upload_image',[CatalogController::class, 'upload_image'])->name('upload_monograph');
+    Route::post('/monograph/store', [CatalogController::class, 'store']);
+    Route::post('/monograph/validation/{action}', [CatalogController::class, 'validation']);
+    Route::get('/monograph/edit/{monograph}', [CatalogController::class, 'edit']);
+    Route::put('/monograph/edit/{catalog}', [CatalogController::class, 'update']);
+    Route::get('/monograph/delete/{catalog}',[CatalogController::class, 'delete']);
 
     ## Reference
-    Route::get('/reference', [ReferenceController::class, 'index'])->name('reference.index');
-    Route::get('/reference/list', [ReferenceController::class, 'get_reference_index'])->name('reference.list');
-    Route::post('reference/upload_image',[ReferenceController::class, 'upload_image'])->name('upload_reference');
-    Route::post('/reference/store', [ReferenceController::class, 'store']);
-    Route::post('/reference/validation/{action}', [ReferenceController::class, 'validation']);
-    Route::get('/reference/edit/{reference}', [ReferenceController::class, 'edit']);
-    Route::put('/reference/edit/{reference}', [ReferenceController::class, 'update']);
-    Route::get('/reference/delete/{reference}',[ReferenceController::class, 'delete']);
+    Route::get('/reference', [CatalogController::class, 'index'])->name('reference.index');
+    Route::get('/reference/list/{type}', [CatalogController::class, 'get_catalog_index'])->name('reference.list');
+    Route::post('reference/upload_image',[CatalogController::class, 'upload_image'])->name('upload_reference');
+    Route::post('/reference/store', [CatalogController::class, 'store']);
+    Route::post('/reference/validation/{action}', [CatalogController::class, 'validation']);
+    Route::get('/reference/edit/{reference}', [CatalogController::class, 'edit']);
+    Route::put('/reference/edit/{catalog}', [CatalogController::class, 'update']);
+    Route::get('/reference/delete/{catalog}',[CatalogController::class, 'delete']);
 
     ## Novel
-    Route::get('/novel', [NovelController::class, 'index'])->name('novel.index');
-    Route::get('/novel/list', [NovelController::class, 'get_novel_index'])->name('novel.list');
-    Route::post('novel/upload_image',[NovelController::class, 'upload_image'])->name('upload_novel');
-    Route::post('/novel/store', [NovelController::class, 'store']);
-    Route::post('/novel/validation/{action}', [NovelController::class, 'validation']);
-    Route::get('/novel/edit/{novel}', [NovelController::class, 'edit']);
-    Route::put('/novel/edit/{novel}', [NovelController::class, 'update']);
-    Route::get('/novel/delete/{novel}',[NovelController::class, 'delete']);
+    Route::get('/novel', [CatalogController::class, 'index'])->name('novel.index');
+    Route::get('/novel/list/{type}', [CatalogController::class, 'get_catalog_index'])->name('novel.list');
+    Route::post('novel/upload_image',[CatalogController::class, 'upload_image'])->name('upload_novel');
+    Route::post('/novel/store', [CatalogController::class, 'store']);
+    Route::post('/novel/validation/{action}', [CatalogController::class, 'validation']);
+    Route::get('/novel/edit/{novel}', [CatalogController::class, 'edit']);
+    Route::put('/novel/edit/{catalog}', [CatalogController::class, 'update']);
+    Route::get('/novel/delete/{catalog}',[CatalogController::class, 'delete']);
 
     ## Conference
     Route::get('/conference', [ConferenceController::class, 'index'])->name('conference.index');

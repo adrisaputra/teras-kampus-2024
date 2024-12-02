@@ -5,6 +5,8 @@
 	$news = \App\Helpers\Helpers::news();
 	$textbook = \App\Helpers\Helpers::textbook();
 @endphp
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 <!-- Page Title
 		============================================= -->
 		<section id="page-title">
@@ -37,7 +39,18 @@
 								<div class="single-post mb-0">
 
 									<div class="entry clearfix">
-											aaa
+										<div class="table-responsive">
+											<table class="table table-bordered table-hover mb-12" id="workshop-table">
+												<thead>
+													<tr>
+														<th style="width: 10%" >Number</th>
+														<th style="width: 10%" >No</th>
+														<th>Nama Acara</th>
+														<th>Tanggal Mulai - Selesai</th>
+													</tr>
+												</thead>
+											</table>
+										</div>
 									</div>
 
 								</div>
@@ -123,5 +136,22 @@
 			</div>
 		</section><!-- #content end -->
 
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    
+<script>
+	$(function () {
+		$('#workshop-table').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: "{{ route('page_workshops.list') }}",
+            columns: [
+				{data: 'id', name: 'id', visible: false},
+				{data: 'number', name: 'number'}, // Kolom nomor urut
+				{data: 'title', name: 'title'},
+				{data: 'start_date', name: 'start_date'}
+            ],
+		});
+	});
+</script>
 @endsection

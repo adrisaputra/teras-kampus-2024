@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalog;
 use App\Models\Conference;
 use App\Models\Journal;
-use App\Models\Monograph;
 use App\Models\News;
 use App\Models\NewsViewer;
-use App\Models\Novel;
 use App\Models\Page;
 use App\Models\Proceeding;
-use App\Models\Reference;
 use App\Models\Slider;
 use App\Models\Supported;
-use App\Models\Textbook;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class WebController extends Controller
 {
@@ -23,11 +21,12 @@ class WebController extends Controller
     {
         $slider = Slider::get();
         $news = News::orderBy('id', 'DESC')->limit(6)->get();
-        $textbook = Textbook::orderBy('id', 'DESC')->limit(5)->get();
-        $catalog1 = Textbook::orderBy('id', 'DESC')->limit(3)->get();
-        $catalog2 = Monograph::orderBy('id', 'DESC')->limit(3)->get();
-        $catalog3 = Reference::orderBy('id', 'DESC')->limit(3)->get();
-        $catalog4 = Novel::orderBy('id', 'DESC')->limit(3)->get();
+        
+        $textbook = Catalog::where('type','textbook')->orderBy('id', 'DESC')->limit(5)->get();
+        $catalog1 = Catalog::where('type','textbook')->orderBy('id', 'DESC')->limit(3)->get();
+        $catalog2 = Catalog::where('type','monograph')->orderBy('id', 'DESC')->limit(3)->get();
+        $catalog3 = Catalog::where('type','reference')->orderBy('id', 'DESC')->limit(3)->get();
+        $catalog4 = Catalog::where('type','novel')->orderBy('id', 'DESC')->limit(3)->get();
         $journal = Journal::orderBy('id', 'DESC')->limit(4)->get();
         $proceeding = Proceeding::orderBy('id', 'DESC')->limit(5)->get();
         $supported = Supported::get();
@@ -89,59 +88,39 @@ class WebController extends Controller
         return view('web.news_detail', compact('title','news2'));
     }
 
-    public function catalog_1()
+    public function catalog(Request $request)
     {
-        $title = "Buku Ajar";
-        $catalog = Textbook::paginate(12);
-        return view('web.catalog',compact('title','catalog'));
+        if($request->segment(1)=="page-textbook"){
+            $title = "Buku Ajar";
+            $catalog = Catalog::where('type','textbook')->paginate(12);
+            return view('web.catalog',compact('title','catalog'));
+        } elseif($request->segment(1)=="page-monograph"){
+            $title = "Monograf";
+            $catalog = Catalog::where('type','monograph')->paginate(12);
+            return view('web.catalog',compact('title','catalog'));
+        } elseif($request->segment(1)=="page-reference"){
+            $title = "Referensi";
+            $catalog = Catalog::where('type','reference')->paginate(12);
+            return view('web.catalog',compact('title','catalog'));
+        } elseif($request->segment(1)=="page-novel"){
+            $title = "Novel";
+            $catalog = Catalog::where('type','novel')->paginate(12);
+            return view('web.catalog',compact('title','catalog'));
+        }
     }
 
-    public function catalog_1_detail(Textbook $textbook)
+    public function catalog_detail(Request $request, Catalog $catalog)
     {
-        $title = "Buku Ajar";
-        $catalog = $textbook;
-        return view('web.catalog_detail',compact('title','catalog'));
-    }
-
-    public function catalog_2()
-    {
-        $title = "Monograf";
-        $catalog = Monograph::paginate(12);
-        return view('web.catalog',compact('title','catalog'));
-    }
-
-    public function catalog_2_detail(Monograph $monograph)
-    {
-        $title = "Monograf";
-        $catalog = $monograph;
-        return view('web.catalog_detail',compact('title','catalog'));
-    }
-
-    public function catalog_3()
-    {
-        $title = "Referensi";
-        $catalog = Reference::paginate(12);
-        return view('web.catalog',compact('title','catalog'));
-    }
-
-    public function catalog_3_detail(Reference $reference)
-    {
-        $title = "Referensi";
-        $catalog = $reference;
-        return view('web.catalog_detail',compact('title','catalog'));
-    }
-
-    public function catalog_4()
-    {
-        $title = "Novel";
-        $catalog = Novel::paginate(12);
-        return view('web.catalog',compact('title','catalog'));
-    }
-
-    public function catalog_4_detail(Novel $novel)
-    {
-        $title = "Novel";
-        $catalog = $novel;
+        if($request->segment(1)=="page-textbook"){
+            $title = "Buku Ajar";
+        } elseif($request->segment(1)=="page-monograph"){
+            $title = "Monograf";
+        } elseif($request->segment(1)=="page-reference"){
+            $title = "Referensi";
+        } elseif($request->segment(1)=="page-novel"){
+            $title = "Novel";
+        }
+        
         return view('web.catalog_detail',compact('title','catalog'));
     }
 
@@ -174,15 +153,61 @@ class WebController extends Controller
     public function conference()
     {
         $title = "Konferensi";
-        $conference = Conference::paginate(12);
-        return view('web.conference',compact('title','conference'));
+        return view('web.conference',compact('title'));
+    }
+    
+    public function get_conference_index(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $counter = 1;
+
+            $conference = Conference::limit(10);
+
+            return DataTables::of($conference)
+            ->addIndexColumn()
+            ->addColumn('number', function () use (&$counter) {
+                return $counter++;
+            })
+            ->addColumn('start_date', function ($v){
+                return 'Mulai Tanggal : '.date('d M Y', strtotime($v->start_date)).' Sampai '.date('d M Y', strtotime($v->end_date));
+            })
+            ->addColumn('user', function ($v) {
+                return $v->user ? $v->user->name : '';
+            })
+            ->rawColumns([])->make(true);
+        }
+        
     }
 
     public function workshop()
     {
         $title = "Workshop";
-        $workshop = Workshop::paginate(12);
-        return view('web.workshop',compact('title','workshop'));
+        return view('web.workshop',compact('title'));
+    }
+
+    public function get_workshop_index(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $counter = 1;
+
+            $workshop = Workshop::limit(10);
+
+            return DataTables::of($workshop)
+            ->addIndexColumn()
+            ->addColumn('number', function () use (&$counter) {
+                return $counter++;
+            })
+            ->addColumn('start_date', function ($v){
+                return 'Mulai Tanggal : '.date('d M Y', strtotime($v->start_date)).' Sampai '.date('d M Y', strtotime($v->end_date));
+            })
+            ->addColumn('user', function ($v) {
+                return $v->user ? $v->user->name : '';
+            })
+            ->rawColumns([])->make(true);
+        }
+        
     }
 
     public function author_and_affiliation()
