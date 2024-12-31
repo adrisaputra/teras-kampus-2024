@@ -217,6 +217,7 @@
                 document.getElementById("author").value = response.data.author;
                 document.getElementById("publication_date").value = response.data.publication_date;
                 document.getElementById("selling_price").value = rupiah(response.data.selling_price);
+                document.getElementById("url").value = response.data.url;
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){

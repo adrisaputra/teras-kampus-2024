@@ -15,6 +15,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}" type="text/css" />
+	
+	<link rel="stylesheet" href="{{ asset('app.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{ asset('add.css')}}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/style.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/swiper.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('frontend/css/dark.css') }}" type="text/css" />
@@ -65,8 +68,31 @@
 	============================================= -->
 	<div id="wrapper" class="clearfix">
 
-		<!-- Header
-		============================================= -->
+		<div class="bdgcontent">
+			<div class="floatmenu">
+				<div class="row col-md-12 col-lg-12">
+					<div class="col-md-6 col-lg-6">
+						<div class="floatmenu__wrap">
+							<ul>
+								<!-- <li><a href="" target="_blank" style="background: #c5223a;"><img src="{{ asset('lapor.png')}}" alt="img"></a></li> -->
+								<!-- <li><a href="" rel="nofollow" target="_blank" style="background: #002b56;"><img src="{{ asset('facebook.png')}}" alt="img"></a></li> -->
+								<!-- <li><a href="" style="background: #503b39;"><img src="{{ asset('youtube.png')}}"></a></li> -->
+								<li><a href="{{ $setting->whatsapp }}" rel="nofollow" target="_blank" style="background: #2a7721;"><img src="{{ asset('whatsapp.png')}}" alt="img"></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-6">
+						<div class="floatmenu__wrap">
+							<ul>
+								<!-- <li><a href="#" target="_blank" style="background: #2196f3;"><img src="{{ asset('call.png')}}" alt="img"></a></li> -->
+								<!-- <li><a href="" style="background: #b31985;"><img src="{{ asset('instagram.png')}}"></a></li> -->
+								<!-- <li><a href="https://wa.me/08114038411" rel="nofollow" target="_blank" style="background: #2a7721;"><img src="{{ asset('whatsapp.png')}}" alt="img"></a></li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Header
 		============================================= -->
 		<header id="header" class="full-header transparent-header" data-sticky-class="not-dark">
@@ -87,7 +113,7 @@
 							<!-- Top Cart
 							============================================= -->
 							<div id="top-cart" class="">
-								<a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
+								<a href="#" id="top-cart-trigger" style="color: #607D8B;"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
 										<h4>Shopping Cart</h4>
@@ -123,9 +149,43 @@
 										<a href="#" class="button button-3d button-small m-0">View Cart</a>
 									</div>
 								</div>
-								&nbsp;&nbsp;<a href="#" ><i class="icon-user"></i></a>
+								
 							</div><!-- #top-cart end -->
 
+							@if(Auth::user())
+							<nav class="primary-menu">
+								<ul class="menu-container" >
+									@if(Auth::user()->photo)
+										<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><img src="{{ asset('upload/photo/'.Auth::user()->photo)}}" width=30px height="30px" style="border-radius: 50%;"></a>
+									@else
+										<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><img src="{{ asset('profile.png')}}" width=30px height="30px" style="border-radius: 50%;margin-left:10px;margin-top:-10px"></a>
+									@endif
+									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
+											<div class="container">
+												<div class="row">
+													<ul class="sub-menu-container">
+														<li class="menu-item mega-menu-title">
+															<ul class="sub-menu-container">
+																<li class="menu-item">
+																	<a class="menu-link" href="{{ url('page-textbook') }}"><div>Akun</div></a>
+																</li>
+																<li class="menu-item">
+																	<a class="menu-link" href=""  onclick="event.preventDefault();document.getElementById('logout-form').submit();" ><div>Sign Out</div>
+																		<form id="logout-form" action="{{ url('web-logout') }}" method="POST" style="display: none;">
+																			@csrf
+																		</form>
+																	</a>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</nav>
+							@endif
 						</div>
 
 						<div id="primary-menu-trigger">
@@ -213,9 +273,6 @@
 
 						</nav><!-- #primary-menu end -->
 
-						<form class="top-search-form" action="search.html" method="get">
-							<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
-						</form>
 
 					</div>
 				</div>
@@ -286,6 +343,8 @@
 								<i class="icon-youtube"></i>
 							</a>
 						</div>
+						
+						<div id="histats_counter" style="padding-top:20px" data-animate="fadeInUp" data-delay="600"></div>
 					</div>
 
 				</div>
@@ -426,5 +485,18 @@
 			});
 		});
 	</script>
+	
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4908527,4,408,270,55,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4908527&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->  
 </body>
 </html>

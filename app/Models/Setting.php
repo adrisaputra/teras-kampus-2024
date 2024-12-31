@@ -20,6 +20,7 @@ class Setting extends Model
         'office_name',
         'email',
         'phone',
+        'whatsapp',
         'address',
         'fb',
         'ig',

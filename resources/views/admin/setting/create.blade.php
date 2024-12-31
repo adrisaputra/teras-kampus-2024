@@ -20,6 +20,12 @@
             </div>
         </div>
         <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Whatsapp</label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="whatsapp" id="whatsapp" class="form-control" placeholder="Whatsapp" value="{{ $setting->whatsapp }}"/>
+            </div>
+        </div>
+        <div class="row mb-6">
             <label class="col-lg-4 col-form-label fw-bold fs-6">Email</label>
             <div class="col-lg-8 fv-row">
                 <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ $setting->email }}"/>

@@ -163,6 +163,7 @@ class CatalogController extends Controller
            $catalog->author = $request->author;
            $catalog->publication_date = $request->publication_date;
            $catalog->desc = $request->desc;
+           $catalog->url = $request->url;
            
            if($request->selling_price){
                 $catalog->selling_price = str_replace(".", "", $request->selling_price);

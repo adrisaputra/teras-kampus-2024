@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProceedingController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RelatedLinksController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
@@ -16,7 +17,24 @@ use App\Http\Controllers\SupportedController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\WorkshopController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/buat_storage', function () {
+    Artisan::call('storage:link');
+    dd("Storage Berhasil Di Buat");
+});
+
+Route::get('/clear-cache-all', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:cache');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    dd("Cache Clear All");
+});
 
 Route::get('/', [WebController::class, 'index']);
 Route::get('/page-about', [WebController::class, 'about']);
@@ -43,6 +61,11 @@ Route::get('/page-workshop/list', [WebController::class, 'get_workshop_index'])-
 Route::get('/page-author-and-affiliation', [WebController::class, 'author_and_affiliation']);
 Route::get('/page-term-and-condition', [WebController::class, 'term_and_condition']);
 Route::get('/page-contact', [WebController::class, 'contact']);
+Route::get('/page-register', [WebController::class, 'register']);
+Route::get('/page-login', [WebController::class, 'login']);
+Route::post('/web-register', [RegisterController::class, 'store']);
+Route::post('/web-login', [LoginController::class, 'authenticate_web']);
+Route::post('/web-logout', [LoginController::class, 'logout_web']);
 
 
 Route::get('/login', [LoginController::class, 'index']);

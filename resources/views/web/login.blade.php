@@ -32,7 +32,7 @@
 					<div class="row clearfix">
 						<div class="col-lg-8">
 
-							<div class="postcontent col-lg-12">
+							<div class="postcontent col-lg-12"  data-animate="fadeInUp" data-delay="200">
 
 								<div class="single-post mb-0">
 
@@ -44,43 +44,48 @@
 										============================================= -->
 										<div class="entry-content mt-0">
 
-										<div id="shop" class="shop row grid-container gutter-50" data-layout="fitRows">
-
-											@foreach($catalog as $i => $v)
-											<div class="product col-md-4 col-sm-6 col-12"   data-animate="fadeInUp" data-delay="{{$i+1}}00">
-												<div class="grid-inner">
-													<div class="product-image h-translate-y all-ts">
-														@if($title=="Buku Ajar")
-															<a href="{{ url('page-catalog-1/'.$v->id) }}"><img src="{{ asset('upload/textbook/'.$v->cover) }}" alt="Image 1"></a>
-														@elseif($title=="Monograf")
-															<a href="{{ url('page-catalog-2/'.$v->id) }}"><img src="{{ asset('upload/monograph/'.$v->cover) }}" alt="Image 1"></a>
-														@elseif($title=="Referensi")
-															<a href="{{ url('page-catalog-3/'.$v->id) }}"><img src="{{ asset('upload/reference/'.$v->cover) }}" alt="Image 1"></a>
-														@else
-															<a href="{{ url('page-catalog-4/'.$v->id) }}"><img src="{{ asset('upload/novel/'.$v->cover) }}" alt="Image 1"></a>
-														@endif
-														
-														<div class="bg-overlay">
-															<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-																@if(Auth::user())
-																	<a href="{{ $v->url }}" target="_blank" class="btn btn-warning me-2"><i class="icon-shopping-basket"></i></a>
-																@else
-																	<a href="{{ url('page-login') }}" target="_blank" class="btn btn-warning me-2"><i class="icon-shopping-basket"></i></a>
-																@endif
-																
-															</div>
-															<div class="bg-overlay-bg bg-transparent"></div>
-														</div>
-													</div>
-													<div class="product-desc py-0">
-														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
-														<div class="product-price">Rp. {{ number_format($v->selling_price, 0, ',', '.') }}</div>
-													</div>
+										<form method="POST" action="{{ url('web-login') }}" method="POST" enctype="multipart/form-data">
+											@csrf
+													
+											@if ($message = Session::get('status'))
+											<div class="row">
+												<div class="col-md-8 offset-2 form-group" style="margin-bottom:20px">
+													<p class="alert text-center" style="color: #ffffff;background-color: #4CAF50;border-color: #4CAF50;">
+														{{ $message }}
+													</p>
 												</div>
 											</div>
-
-											@endforeach
+											@endif
+												
+										<div class="row" style="margin-top:-10px">
+											<div class="col-md-3 offset-2 form-group">
+											<p style="margin-top:6px">Email</p>
+											</div>
+											<div class="col-md-5 form-group">
+											<input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}">
+											@if ($errors->has('email')) <label style="font-size:12px;color: #f44336;">{{ $errors->first('email') }}</label>@endif
+											</div>
 										</div>
+										<div class="row" style="margin-top:-10px">
+											<div class="col-md-3  offset-2  form-group">
+											<p style="margin-top:6px">Password</p>
+											</div>
+											<div class="col-md-5 form-group">
+											<input type="password" name="password" class="form-control" placeholder="Password">
+											@if ($errors->has('password')) <label style="font-size:12px;color: #f44336;">{{ $errors->first('password') }}</label>@endif
+											</div>
+										</div>
+										<br>
+										<div class="text-center"><button type="submit" class="btn btn-success" style="background: #d41e10;
+											border: 0;
+											padding: 10px 24px;
+											color: #fff;
+											transition: 0.4s;
+											border-radius: 4px;">Login</button>
+											<br><br>
+											Belum Punya Akun ? Registrasi <a href="{{ url('page-register') }}">Di Sini !</a>
+											</div>
+										</form>
 
 										</div>
 									</div><!-- .entry end -->
@@ -96,9 +101,9 @@
 								
 								<div class="widget clearfix">
 									<h4 class="mb-2 ls1 text-uppercase fw-bold" data-animate="fadeInUp" data-delay="100">Berita Terbaru</h4>
-									<div class="line line-xs line-sports" data-animate="fadeInUp" data-delay="300"></div>
+									<div class="line line-xs line-sports"  data-animate="fadeInUp" data-delay="300"></div>
 
-									<div class="posts-sm row col-mb-30" data-animate="fadeInUp" data-delay="200">
+									<div class="posts-sm row col-mb-30"  data-animate="fadeInUp" data-delay="200">
 										
 										@foreach($news as $i => $v)
 										<div class="entry col-12">
@@ -128,10 +133,10 @@
 								</div>
 								
 								<div class="widget clearfix">
-									<h4 class="mb-2 ls1 text-uppercase fw-bold" data-animate="fadeInUp" data-delay="100">Buku Terbaru</h4>
-									<div class="line line-xs line-food" data-animate="fadeInUp" data-delay="300"></div>
+									<h4 class="mb-2 ls1 text-uppercase fw-bold">Buku Terbaru</h4>
+									<div class="line line-xs line-food"></div>
 
-									<div class="posts-sm row col-mb-30" data-animate="fadeInUp" data-delay="200">
+									<div class="posts-sm row col-mb-30">
 										
 										@foreach($textbook as $i => $v)
 										<div class="entry col-12">

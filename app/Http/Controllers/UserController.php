@@ -144,9 +144,8 @@ class UserController extends Controller
         $user = User::where('id',$user)->first();
 		return view('admin.user.profile',compact('title','user'));
     }
-
     
-    public function validation_profile(Request $request)
+    public function validation_profile(Request $request, $action)
     {
         if ($request->ajax()) {
 
@@ -156,15 +155,23 @@ class UserController extends Controller
                 'password' => 'Password'
             ];
 
-            if($request->password){
+            if($action==="Simpan"){
                 $rules = [
                     'name' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255|unique:users',
                     'password' => 'required|string|min:8|confirmed'
                 ];
             } else {
-                $rules = [
-                    'name' => 'required|string|max:255'
-                ];
+                if($request->password){
+                    $rules = [
+                        'name' => 'required|string|max:255',
+                        'password' => 'required|string|min:8|confirmed',
+                    ];
+                } else {
+                    $rules = [
+                        'name' => 'required|string|max:255',
+                    ];
+                }
             }
 
             $request->validate($rules, [],$attributes);

@@ -230,4 +230,16 @@ class WebController extends Controller
         return view('web.contact',compact('title'));
     }
 
+    public function register()
+    {
+        $title = "Registrasi";
+        return view('web.register',compact('title'));
+    }
+
+    public function login()
+    {
+        $title = "Login";
+        return view('web.login',compact('title'));
+    }
+
 }

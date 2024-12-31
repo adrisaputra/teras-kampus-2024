@@ -61,6 +61,11 @@
                         </div>
 
                         <div class="fv-row mb-7">
+                            <label class="fw-bold fs-6 mb-2">{{ __('Link Penjualan') }}</label>
+                            <input type="text" class="form-control" placeholder="Link Penjualan" name="url" id="url" />
+                        </div>
+
+                        <div class="fv-row mb-7">
                             <label class="fw-bold fs-6 mb-2">{{ __('Cover') }}</label>
                             <input type="file" name="cover" id="cover" class="form-control">
                             <span class="text-red" id="show_cover"></span>

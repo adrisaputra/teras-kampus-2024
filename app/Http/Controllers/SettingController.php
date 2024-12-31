@@ -37,6 +37,7 @@ class SettingController extends Controller
             $setting->email = $request->email;
             $setting->application_name = $request->application_name;
             $setting->short_application_name = $request->short_application_name;
+            $setting->whatsapp = $request->whatsapp;
 
             if ($setting->small_icon && $request->file('small_icon') != "") {
                 $image_path = public_path() . '/upload/setting/' . $setting->small_icon;
