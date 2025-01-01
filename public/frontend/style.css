@@ -8361,7 +8361,7 @@ body:not(.device-touch):not(.device-sm):not(.device-xs) .product-image > a {
 .product-price {
 	font-size: 1.125rem;
 	font-weight: 700;
-	color: #444;
+	color: #FF5722;
 	margin-bottom: 4px;
 }
 

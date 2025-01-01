@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Catalog;
 use App\Models\Conference;
 use App\Models\Journal;
@@ -9,10 +10,12 @@ use App\Models\News;
 use App\Models\NewsViewer;
 use App\Models\Page;
 use App\Models\Proceeding;
+use App\Models\SellingMaster;
 use App\Models\Slider;
 use App\Models\Supported;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class WebController extends Controller
@@ -242,4 +245,86 @@ class WebController extends Controller
         return view('web.login',compact('title'));
     }
 
+    public function add_cart($id)
+    {
+        $selling_master = SellingMaster::where('status','CART')->where('user_id',Auth::user()->id)->latest()->first();
+        
+        $index = SellingMaster::count() + 1;
+
+        if ($selling_master == NULL) {
+            $selling_master = new SellingMaster();
+            $selling_master->transaction_number = 'TRX'.time().$index;
+            $selling_master->status = "CART";
+            $selling_master->date = date('Y-m-d');
+            $selling_master->time = date('H:i:s');
+            $selling_master->user_id = Auth::user()->id;
+            $selling_master->save();
+        }
+
+
+            $selling_master_id = $selling_master->id ;
+
+            ## Check Stock
+            $stock = Catalog::where('id',$id)->first();
+
+            ## Check Cart
+            $count_cart = Cart::where('selling_master_id',$selling_master_id)->where('catalog_id',$id)->count();
+            
+            if($count_cart == 0){
+                $cart = new Cart();
+            } else {
+                $cart = Cart::where('selling_master_id',$selling_master_id)->where('catalog_id',$id)->first();
+            }
+
+            ## Cek Stock
+            if(($cart->qty +1) > $stock->stock ){
+                $qty = $stock->stock;
+            } else {
+                $qty = $cart->qty + 1;
+            }
+
+            $qty2 = $cart->qty + 1;
+
+            $cart->selling_master_id = $selling_master_id;
+            $cart->catalog_id = $id;
+            $cart->purchase_price = $cart->catalog->purchase_price;
+            $cart->selling_price = $cart->catalog->selling_price;
+            $cart->qty = $qty;
+            $cart->total = $cart->selling_price * $qty;
+            $cart->user_id = Auth::user()->id;
+            $cart->save();
+
+            $total = Cart::where('selling_master_id',$cart->selling_master_id)->sum('total');
+            $qty = Cart::where('selling_master_id',$cart->selling_master_id)->sum('qty');
+
+            if($qty2 > $stock->stock ){
+                return response()->json(['failed' => true,'message' => 'Melebihi Stok Yang Tersedia','qty' => $qty,'total' => $total]);
+            } else {
+                activity()->log('Create Data Cart');
+                return response()->json(['success' => true,'message' => 'Tambah Keranjang Berhasil','qty' => $qty,'total' => $total]);
+            }
+        
+    }
+
+    public function refresh_cart()
+    {
+        $selling_master = SellingMaster::where('status','CART')->where('user_id',Auth::user()->id)->latest()->first();
+        $cart = Cart::where('selling_master_id',$selling_master->id)->get();
+            
+		return view('web.refresh_cart',compact('cart'));
+    }
+
+    public function total_cart()
+    {
+        
+        $selling_master = SellingMaster::where('status','CART')->where('user_id',Auth::user()->id)->latest()->first();
+        $cart = Cart::where('selling_master_id',$selling_master->id)->get();
+        $total = 0;
+        foreach($cart as $v){
+            $total =+ $total = ($v->selling_price * $v->qty);
+        }
+
+        return "Rp. ".number_format($total, 0, ',', '.');
+    }
+    
 }

@@ -1,6 +1,8 @@
 @php
 	$setting = \App\Helpers\Helpers::setting();
 	$related_links = \App\Helpers\Helpers::related_links();
+	$count_cart = \App\Helpers\Helpers::count_cart();
+	$cart = \App\Helpers\Helpers::cart();
 @endphp
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -113,39 +115,43 @@
 							<!-- Top Cart
 							============================================= -->
 							<div id="top-cart" class="">
-								<a href="#" id="top-cart-trigger" style="color: #607D8B;"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
+								<a href="#" id="top-cart-trigger" style="color: #607D8B;"><i class="icon-line-bag"></i><span class="top-cart-number" id="count_cart">{{ $count_cart }}</span></a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
-										<h4>Shopping Cart</h4>
+										<h4>Keranjang Belanja</h4>
 									</div>
 									<div class="top-cart-items">
+									<div id="top-cart-content">
+										@php $total = 0 ; @endphp
+										@foreach($cart as $v)
 										<div class="top-cart-item">
 											<div class="top-cart-item-image">
-												<a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+												
+												@if($v->catalog->type=="textbook")
+													<a href="#"><img src="{{ url('upload/textbook/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
+												@elseif($v->catalog->type=="monograph")
+													<a href="#"><img src="{{ url('upload/monograph/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
+												@elseif($title=="reference")
+													<a href="#"><img src="{{ url('upload/reference/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
+												@else
+													<a href="#"><img src="{{ url('upload/novel/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
+												@endif
+												
 											</div>
 											<div class="top-cart-item-desc">
 												<div class="top-cart-item-desc-title">
-													<a href="#">Blue Round-Neck Tshirt with a Button</a>
-													<span class="top-cart-item-price d-block">$19.99</span>
+													<a href="#">{{ $v->catalog->name }}</a>
+													<span class="top-cart-item-price d-block">Rp. {{ number_format($v->catalog->selling_price, 0, ',', '.') }}</span>
 												</div>
-												<div class="top-cart-item-quantity">x 2</div>
+												<div class="top-cart-item-quantity">x {{ number_format($v->qty, 0, ',', '.') }}</div>
 											</div>
 										</div>
-										<div class="top-cart-item">
-											<div class="top-cart-item-image">
-												<a href="#"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
-											</div>
-											<div class="top-cart-item-desc">
-												<div class="top-cart-item-desc-title">
-													<a href="#">Light Blue Denim Dress</a>
-													<span class="top-cart-item-price d-block">$24.99</span>
-												</div>
-												<div class="top-cart-item-quantity">x 3</div>
-											</div>
-										</div>
+										@php $total = $total + ($v->qty * $v->selling_price) ; @endphp
+										@endforeach
+									</div>
 									</div>
 									<div class="top-cart-action">
-										<span class="top-checkout-price">$114.95</span>
+										<span class="top-checkout-price" id="top-checkout-price">Rp. {{ number_format($total, 0, ',', '.') }}</span>
 										<a href="#" class="button button-3d button-small m-0">View Cart</a>
 									</div>
 								</div>
@@ -226,7 +232,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Journal & Proceeding</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;"><center>Journal<br> & Proceeding</center></div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -246,7 +252,7 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;">Conference & Workshop</div></a>
+								<li class="menu-item menu-color-tech  mega-menu mega-menu-small"><a class="menu-link" href="#"><div style="font-size: 12px;"><center>Conference <br> & Workshop</center></div></a>
 									<div class="mega-menu-content border-top-0 mega-menu-style-2" style="width: 200px">
 										<div class="container">
 											<div class="row">
@@ -266,8 +272,8 @@
 										</div>
 									</div>
 								</li>
-								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;">Author & Affiliation</div></a></li>
-								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;">Term & Condition</div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-author-and-affiliation') }}"><div style="font-size: 12px;"><center>Author <br> & Affiliation</center></div></a></li>
+								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-term-and-condition') }}"><div style="font-size: 12px;"><center>Term <br> & Condition</center></div></a></li>
 								<li class="menu-item menu-color-tech"><a class="menu-link" href="{{ url('page-contact') }}"><div style="font-size: 12px;">Contact Us</div></a></li>
 							</ul>
 

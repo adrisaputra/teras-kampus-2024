@@ -26,4 +26,8 @@ class Catalog extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    
+    public function cart(){
+        return $this->hasOne('App\Models\Catalog');
+    }
 }

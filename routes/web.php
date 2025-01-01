@@ -63,6 +63,9 @@ Route::get('/page-term-and-condition', [WebController::class, 'term_and_conditio
 Route::get('/page-contact', [WebController::class, 'contact']);
 Route::get('/page-register', [WebController::class, 'register']);
 Route::get('/page-login', [WebController::class, 'login']);
+Route::get('/web-add-cart/{id}', [WebController::class, 'add_cart']);
+Route::get('/web-refresh-cart', [WebController::class, 'refresh_cart']);
+Route::get('/web-total-cart', [WebController::class, 'total_cart']);
 Route::post('/web-register', [RegisterController::class, 'store']);
 Route::post('/web-login', [LoginController::class, 'authenticate_web']);
 Route::post('/web-logout', [LoginController::class, 'logout_web']);

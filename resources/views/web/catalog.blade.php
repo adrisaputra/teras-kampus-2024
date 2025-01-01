@@ -62,11 +62,7 @@
 														
 														<div class="bg-overlay">
 															<div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-																@if(Auth::user())
-																	<a href="{{ $v->url }}" target="_blank" class="btn btn-warning me-2"><i class="icon-shopping-basket"></i></a>
-																@else
-																	<a href="{{ url('page-login') }}" target="_blank" class="btn btn-warning me-2"><i class="icon-shopping-basket"></i></a>
-																@endif
+																
 																
 															</div>
 															<div class="bg-overlay-bg bg-transparent"></div>
@@ -75,6 +71,13 @@
 													<div class="product-desc py-0">
 														<div class="product-title"><h3><a href="#" class="text-dark">{{ $v->title }}</a></h3></div>
 														<div class="product-price">Rp. {{ number_format($v->selling_price, 0, ',', '.') }}</div>
+														@if(Auth::user())
+															<a onClick="addCart({{ $v->id }});" class="btn btn-success"><i class="icon-shopping-basket" style="color: beige;"></i></a>
+															<a href="{{ $v->url }}" target="_blank" class="btn btn-danger"><i class="icon-link" style="color: beige;"></i></a>
+														@else
+															<a href="{{ url('page-login') }}" class="btn btn-success"><i class="icon-shopping-basket" style="color: beige;"></i></a>
+															<a href="{{ $v->url }}" target="_blank" class="btn btn-danger"><i class="icon-link" style="color: beige;"></i></a>
+														@endif
 													</div>
 												</div>
 											</div>
@@ -169,5 +172,38 @@
 			</div>
 		</section><!-- #content end -->
 
-
+<script>
+	function addCart(id){
+		url = "{{ url('web-add-cart/') }}";
+		$.ajax({
+            url : url + "/" + id,
+			method : "GET",
+			success : function response(data){
+				document.getElementById('count_cart').textContent = data.qty;
+				refreshCart();
+				totalCart();
+			}
+		});
+	}
+	function refreshCart(){
+		url = "{{ url('web-refresh-cart/') }}";
+		$.ajax({
+            url : url,
+			method : "GET",
+			success : function response(data){
+				$("#top-cart-content").html(data);
+			}
+		});
+	}
+	function totalCart(){
+		url = "{{ url('web-total-cart/') }}";
+		$.ajax({
+            url : url,
+			method : "GET",
+			success : function response(data){
+				document.getElementById('top-checkout-price').textContent = data;
+			}
+		});
+	}
+</script>
 @endsection
