@@ -317,11 +317,11 @@ class WebController extends Controller
     public function total_cart()
     {
         
-        $selling_master = SellingMaster::where('status','CART')->where('user_id',Auth::user()->id)->latest()->first();
-        $cart = Cart::where('selling_master_id',$selling_master->id)->get();
+        // $selling_master = SellingMaster::where('status','CART')->where('user_id',Auth::user()->id)->latest()->first();
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
         $total = 0;
         foreach($cart as $v){
-            $total =+ $total = ($v->selling_price * $v->qty);
+            $total =+ $total + ($v->total);
         }
 
         return "Rp. ".number_format($total, 0, ',', '.');

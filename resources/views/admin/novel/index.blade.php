@@ -99,12 +99,16 @@
             var action = document.getElementById('action').innerText;
             var id_novel = $('#id_novel').val();
             var title = $('#title').val();
+            var selling_price = $('#selling_price').val();
+            var stock = $('#stock').val();
             var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
             var formData = new FormData();
             formData.append('id', id_novel);
             formData.append('title', title);
+            formData.append('selling_price', selling_price);
+            formData.append('stock', stock);
             formData.append('_token', "{{ csrf_token() }}");
 
             var fileInput = document.getElementById('cover');
@@ -211,6 +215,8 @@
                 document.getElementById("title").value = response.data.title;
                 document.getElementById("author").value = response.data.author;
                 document.getElementById("publication_date").value = response.data.publication_date;
+                document.getElementById("selling_price").value = rupiah(response.data.selling_price);
+                document.getElementById("stock").value = rupiah(response.data.stock);
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){

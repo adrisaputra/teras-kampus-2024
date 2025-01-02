@@ -51,7 +51,7 @@ class LoginController extends Controller
             // 'captcha' => 'required|captcha'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->where('group_id', 2)->first();
 
         if ($user && Hash::check($request->password, $user->password) && $user->status == "Active") {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {

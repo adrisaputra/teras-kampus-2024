@@ -16,6 +16,7 @@ class Catalog extends Model
         'publication_date',
         'desc',
         'selling_price',
+        'stock',
         'url',
         'cover',
         'file',

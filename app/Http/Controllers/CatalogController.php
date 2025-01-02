@@ -82,18 +82,24 @@ class CatalogController extends Controller
            $attributes = [
                'title' => 'Judul',
                'cover' => 'Cover',
+               'selling_price' => 'Harga Jual (Rp)',
+               'stock' => 'Stok Saat Ini',
                'file' => 'File'
            ];
 
            if($action==="Simpan"){
                $rules = [
                    'title' => 'required',
+                   'selling_price' => 'required',
+                   'stock' => 'required',
                    'cover' => 'image|mimes:jpeg,png,jpg|max:5000',
                    'file' => 'mimes:pdf|max:5000'
                ];
            } else {
                $rules = [
                    'title' => 'required',
+                   'selling_price' => 'required',
+                   'stock' => 'required',
                    'cover' => 'image|mimes:jpeg,png,jpg|max:5000',
                    'file' => 'mimes:pdf|max:5000'
                ];
@@ -124,6 +130,10 @@ class CatalogController extends Controller
 
            if($request->selling_price){
                 $catalog->selling_price = str_replace(".", "", $request->selling_price);
+           }
+
+           if($request->stock){
+                $catalog->stock = str_replace(".", "", $request->stock);
            }
 
            $catalog->user_id = Auth::user()->id;
@@ -168,6 +178,10 @@ class CatalogController extends Controller
            if($request->selling_price){
                 $catalog->selling_price = str_replace(".", "", $request->selling_price);
            }
+
+           if($request->stock){
+                $catalog->stock = str_replace(".", "", $request->stock);
+            }
 
            if ($catalog->cover && $request->file('cover') != "") {
                $cover_path = public_path() . '/upload/catalog/' . $catalog->cover;

@@ -102,6 +102,8 @@
             var id_monograph = $('#id_monograph').val();
             var category = $('#category').val();
             var title = $('#title').val();
+            var selling_price = $('#selling_price').val();
+            var stock = $('#stock').val();
             var desc = CKEDITOR.instances.desc.getData();
 
             // Buat objek FormData untuk mengirim data form, termasuk file
@@ -109,6 +111,8 @@
             formData.append('id', id_monograph);
             formData.append('title', title);
             formData.append('category', category);
+            formData.append('selling_price', selling_price);
+            formData.append('stock', stock);
             formData.append('_token', "{{ csrf_token() }}");
 
             var fileInput = document.getElementById('cover');
@@ -217,6 +221,7 @@
                 document.getElementById("author").value = response.data.author;
                 document.getElementById("publication_date").value = response.data.publication_date;
                 document.getElementById("selling_price").value = rupiah(response.data.selling_price);
+                document.getElementById("stock").value = rupiah(response.data.stock);
                 
                 CKEDITOR.instances['desc'].setData(response.data.desc);
                 if(response.data.cover){

@@ -1,8 +1,10 @@
 @php
 	$setting = \App\Helpers\Helpers::setting();
 	$related_links = \App\Helpers\Helpers::related_links();
-	$count_cart = \App\Helpers\Helpers::count_cart();
-	$cart = \App\Helpers\Helpers::cart();
+	if(Auth::user()){
+		$count_cart = \App\Helpers\Helpers::count_cart();
+		$cart = \App\Helpers\Helpers::cart();
+	}
 @endphp
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -115,7 +117,7 @@
 							<!-- Top Cart
 							============================================= -->
 							<div id="top-cart" class="">
-								<a href="#" id="top-cart-trigger" style="color: #607D8B;"><i class="icon-line-bag"></i><span class="top-cart-number" id="count_cart">{{ $count_cart }}</span></a>
+								<a href="#" id="top-cart-trigger" style="color: #607D8B;"><i class="icon-line-bag"></i>@if(Auth::user())<span class="top-cart-number" id="count_cart">{{ $count_cart }}</span>@endif</a>
 								<div class="top-cart-content">
 									<div class="top-cart-title">
 										<h4>Keranjang Belanja</h4>
@@ -123,6 +125,7 @@
 									<div class="top-cart-items">
 									<div id="top-cart-content">
 										@php $total = 0 ; @endphp
+										@if(Auth::user())
 										@foreach($cart as $v)
 										<div class="top-cart-item">
 											<div class="top-cart-item-image">
@@ -148,6 +151,7 @@
 										</div>
 										@php $total = $total + ($v->qty * $v->selling_price) ; @endphp
 										@endforeach
+										@endif
 									</div>
 									</div>
 									<div class="top-cart-action">

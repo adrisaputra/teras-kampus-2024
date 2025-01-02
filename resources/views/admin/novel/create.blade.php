@@ -45,13 +45,19 @@
                         </div>
 
                         <div class="fv-row mb-7">
-                            <label class="fw-bold fs-6 mb-2">{{ __('Harga Jual (Rp)') }}</label>
+                            <label class="required fw-bold fs-6 mb-2">{{ __('Harga Jual (Rp)') }}</label>
                             <input type="text" class="form-control" placeholder="Harga Jual" name="selling_price" id="selling_price" onkeyup="formatRupiah(this, '.')"/>
-                            <div id="desc-error" class="fv-plugins-message-container invalid-feedback"></div>
+                            <div id="selling_price-error" class="fv-plugins-message-container invalid-feedback"></div>
                         </div>
 
                         <div class="fv-row mb-7">
-                            <label class="fw-bold fs-6 mb-2">{{ __('Cover') }}</label>
+                            <label class="required fw-bold fs-6 mb-2">{{ __('Stok Saat Ini') }}</label>
+                            <input type="text" class="form-control" placeholder="Stok Saat Ini" name="stock" id="stock" onkeyup="formatRupiah(this, '.')"/>
+                            <div id="stock-error" class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+
+                        <div class="fv-row mb-7">
+                            <label class="required fw-bold fs-6 mb-2">{{ __('Cover') }}</label>
                             <input type="file" name="cover" id="cover" class="form-control">
                             <span class="text-red" id="show_cover"></span>
                             <div id="cover-error" class="fv-plugins-message-container invalid-feedback"></div>

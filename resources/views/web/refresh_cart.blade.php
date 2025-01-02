@@ -8,7 +8,7 @@
 				<a href="#"><img src="{{ url('upload/textbook/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
 			@elseif($v->catalog->type=="monograph")
 				<a href="#"><img src="{{ url('upload/monograph/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
-			@elseif($title=="reference")
+			@elseif($v->catalog->type=="reference")
 				<a href="#"><img src="{{ url('upload/reference/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
 			@else
 				<a href="#"><img src="{{ url('upload/novel/'.$v->catalog->cover) }}" alt="Blue Round-Neck Tshirt" /></a>
